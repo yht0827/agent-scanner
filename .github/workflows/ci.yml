@@ -54,6 +54,18 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
+      - name: Initialize Dual PostgreSQL Databases (scannerdb & targetdb)
+        run: |
+          echo "Initializing targetdb for Dual-Database architecture in CI..."
+          CID="${{ job.services.postgres.id }}"
+          if [ -z "$CID" ]; then
+            CID=$(docker ps --filter "ancestor=postgres:16-alpine" -q | head -n 1)
+          fi
+          echo "PostgreSQL container ID: $CID"
+          docker exec -e PGPASSWORD=postgres "$CID" psql -U postgres -tc "SELECT 1 FROM pg_database WHERE datname = 'targetdb'" | grep -q 1 || \
+          docker exec -e PGPASSWORD=postgres "$CID" psql -U postgres -c "CREATE DATABASE targetdb;"
+          docker exec -e PGPASSWORD=postgres "$CID" psql -U postgres -l
+
       - name: Run Full Build & Tests with Gradle
         run: ./gradlew clean check build --no-daemon
 
