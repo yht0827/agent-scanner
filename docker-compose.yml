@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: agent-scanner-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: scannerdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - agent-scanner-net
+
+  agent-scanner-target:
+    image: agent-scanner-target:latest
+    build:
+      context: ./agent-scanner-target
+      dockerfile: Dockerfile
+    container_name: agent-scanner-target
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      SERVER_PORT: 8081
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-mock-offline-key}
+    networks:
+      - agent-scanner-net
+
+volumes:
+  postgres_data:
+
+networks:
+  agent-scanner-net:
+    driver: bridge
