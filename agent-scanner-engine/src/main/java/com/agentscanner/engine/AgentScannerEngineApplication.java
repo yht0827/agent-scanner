@@ -1,0 +1,14 @@
+package com.agentscanner.engine;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@EnableScheduling
+@SpringBootApplication
+public class AgentScannerEngineApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(AgentScannerEngineApplication.class, args);
+    }
+}

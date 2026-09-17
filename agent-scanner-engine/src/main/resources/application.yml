@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: agent-scanner-engine
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scannerdb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+scanner:
+  target-base-url: "http://localhost:8081"
+  default-adapter: "mock" # 'mock' (내장 시뮬레이터) 또는 'http' (8081 타깃 에이전트 연동)
+  false-positive-filter-enabled: true
+  slack-webhook-url: "" # 슬랙 웹훅 URL (공란 시 콘솔 출력만 수행)
