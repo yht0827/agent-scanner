@@ -1,0 +1,34 @@
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Visual Studio Code ###
+.vscode/
+
+### OS files ###
+.DS_Store
+Thumbs.db
+
+### Log files ###
+*.log
+logs/
+reports/
+
+### Node.js / Frontend ###
+**/node_modules/
+**/dist/
+
+### Environment / Secrets ###
+.env
+.env.*
