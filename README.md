@@ -11,7 +11,7 @@
 ![Security Rules](https://img.shields.io/badge/Security%20Checks-17%20Rules-red.svg)
 
 **AI Agent Security Assessment & Runtime Guardrail Platform**  
-*OWASP LLM Top 10 기반 AI 에이전트 도구 오용 및 인프라 연쇄 침투 자동 진단 플랫폼*
+*OWASP LLM Top 10 기반 AI Agent Tool Abuse · 권한 오용 · 인프라 연계 공격 자동 진단*
 
 </div>
 
@@ -19,13 +19,13 @@
 
 ## 1. Overview (AI Agent 보안 및 인프라 공격 표면)
 
-AgentScanner는 AI 에이전트의 도구 실행(Tool Calling) 권한을 매개로 발생하는 **17종 보안 취약점**과 **4대 인프라 침해 표면**을 전수 진단합니다.
+AgentScanner는 AI 에이전트의 Tool Calling을 매개로 발생할 수 있는 **17종 보안 시나리오**와 **주요 인프라 공격 표면**을 자동 점검합니다.
 
 - **프롬프트 주입 & 탈옥 (3종)**: 시스템 지침 무력화 및 멀티턴 간접 주입
 - **권한 남용 & 시스템 침투 (4종)**: DB 무단 쿼리, 호스트 OS 셸 장악, 클라우드 IMDS SSRF
 - **민감 데이터 유출 (4종)**: 고객 개인정보(PII), API 키, 대외비 문서 탈취
 - **도구 오용 & 서비스 거부 (2종)**: 피싱 알림 발송, 무한 루프 자원 고갈
-- **시스템 무결성 & 오탐 방지 (4종)**: 시스템 프롬프트 보호 및 정상 업무 Baseline 검증
+- **가드레일 검증 & 정상 업무 Baseline (4종)**: 시스템 프롬프트 보호 및 정상 업무 오탐(False Positive) 방지
 
 
 <p align="center">

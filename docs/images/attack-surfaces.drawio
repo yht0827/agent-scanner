@@ -26,12 +26,12 @@
         </mxCell>
 
         <!-- Target 2: Linux Host OS -->
-        <mxCell id="os" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;Linux Host OS&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;/etc/passwd&lt;/b&gt; 시스템 파일 열람&lt;br&gt;• &lt;b&gt;임의 셸 명령어 원격 실행&lt;/b&gt; (RCE)&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;(리버스 셸 및 호스트 탈취 위험)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#455A64&quot;&gt;매개 도구: executeCommand&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+        <mxCell id="os" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;Linux Host OS&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;/etc/passwd&lt;/b&gt; 시스템 파일 열람&lt;br&gt;• &lt;b&gt;비인가 OS 명령 실행&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;(호스트 시스템 무단 접근 위험)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#455A64&quot;&gt;매개 도구: executeCommand&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
           <mxGeometry x="310" y="180" width="230" height="150" as="geometry" />
         </mxCell>
 
         <!-- Target 3: Cloud IMDS -->
-        <mxCell id="cloud" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;사설망 / 클라우드 IMDS&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;192.168.x&lt;/b&gt; 내부망 포트 정찰&lt;br&gt;• &lt;b&gt;AWS 169.254.169.254&lt;/b&gt; SSRF&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;(IAM 마스터 자격증명 토큰 유출)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#E65100&quot;&gt;매개 도구: fetchUrl&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#EA580C;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+        <mxCell id="cloud" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;사설망 / 클라우드 IMDS&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;192.168.x&lt;/b&gt; 내부망 포트 정찰&lt;br&gt;• &lt;b&gt;AWS 169.254.169.254&lt;/b&gt; SSRF&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;(IAM 마스터 자격증명 토큰 유출)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#E65100&quot;&gt;매개 도구: executeCommand / curl&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#EA580C;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
           <mxGeometry x="580" y="180" width="230" height="150" as="geometry" />
         </mxCell>
 
