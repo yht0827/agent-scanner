@@ -101,30 +101,43 @@ AgentScanner는 AI 에이전트의 Tool Calling을 매개로 발생할 수 있�
 
 ---
 
-## 6. Tech Stack
+## 6. Web Dashboard
+
+*Web UI: `http://localhost:8080` (Frontend 프로덕션 빌드는 Engine 내장 제공)*
+
+<p align="center">
+  <img src="docs/images/dashboard.png" alt="AgentScanner Web Dashboard" width="850">
+</p>
+
+보안 진단 세션 결과, 17대 취약점 Finding 증적, 가드레일 조치 및 1-Click Re-Test를 웹 대시보드에서 실시간으로 관제·조치할 수 있습니다.
+
+---
+
+## 7. Tech Stack
 
 | 영역 | 기술 스택 | 설명 |
 | :--- | :--- | :--- |
 | **Backend** | Java 21 LTS, Spring Boot 3.3.5, Spring Data JPA, Spring AOP | 스캐너 중앙 엔진 및 Tool Execution Trace 수집 |
 | **AI / Agent** | Spring AI 1.0.0, OpenAI Tool Calling | Spring AI 기반 LLM Tool Calling 및 Real/Mock 실행 |
-| **Database** | PostgreSQL 16 (Multi-DB: `scannerdb`, `targetdb`), HikariCP | Scanner/Target 데이터 논리적 완전 분리 |
+| **Database** | PostgreSQL 16 (Multi-DB: `scannerdb`, `targetdb`) | Scanner / Target 데이터 논리 분리 |
 | **Frontend** | React 18, Vite, Tailwind CSS, Lucide Icons | 보안 진단·Finding·Re-Test 실시간 대시보드 |
-| **Infra & CI** | Docker, Docker Compose, GitHub Actions | Docker 기반 로컬 격리 환경 및 CI 테스트 자동화 |
+| **Infra & CI** | Docker, Docker Compose, GitHub Actions | Docker 기반 로컬 실행 환경 및 CI 테스트 자동화 |
 
 ---
 
-## 7. Quick Start (Local Sandbox)
+## 8. Quick Start (Local Sandbox)
 
-외부 클라우드 가입 없이 로컬 Docker 환경에서 즉시 구동 가능합니다.
+외부 클라우드 가입 없이 로컬 환경에서 즉시 구동 가능합니다.
 
 ### Requirements
 - Java 21 LTS (OpenJDK 21)
 - Docker 또는 OrbStack
 
-### 1) 격리 인프라 실행 (PostgreSQL 16 Multi-DB)
+### 1) DB 인프라 실행 (PostgreSQL 16 Multi-DB)
 ```bash
-docker compose up -d
+docker compose up -d postgres
 ```
+*(Target Agent까지 Docker 컨테이너 격리 환경으로 함께 띄우려면 `docker compose up -d`를 사용합니다)*
 
 ### 2) 타깃 에이전트 실행 (포트 8081)
 ```bash
@@ -136,7 +149,7 @@ docker compose up -d
 ```bash
 ./gradlew :agent-scanner-engine:bootRun
 ```
-*보안 대시보드: `http://localhost:8080/`*
+*웹 대시보드: `http://localhost:8080/` (React 빌드가 Engine에 내장되어 통합 제공)*
 
 ### 4) 전체 테스트 검증
 ```bash
@@ -145,7 +158,7 @@ docker compose up -d
 
 ---
 
-## 8. Documentation
+## 9. Documentation
 
 | 문서명 | 주요 내용 | 바로가기 |
 | :--- | :--- | :---: |
@@ -153,4 +166,5 @@ docker compose up -d
 | **Case Studies** | DB 덤프 및 AWS IMDS SSRF 실제 Trace JSON 비교 분석, 실증 시나리오 | [보기](./docs/CASE-STUDY.md) |
 | **API & Operations** | 엔진 및 타깃 REST API 명세서, 로컬 샌드박스 구동법, 감사 보고서 생성 | [보기](./docs/API-AND-OPERATIONS.md) |
 | **Portfolio Whitepaper** | 문제 정의, 4대 기술 챌린지, 상세 아키텍처 및 21개 시나리오 실증 백서 | [보기](./PORTFOLIO.md) |
+
 
