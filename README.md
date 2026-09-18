@@ -105,15 +105,15 @@ AgentScanner는 AI 에이전트의 Tool Calling을 매개로 발생할 수 있�
 
 | 영역 | 기술 스택 | 설명 |
 | :--- | :--- | :--- |
-| **Backend** | Java 21 LTS, Spring Boot 3.3.5, Spring Data JPA, Spring AOP | 스캐너 중앙 컨트롤러 및 비침습적 런타임 감사 인터셉터 |
-| **AI / Agent** | Spring AI 1.0.0, OpenAI GPT-4o-mini Function Calling | LLM 함수 호출 연동 및 듀얼 모드(Real/Mock) 샌드박스 |
-| **Database** | PostgreSQL 16 (Multi-DB: `scannerdb`, `targetdb`), HikariCP | 스캐너 진단 데이터와 피실험체 비즈니스 데이터 완전 분리 |
-| **Frontend** | React 18, Vite, Lucide Icons | 실시간 KISA 보안 관제 대시보드 및 1-Click 재점검 인터랙션 |
-| **Infra & CI** | Docker Compose, GitHub Actions | 로컬 격리 샌드박스 환경 및 자동화 CI 빌드·테스트 파이프라인 |
+| **Backend** | Java 21 LTS, Spring Boot 3.3.5, Spring Data JPA, Spring AOP | 스캐너 중앙 엔진 및 Tool Execution Trace 수집 |
+| **AI / Agent** | Spring AI 1.0.0, OpenAI Tool Calling | Spring AI 기반 LLM Tool Calling 및 Real/Mock 실행 |
+| **Database** | PostgreSQL 16 (Multi-DB: `scannerdb`, `targetdb`), HikariCP | Scanner/Target 데이터 논리적 완전 분리 |
+| **Frontend** | React 18, Vite, Tailwind CSS, Lucide Icons | 보안 진단·Finding·Re-Test 실시간 대시보드 |
+| **Infra & CI** | Docker, Docker Compose, GitHub Actions | Docker 기반 로컬 격리 환경 및 CI 테스트 자동화 |
 
 ---
 
-## 7. Quick Start (1-Click Local Sandbox)
+## 7. Quick Start (Local Sandbox)
 
 외부 클라우드 가입 없이 로컬 Docker 환경에서 즉시 구동 가능합니다.
 
@@ -145,26 +145,12 @@ docker compose up -d
 
 ---
 
-## 8. Multi-Module Layout
-
-```text
-agent-scanner/
-├── agent-scanner-common/      # Canonical Model, Finding, AgentExecutionTrace 규격
-├── agent-scanner-engine/      # 보안 스캔 오케스트레이터, 17종 분석기, RiskEvaluator, 보고서 생성
-├── agent-scanner-target/      # Spring AI 기반 피실험체 에이전트, Spring AOP 감사 계층
-├── agent-scanner-frontend/    # Vite + React 18 기반 실시간 보안 관제 대시보드
-├── docs/                      # 3대 심층 기술 문서 (Security Assessment, Case Study, API & Operations)
-├── docker-compose.yml         # PostgreSQL 16 멀티 데이터베이스 컨테이너 환경
-└── PORTFOLIO.md               # 채용 담당자/면접관을 위한 7단계 종합 백서 (STAR 4대 챌린지)
-```
-
----
-
-## 9. Documentation Hub
+## 8. Documentation
 
 | 문서명 | 주요 내용 | 바로가기 |
 | :--- | :--- | :---: |
-| **Security Assessment** | AI 17종 전수 카탈로그, 100점 위험도 평가 공식, 재진단 라이프사이클 | [보기](./docs/SECURITY-ASSESSMENT.md) |
-| **Case Studies** | DB 유출 및 AWS IMDS SSRF 실제 Trace JSON 비교 분석, 21개 시나리오 매트릭스 | [보기](./docs/CASE-STUDY.md) |
-| **API & Operations** | 엔진 및 타깃 REST API 명세서, 로컬 샌드박스 구동법, 감사 보고서 발행 | [보기](./docs/API-AND-OPERATIONS.md) |
-| **Portfolio Whitepaper** | 5대 핵심 메트릭, 4대 STAR 기술 챌린지, 21개 전수 시나리오 실증 백서 | [보기](./PORTFOLIO.md) |
+| **Security Assessment** | 17대 보안 점검 카탈로그, 자체 RiskEvaluator 산정 모델, 재진단 절차 | [보기](./docs/SECURITY-ASSESSMENT.md) |
+| **Case Studies** | DB 덤프 및 AWS IMDS SSRF 실제 Trace JSON 비교 분석, 실증 시나리오 | [보기](./docs/CASE-STUDY.md) |
+| **API & Operations** | 엔진 및 타깃 REST API 명세서, 로컬 샌드박스 구동법, 감사 보고서 생성 | [보기](./docs/API-AND-OPERATIONS.md) |
+| **Portfolio Whitepaper** | 문제 정의, 4대 기술 챌린지, 상세 아키텍처 및 21개 시나리오 실증 백서 | [보기](./PORTFOLIO.md) |
+
