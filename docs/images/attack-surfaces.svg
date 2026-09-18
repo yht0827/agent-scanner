@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" width="100%" height="100%">
+  <defs>
+    <style>
+      .title-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 14px; font-weight: 700; }
+      .sub-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11px; fill: #64748b; }
+      .item-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 12px; fill: #334155; }
+      .box { rx: 8px; ry: 8px; stroke-width: 1.5px; }
+      .arrow { stroke: #64748b; stroke-width: 1.5px; fill: none; }
+      .arrow-head { fill: #64748b; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="880" height="300" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" rx="10" />
+
+  <!-- Top Level Flow -->
+  <!-- Box 1: 악의적 프롬프트 주입 -->
+  <g transform="translate(140, 22)">
+    <rect class="box" width="240" height="52" fill="#fef2f2" stroke="#ef4444" />
+    <text x="120" y="25" text-anchor="middle" class="title-text" fill="#b91c1c">악의적 프롬프트 주입</text>
+    <text x="120" y="42" text-anchor="middle" class="sub-text">Direct / Indirect Prompt Injection</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <path d="M 380 48 L 490 48" class="arrow" marker-end="url(#arrow)" />
+
+  <!-- Box 2: AI 에이전트 도구 실행 -->
+  <g transform="translate(500, 22)">
+    <rect class="box" width="240" height="52" fill="#eff6ff" stroke="#3b82f6" />
+    <text x="120" y="25" text-anchor="middle" class="title-text" fill="#1d4ed8">AI 에이전트 도구 실행</text>
+    <text x="120" y="42" text-anchor="middle" class="sub-text">LLM Tool Calling (Function Execution)</text>
+  </g>
+
+  <!-- Branching Connector from Box 2 down to 3 branches -->
+  <path d="M 620 74 L 620 105" class="arrow" />
+  <path d="M 160 105 L 720 105" class="arrow" />
+  <path d="M 160 105 L 160 135" class="arrow" marker-end="url(#arrow)" />
+  <path d="M 440 105 L 440 135" class="arrow" marker-end="url(#arrow)" />
+  <path d="M 720 105 L 720 135" class="arrow" marker-end="url(#arrow)" />
+
+  <!-- 3 Target Infrastructure Boxes -->
+  <!-- Branch 1: PostgreSQL 16 DB -->
+  <g transform="translate(40, 135)">
+    <rect class="box" width="240" height="140" fill="#f8fafc" stroke="#336791" />
+    <rect x="0" y="0" width="240" height="32" rx="8" fill="#336791" />
+    <rect x="0" y="24" width="240" height="8" fill="#336791" />
+    <text x="120" y="21" text-anchor="middle" class="title-text" fill="#ffffff">PostgreSQL 16 DB</text>
+    <text x="16" y="60" class="item-text">• <tspan font-weight="600">admin_users</tspan> 해시 덤프</text>
+    <text x="16" y="84" class="item-text">• <tspan font-weight="600">customer_credentials</tspan> 탈취</text>
+    <text x="24" y="102" class="sub-text">(카드번호, 주민등록번호 노출)</text>
+    <text x="16" y="126" class="sub-text">매개 도구: <tspan fill="#336791" font-weight="600">queryDatabase</tspan></text>
+  </g>
+
+  <!-- Branch 2: Linux Host OS -->
+  <g transform="translate(320, 135)">
+    <rect class="box" width="240" height="140" fill="#f8fafc" stroke="#475569" />
+    <rect x="0" y="0" width="240" height="32" rx="8" fill="#475569" />
+    <rect x="0" y="24" width="240" height="8" fill="#475569" />
+    <text x="120" y="21" text-anchor="middle" class="title-text" fill="#ffffff">Linux Host OS</text>
+    <text x="16" y="60" class="item-text">• <tspan font-weight="600">/etc/passwd</tspan> 시스템 파일 열람</text>
+    <text x="16" y="84" class="item-text">• <tspan font-weight="600">임의 셸 명령어 실행</tspan> (RCE)</text>
+    <text x="24" y="102" class="sub-text">(리버스 셸 및 호스트 탈취 위험)</text>
+    <text x="16" y="126" class="sub-text">매개 도구: <tspan fill="#475569" font-weight="600">executeCommand</tspan></text>
+  </g>
+
+  <!-- Branch 3: 사설망 / 클라우드 IMDS -->
+  <g transform="translate(600, 135)">
+    <rect class="box" width="240" height="140" fill="#f8fafc" stroke="#ea580c" />
+    <rect x="0" y="0" width="240" height="32" rx="8" fill="#ea580c" />
+    <rect x="0" y="24" width="240" height="8" fill="#ea580c" />
+    <text x="120" y="21" text-anchor="middle" class="title-text" fill="#ffffff">사설망 / 클라우드 IMDS</text>
+    <text x="16" y="60" class="item-text">• <tspan font-weight="600">192.168.x</tspan> 내부망 포트 정찰</text>
+    <text x="16" y="84" class="item-text">• <tspan font-weight="600">AWS 169.254.169.254</tspan> SSRF</text>
+    <text x="24" y="102" class="sub-text">(IAM 마스터 자격증명 토큰 유출)</text>
+    <text x="16" y="126" class="sub-text">매개 도구: <tspan fill="#ea580c" font-weight="600">fetchUrl</tspan></text>
+  </g>
+</svg>

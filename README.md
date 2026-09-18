@@ -27,16 +27,11 @@ AgentScanner는 AI 에이전트의 도구 실행(Tool Calling) 권한을 매개�
 - **도구 오용 & 서비스 거부 (2종)**: 피싱 알림 발송, 무한 루프 자원 고갈
 - **시스템 무결성 & 오탐 방지 (4종)**: 시스템 프롬프트 보호 및 정상 업무 Baseline 검증
 
-```text
-[ 악의적 프롬프트 주입 ] -> [ AI 에이전트 도구 실행 (Tool Calling) ]
-                                    │
-       ┌────────────────────────────┼────────────────────────────┐
-       ▼                            ▼                            ▼
-[ PostgreSQL 16 DB ]      [ Linux Host OS ]          [ 사설망 / 클라우드 IMDS ]
-• admin_users 해시 덤프    • /etc/passwd 열람         • 192.168.x 내부 서버 정찰
-• customer_credentials    • OS 셸 커맨드 원격 실행   • AWS 169.254.169.254
-  (카드번호/주민번호)       (RCE 위험)                 IAM 마스터 자격증명 탈취
-```
+
+<p align="center">
+  <img src="docs/images/attack-surfaces.svg" alt="AI Agent Attack Surfaces" width="850">
+</p>
+
 
 ---
 
