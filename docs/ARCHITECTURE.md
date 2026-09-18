@@ -23,7 +23,7 @@ AgentScanner는 오픈소스 성능 부하 테스트 도구인 **nGrinder의 분
                      ┌───────────────────────────────────────────────┐
                      │    agent-scanner-engine (중앙 컨트롤러, 8080)   │
                      │  • Scan Session Orchestrator                  │
-                     │  • KISA & OWASP 46대 통합 보안 룰셋 진단 엔진  │
+                     │  • OWASP LLM 기반 17대 보안 룰셋 진단 엔진    │
                      │  • 100점 가중치 위험도 평가 (RiskEvaluator)    │
                      │  • 조치(Remediation) & 핀포인트 재진단(Re-Test)│
                      │  • KISA 표준 감사 보고서 자동 발행 (MD / HTML)  │

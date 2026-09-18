@@ -10,13 +10,13 @@
 | 항목 | 내용 |
 | :--- | :--- |
 | **프로젝트명** | **AgentScanner** |
-| **한 줄 소개** | OWASP LLM & KISA 인프라 기준 46종 통합 자동화 보안 진단 및 조치 라이프사이클 플랫폼 |
-| **진단 규모** | **총 46개 보안 검증 룰셋 완비**<br>• **AI 에이전트 보안 (17종)**: OWASP Top 10 for LLM (프롬프트 주입, SQLi, PII 유출, 과도한 권한, DoS 등)<br>• **호스트 인프라 보안 (29종)**: KISA 주요정보통신기반시설 기술적 가이드라인 (리눅스 OS 25종 + 네트워크 4종) |
+| **한 줄 소개** | OWASP Top 10 for LLM 기반 17대 AI Agent 보안 진단 & 21개 실증 시나리오 조치 라이프사이클 플랫폼 |
+| **진단 규모** | **17대 AI Agent 보안 점검 룰셋 & 21개 킬체인 실증 시나리오 완비**<br>• **OWASP LLM Top 10 준용**: 프롬프트 주입, SQLi, PII 유출, 과도한 권한, DoS 등<br>• **도구 매개 인프라 침해 전수 진단**: DB 직접 쿼리, 호스트 OS 셸 실행, 사설망 및 AWS IMDS SSRF, RAG 지식베이스 탈취 |
 | **핵심 가치** | **단순 취약점 스캔을 넘어, [취약점 탐지(FAIL) ➔ 보안 가드레일 조치(Remediation) ➔ 1-Click 재점검(Re-Test)을 통한 자동 종결(PASS)]까지의 전체 DevSecOps 라이프사이클 완벽 구현** |
 | **주요 기술** | Java 21, Spring Boot 3.3.5, Spring AI 1.0 (OpenAI GPT-4o-mini), Spring AOP, Spring Data JPA, PostgreSQL 16, H2 RDBMS, Docker, React 18, Vite |
 
 ### 🎯 핵심 엔지니어링 성과 지표 (Key Performance Metrics)
-- **보안 카탈로그 자동화**: KISA 및 OWASP LLM 표준 기반 **46종 통합 점검 룰셋** 및 **21개 킬체인 실증 시나리오** 구축
+- **보안 카탈로그 자동화**: OWASP LLM 표준 기반 **17종 통합 점검 룰셋** 및 **21개 킬체인 실증 시나리오** 구축
 - **비즈니스 코드 침해 0줄**: Spring AOP `@Around`와 `ThreadLocal` 기반 **런타임 도구 감사 인터셉터**로 침투 흔적 및 SQL/인자 100% 무누수 추적
 - **DevSecOps 완결성**: 취약점 탐지(`FAIL`, 위험도 90점) ➔ 보안 가드레일 적용 ➔ 1-Click 재점검(`PASS`, 위험도 0점) **원클릭 조치 라이프사이클** 구현
 - **무중단·무과금 시연 환경**: OpenAI API 키 유무를 자동 감지하여 **실제 GPT-4o 추론 ↔ 가상 샌드박스 Mock** 자동 Fallback 구현 (API 비용 및 네트워크 장애 0%)
@@ -57,7 +57,7 @@
                    ┌───────────────────────────────────────────────┐
                    │    agent-scanner-engine (중앙 컨트롤러, 8080)   │
                    │  • Scan Session Orchestrator                  │
-                   │  • KISA & OWASP 46대 통합 보안 룰셋 진단      │
+                   │  • KISA & OWASP 17대 통합 보안 룰셋 진단      │
                    │  • KISA 중요도 가중치 위험도 평가 (RiskEvaluator)│
                    │  • 조치(Remediation) & 핀포인트 재진단(Re-Test)│
                    └───────────────┬───────────────────┬───────────┘
@@ -198,7 +198,7 @@ searchProduct() getUserInfo() queryDatabase() searchKnowledgeBase()   readFile()
 - **Action (행동)**:
   - Spring AI `ChatModelProvider`를 활용하여 API 키 유효성을 동적으로 감지.
   - API 키가 있으면 실제 OpenAI GPT-4o 실시간 추론, 키가 없거나 크레딧 소진 시 내장 가상 샌드박스 Mock으로 즉시 자동 Fallback되도록 설계.
-- **Result (결과)**: 오프라인 환경에서도 46종 룰셋 및 21개 전수 실증 시나리오 100% 무과금·무중단 시연 보장.
+- **Result (결과)**: 오프라인 환경에서도 17종 룰셋 및 21개 전수 실증 시나리오 100% 무과금·무중단 시연 보장.
 
 ---
 

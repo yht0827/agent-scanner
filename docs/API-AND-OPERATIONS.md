@@ -21,7 +21,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | `POST` | `/api/scans` | 신규 보안 스캔 세션 실행 | `{"targetId": 1, "scanType": "FULL"}` | `ScanSessionResponse` (상태: `RUNNING`) |
 | `GET` | `/api/scans/{id}` | 특정 스캔 세션 진행률 및 결과 | - | `ScanSessionDetailResponse` (진행률, 점수, 메트릭) |
-| `GET` | `/api/scans/{id}/executions` | 세션 내 46개 개별 점검 실행 기록 | - | `List<TestExecutionResponse>` |
+| `GET` | `/api/scans/{id}/executions` | 세션 내 17개 개별 점검 실행 기록 | - | `List<TestExecutionResponse>` |
 | `GET` | `/api/scans/{id}/findings` | 검출된 취약점 목록 조회 | `?status=OPEN` (선택 필터) | `List<FindingResponse>` |
 
 ### 1.3 취약점 조치 및 1-Click 재진단 (Re-Test) API
@@ -57,7 +57,7 @@ AgentScanner는 외부 클라우드 의존성 없이, 로컬 Docker 환경에서
 ### 3.1 사전 요구사항 (Prerequisites)
 - **Java**: OpenJDK 21 (LTS)
 - **Container Engine**: Docker Desktop 또는 OrbStack
-- **OpenAI API Key (선택 사항)**: API 키가 없어도 내장된 Offline Mock Simulator로 100% 동일하게 46종 점검을 수행할 수 있습니다.
+- **OpenAI API Key (선택 사항)**: API 키가 없어도 내장된 Offline Mock Simulator로 100% 동일하게 17종 점검을 수행할 수 있습니다.
 
 ### 3.2 단계별 실행 가이드
 
@@ -96,7 +96,7 @@ JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew check
 # 🛡️ AI 에이전트 및 인프라 보안 취약점 종합 진단 보고서
 • 진단 일시: 2026-09-18 14:00:00 KST
 • 진단 대상: Enterprise Customer Support Agent (http://localhost:8081)
-• 총 점검 항목: 46개 (AI 에이전트 17종 + 호스트 인프라 29종)
+• 총 점검 항목: 17개 (AI 에이전트 17종 전수 검증)
 • 취약점 발견: 8건 ([FAIL] 중요도 상: 5건, 중: 2건, 하: 1건)
 • 종합 보안 점수: 48 / 100점 (위험 등급: HIGH)
 
