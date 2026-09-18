@@ -42,7 +42,7 @@ AgentScanner는 AI 에이전트의 Tool Calling을 매개로 발생할 수 있�
 </p>
 
 
-핵심은 LLM의 최종 텍스트 응답만을 보는 표면적 검증이 아니라, **에이전트가 실제로 실행한 도구(Tool) 호출 여부, 전달된 파라미터, 백엔드 데이터 반환 결과를 Spring AOP로 무결하게 가로채서(Trace) 판정**하는 것입니다.
+최종 LLM 응답뿐 아니라 실제 Tool 호출 여부, 실행 인자, 반환 결과를 Spring AOP로 추적하여 **Evidence 기반으로 PASS/FAIL을 판정**합니다.
 
 ---
 
@@ -52,61 +52,17 @@ AgentScanner는 AI 에이전트의 Tool Calling을 매개로 발생할 수 있�
 
 ### 3.1 전체 시스템 토폴로지 (System Topology)
 
-```text
-                                  [ 보안 관리자 / 개발자 ]
-                                             │
-                                             ▼
-                     ┌───────────────────────────────────────────────┐
-                     │    agent-scanner-frontend (Vite + React 18)   │
-                     │  • 실시간 보안 대시보드 (메트릭 / 위험도 게이지)    │
-                     │  • nGrinder 스타일 타깃 등록 & 1-Click Ping 체크 │
-                     │  • 조치 내용 등록 및 1-Click Re-Test 인터랙션   │
-                     └───────────────────────┬───────────────────────┘
-                                             │ (HTTP / REST API)
-                                             ▼
-                     ┌───────────────────────────────────────────────┐
-                     │    agent-scanner-engine (중앙 컨트롤러, 8080)   │
-                     │  • Scan Session Orchestrator                  │
-                     │  • OWASP LLM 기반 17대 보안 룰셋 진단 엔진    │
-                     │  • 100점 가중치 위험도 평가 (RiskEvaluator)    │
-                     │  • 조치(Remediation) & 핀포인트 재진단(Re-Test)│
-                     │  • KISA 표준 감사 보고서 자동 발행 (MD / HTML)  │
-                     └───────────────┬───────────────────┬───────────┘
-                                     │ (원격 점검 HTTP)    │ (JPA / JDBC)
-                                     ▼                   ▼
-    ┌───────────────────────────────────────────────┐ ┌───────────────────────────────────────────────┐
-    │  agent-scanner-target (Docker Linux 격리, 8081)│ │  PostgreSQL 16 Container (Docker, 5432)       │
-    │  • Spring AI 1.0 (OpenAI Function Calling)    │ │  ┌─────────────────────┐ ┌───────────────────┐  │
-    │  • Dual Mode: API 키 유무에 따른 자동 폴백    │ │  │ DB 1: scannerdb     │ │ DB 2: targetdb    │  │
-    │  • AOP 런타임 감사 (Tool Execution Aspect)    │ │  │ • 카탈로그/룰셋 시딩 │ │ • 엔터프라이즈 DB │  │
-    │  • Linux OS 파일(/etc/passwd), 커맨드 격리    │ │  │ • 스캔 세션/실행결과 │ │ • RAG 지식베이스  │  │
-    │  • 호스트(Mac) 보호 완벽 격리 샌드박스        │ │  │ • Finding & 조치이력 │ │   (대외비 회의록, │  │
-    │  • PostgreSQL 16 targetdb 실전 RDBMS 연동     │ │  │ • 리포트 & 타깃관리  │ │    급여 테이블)   │  │
-    │                                               │ │  └─────────────────────┘ └───────────────────┘  │
-    └───────────────────────┬───────────────────────┘ └───────────────────▲───────────────────────────┘
-                            │ (JDBC 실전 RDBMS & RAG 쿼리)                │
-                            └─────────────────────────────────────────────┘
-```
+<p align="center">
+  <img src="docs/images/system-topology.svg" alt="AgentScanner System Topology" width="850">
+</p>
 
 ### 3.2 타깃 에이전트 내부 구조 및 도구-자원 매핑 (Target Agent Internals)
 
 점검 대상 에이전트(`agent-scanner-target`, 8081)는 Spring AI 기반으로 프롬프트와 Function Calling을 처리하며, 비침습적 Spring AOP 계층을 통해 모든 런타임 행위를 추적합니다:
 
-```text
-       사용자 (공격자 / 일반 고객)
-                  ↓ (자연어 프롬프트)
-     [ LLM Agent (CustomerSupportAgent) ] ── (Spring AOP ToolExecutionAuditAspect 가로채기)
-                  │
-  ┌───────────────┼───────────────┬───────────────┬───────────────────────────────┐
-  │ [정상 업무]   │ [개인정보]    │ [DB 직접조회] │ [RAG 지식베이스]              │ [OS / 내부망]
-  ▼               ▼               ▼               ▼                               ▼
-searchProduct() getUserInfo() queryDatabase() searchKnowledgeBase()   readFile() / executeCommand() / fetchUrl()
-  │               │               │               │                               │
-  │ (카탈로그)    │ (사용자 조회) │ (SQL 실행)    │ (대외비 벡터문서)              │ (호스트 파일 / 쉘 / SSRF)
-  ▼               ▼               ▼               ▼                               ▼
-[ 상품 DB ]     [ 회원 PII ]   [ PostgreSQL 16 ] [ PostgreSQL 16 ]             [ Linux OS (/etc/passwd, env) ]
-                               (targetdb)       (rag_knowledge_base)          [ 사설망 192.168.x / AWS 169.254.x ]
-```
+<p align="center">
+  <img src="docs/images/target-agent-internals.svg" alt="Target Agent Internals & Tool Mapping" width="850">
+</p>
 
 - **비침습적 Spring AOP 감사 (`ToolExecutionAuditAspect`)**: 비즈니스 로직 수정 없이 LLM이 호출한 도구명, SQL 인자, 반환 데이터, 소요 시간을 가로채 `AgentExecutionTrace` JSON 객체로 무결하게 캡슐화합니다.
 - **실시간 가드레일 토글**: 재시작 없이 런타임에서 취약 모드(Vulnerable)와 최소 권한 도구 언바인딩 모드(Hardened)를 1초 만에 전환하여 Before/After를 즉각 검증할 수 있습니다.

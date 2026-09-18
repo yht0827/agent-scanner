@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 490" width="100%" height="100%">
+  <defs>
+    <style>
+      .title-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 13px; font-weight: 700; }
+      .header-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 13px; font-weight: 700; fill: #ffffff; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; }
+      .item-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11px; fill: #334155; }
+      .label-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 10.5px; fill: #64748b; font-weight: 600; }
+      .box { rx: 8px; ry: 8px; stroke-width: 1.5px; }
+      .arrow { stroke: #94a3b8; stroke-width: 1.5px; fill: none; }
+      .arrow-head { fill: #94a3b8; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="880" height="490" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" rx="10" />
+
+  <!-- User / Actor -->
+  <g transform="translate(340, 14)">
+    <rect class="box" width="200" height="36" fill="#f1f5f9" stroke="#94a3b8" />
+    <text x="100" y="22" text-anchor="middle" class="title-text" fill="#1e293b">보안 관리자 / 개발자</text>
+  </g>
+
+  <!-- Arrow Actor -> Frontend -->
+  <path d="M 440 50 L 440 68" class="arrow" marker-end="url(#arrow)" />
+
+  <!-- Frontend Container -->
+  <g transform="translate(150, 70)">
+    <rect class="box" width="580" height="74" fill="#f8fafc" stroke="#0284c7" />
+    <rect x="0" y="0" width="580" height="26" rx="8" fill="#0284c7" />
+    <rect x="0" y="18" width="580" height="8" fill="#0284c7" />
+    <text x="16" y="18" class="header-title">agent-scanner-frontend (Vite + React 18, Port 5173)</text>
+    <text x="16" y="44" class="item-text">• 실시간 보안 대시보드 (메트릭 / 100점 위험도 게이지)</text>
+    <text x="16" y="62" class="item-text">• nGrinder 스타일 타깃 등록 &amp; 1-Click Ping 체크 · 조치 등록 &amp; 1-Click Re-Test</text>
+  </g>
+
+  <!-- Arrow Frontend -> Engine -->
+  <path d="M 440 144 L 440 174" class="arrow" marker-end="url(#arrow)" />
+  <rect x="375" y="150" width="130" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
+  <text x="440" y="163" text-anchor="middle" class="label-text">HTTP / REST API</text>
+
+  <!-- Engine Container -->
+  <g transform="translate(150, 176)">
+    <rect class="box" width="580" height="84" fill="#f8fafc" stroke="#6366f1" />
+    <rect x="0" y="0" width="580" height="26" rx="8" fill="#6366f1" />
+    <rect x="0" y="18" width="580" height="8" fill="#6366f1" />
+    <text x="16" y="18" class="header-title">agent-scanner-engine (중앙 컨트롤러 엔진, Port 8080)</text>
+    <text x="16" y="44" class="item-text">• Scan Session Orchestrator · OWASP LLM 기반 17대 보안 룰셋 진단 엔진</text>
+    <text x="16" y="60" class="item-text">• 100점 가중치 위험도 평가 (RiskEvaluator) · 조치(Remediation) 및 1-Click Re-Test</text>
+    <text x="16" y="76" class="item-text">• KISA 표준 감사 보고서 자동 발행 (MD / HTML)</text>
+  </g>
+
+  <!-- Connectors Engine to Target & Postgres -->
+  <!-- Left Branch to Target -->
+  <path d="M 280 260 L 280 298" class="arrow" marker-end="url(#arrow)" />
+  <rect x="220" y="268" width="120" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
+  <text x="280" y="281" text-anchor="middle" class="label-text">원격 점검 HTTP (8081)</text>
+
+  <!-- Right Branch to Postgres -->
+  <path d="M 600 260 L 600 298" class="arrow" marker-end="url(#arrow)" />
+  <rect x="540" y="268" width="120" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
+  <text x="600" y="281" text-anchor="middle" class="label-text">JPA / JDBC (5432)</text>
+
+  <!-- Target Container (Docker 격리) -->
+  <g transform="translate(30, 300)">
+    <rect class="box" width="395" height="135" fill="#f8fafc" stroke="#475569" />
+    <rect x="0" y="0" width="395" height="26" rx="8" fill="#475569" />
+    <rect x="0" y="18" width="395" height="8" fill="#475569" />
+    <text x="16" y="18" class="header-title">agent-scanner-target (Docker Linux 격리, 8081)</text>
+    <text x="16" y="44" class="item-text">• Spring AI 1.0 (OpenAI Function Calling)</text>
+    <text x="16" y="62" class="item-text">• Dual Mode: API 키 유무에 따른 자동 폴백</text>
+    <text x="16" y="80" class="item-text">• AOP 런타임 감사 (ToolExecutionAuditAspect)</text>
+    <text x="16" y="98" class="item-text">• Linux OS 파일(/etc/passwd), 시스템 커맨드 격리</text>
+    <text x="16" y="116" class="item-text">• 호스트(Mac) 보호 완벽 격리 샌드박스</text>
+  </g>
+
+  <!-- PostgreSQL Container -->
+  <g transform="translate(455, 300)">
+    <rect class="box" width="395" height="135" fill="#f8fafc" stroke="#336791" />
+    <rect x="0" y="0" width="395" height="26" rx="8" fill="#336791" />
+    <rect x="0" y="18" width="395" height="8" fill="#336791" />
+    <text x="16" y="18" class="header-title">PostgreSQL 16 Container (Docker, Port 5432)</text>
+
+    <!-- DB 1: scannerdb -->
+    <g transform="translate(10, 34)">
+      <rect width="180" height="92" fill="#eff6ff" stroke="#93c5fd" rx="6" />
+      <text x="10" y="18" class="sub-title" fill="#1e40af">DB 1: scannerdb</text>
+      <text x="10" y="38" class="item-text">• 카탈로그/룰셋 시딩</text>
+      <text x="10" y="54" class="item-text">• 스캔 세션 및 실행결과</text>
+      <text x="10" y="70" class="item-text">• Finding &amp; 조치 이력</text>
+      <text x="10" y="86" class="item-text">• 리포트 &amp; 타깃 관리</text>
+    </g>
+
+    <!-- DB 2: targetdb -->
+    <g transform="translate(205, 34)">
+      <rect width="180" height="92" fill="#eff6ff" stroke="#93c5fd" rx="6" />
+      <text x="10" y="18" class="sub-title" fill="#1e40af">DB 2: targetdb</text>
+      <text x="10" y="38" class="item-text">• 엔터프라이즈 고객 DB</text>
+      <text x="10" y="54" class="item-text">• RAG 지식베이스</text>
+      <text x="16" y="68" class="label-text">(대외비 회의록, 급여)</text>
+      <text x="10" y="86" class="item-text">• 실전 모의 침투 대상</text>
+    </g>
+  </g>
+
+  <!-- Bottom JDBC connection from Target to targetdb -->
+  <path d="M 227 435 L 227 465 L 750 465 L 750 437" class="arrow" marker-end="url(#arrow)" />
+  <rect x="360" y="456" width="220" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
+  <text x="470" y="469" text-anchor="middle" class="label-text">JDBC 실전 RDBMS &amp; RAG 지식베이스 쿼리</text>
+</svg>
