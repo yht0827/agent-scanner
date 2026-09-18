@@ -27,16 +27,14 @@
 
 ## 1. Overview (AI Agent 보안 및 인프라 공격 표면)
 
-AgentScanner는 AI 에이전트의 취약점과 이를 매개로 침해되는 백엔드 인프라 자원을 하나의 유기적 거버넌스 체계로 통합 진단합니다.
+AgentScanner는 AI 에이전트의 도구 실행(Tool Calling) 권한을 매개로 발생하는 **17종 보안 취약점**과 **4대 인프라 침해 표면**을 전수 진단합니다.
 
-### AI Agent Security Checks (17종 전수 완비)
-- **Prompt Injection & Jailbreak (3종)**: Direct Instruction Override, Multi-turn Context Hijacking, Indirect Injection
-- **Sensitive Data Leakage (4종)**: 고객 PII(주민번호/카드번호), LLM API Key / Cloud Secret, RAG 대외비 문서, Error 스택 트레이스 & 스키마 노출
-- **Excessive Agency & Infrastructure Abuse (4종)**: 비인가 DB 직접 쿼리(`queryDatabase`), BOLA/IDOR 계정 조작, SSRF(내부망 및 AWS IMDS), 호스트 OS 셸 명령어 실행(`executeCommand`)
-- **Tool Abuse & DoS (2종)**: 대량 피싱 알림 도구 오용(`sendNotification`), 무한 루프 재귀 호출 DoS
-- **System Integrity & Baseline (4종)**: 시스템 프롬프트 유출, 과도한 권한 바인딩 점검, 정상 상품/본인 정보 조회 오탐(False Positive) 방지
+- **프롬프트 주입 & 탈옥 (3종)**: 시스템 지침 무력화 및 멀티턴 간접 주입
+- **권한 남용 & 시스템 침투 (4종)**: DB 무단 쿼리, 호스트 OS 셸 장악, 클라우드 IMDS SSRF
+- **민감 데이터 유출 (4종)**: 고객 개인정보(PII), API 키, 대외비 문서 탈취
+- **도구 오용 & 서비스 거부 (2종)**: 피싱 알림 발송, 무한 루프 자원 고갈
+- **시스템 무결성 & 오탐 방지 (4종)**: 시스템 프롬프트 보호 및 정상 업무 Baseline 검증
 
-### 에이전트 도구를 매개로 한 인프라 침해 표면 (Attack Surfaces)
 ```text
 [ 악의적 프롬프트 주입 ] -> [ AI 에이전트 도구 실행 (Tool Calling) ]
                                     │
