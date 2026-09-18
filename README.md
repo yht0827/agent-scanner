@@ -14,7 +14,7 @@
 **AI Agent Security Assessment & Runtime Guardrail Platform**  
 *OWASP Top 10 for LLM Applications 준용 AI 에이전트 도구 오용 및 인프라 침해 연쇄 위협 자동화 진단 플랫폼*
 
-[Architecture](./docs/ARCHITECTURE.md) · [Security Assessment](./docs/SECURITY-ASSESSMENT.md) · [Case Study](./docs/CASE-STUDY.md) · [API & Operations](./docs/API-AND-OPERATIONS.md) · [Portfolio Whitepaper](./PORTFOLIO.md)
+[Security Assessment](./docs/SECURITY-ASSESSMENT.md) · [Case Study](./docs/CASE-STUDY.md) · [API & Operations](./docs/API-AND-OPERATIONS.md) · [Portfolio Whitepaper](./PORTFOLIO.md)
 
 </div>
 
@@ -84,40 +84,70 @@ AgentScanner는 AI 에이전트의 취약점과 이를 매개로 침해되는 �
 
 ---
 
-## 3. Architecture (분산 컨트롤러-타깃 구조)
+## 3. Architecture (시스템 아키텍처 및 타깃 에이전트 구조)
 
 오픈소스 부하 테스트 프레임워크인 **nGrinder의 분산 구조(Controller - Agent)**를 차용하여, 보안 제어 엔진과 점검 대상을 격리된 마이크로서비스로 분리했습니다.
 
+### 3.1 전체 시스템 토폴로지 (System Topology)
+
 ```text
-                    [ Security Admin / Developer ]
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │  React Security Dashboard │ (Vite, React 18, Port 8080)
-                 └─────────────┬────────────┘
-                               │ REST API
-                               ▼
-                 ┌──────────────────────────┐
-                 │   AgentScanner Engine    │ (중앙 컨트롤러)
-                 │   - Scan Orchestrator    │
-                 │   - 17 Rules Analyzer    │
-                 │   - KISA RiskEvaluator   │
-                 │   - Audit Reporter       │
-                 └───────┬───────────┬──────┘
-                         │           │
-                    HTTP │           │ JPA
-                         ▼           ▼
-               ┌────────────────┐  ┌────────────────────┐
-               │ Target Agent   │  │ PostgreSQL 16      │
-               │ Spring AI      │  │ • scannerdb        │
-               │ Tool Calling   │  │ • targetdb (격리)  │
-               │ Spring AOP     │  └────────────────────┘
-               └───────┬────────┘
-                       │
-             DB / RAG / OS / Cloud IMDS
+                                  [ 보안 관리자 / 개발자 ]
+                                             │
+                                             ▼
+                     ┌───────────────────────────────────────────────┐
+                     │    agent-scanner-frontend (Vite + React 18)   │
+                     │  • 실시간 보안 대시보드 (메트릭 / 위험도 게이지)    │
+                     │  • nGrinder 스타일 타깃 등록 & 1-Click Ping 체크 │
+                     │  • 조치 내용 등록 및 1-Click Re-Test 인터랙션   │
+                     └───────────────────────┬───────────────────────┘
+                                             │ (HTTP / REST API)
+                                             ▼
+                     ┌───────────────────────────────────────────────┐
+                     │    agent-scanner-engine (중앙 컨트롤러, 8080)   │
+                     │  • Scan Session Orchestrator                  │
+                     │  • OWASP LLM 기반 17대 보안 룰셋 진단 엔진    │
+                     │  • 100점 가중치 위험도 평가 (RiskEvaluator)    │
+                     │  • 조치(Remediation) & 핀포인트 재진단(Re-Test)│
+                     │  • KISA 표준 감사 보고서 자동 발행 (MD / HTML)  │
+                     └───────────────┬───────────────────┬───────────┘
+                                     │ (원격 점검 HTTP)    │ (JPA / JDBC)
+                                     ▼                   ▼
+    ┌───────────────────────────────────────────────┐ ┌───────────────────────────────────────────────┐
+    │  agent-scanner-target (Docker Linux 격리, 8081)│ │  PostgreSQL 16 Container (Docker, 5432)       │
+    │  • Spring AI 1.0 (OpenAI Function Calling)    │ │  ┌─────────────────────┐ ┌───────────────────┐  │
+    │  • Dual Mode: API 키 유무에 따른 자동 폴백    │ │  │ DB 1: scannerdb     │ │ DB 2: targetdb    │  │
+    │  • AOP 런타임 감사 (Tool Execution Aspect)    │ │  │ • 카탈로그/룰셋 시딩 │ │ • 엔터프라이즈 DB │  │
+    │  • Linux OS 파일(/etc/passwd), 커맨드 격리    │ │  │ • 스캔 세션/실행결과 │ │ • RAG 지식베이스  │  │
+    │  • 호스트(Mac) 보호 완벽 격리 샌드박스        │ │  │ • Finding & 조치이력 │ │   (대외비 회의록, │  │
+    │  • PostgreSQL 16 targetdb 실전 RDBMS 연동     │ │  │ • 리포트 & 타깃관리  │ │    급여 테이블)   │  │
+    │                                               │ │  └─────────────────────┘ └───────────────────┘  │
+    └───────────────────────┬───────────────────────┘ └───────────────────▲───────────────────────────┘
+                            │ (JDBC 실전 RDBMS & RAG 쿼리)                │
+                            └─────────────────────────────────────────────┘
 ```
 
-> 📖 상세 아키텍처, 타깃 에이전트 내부 구조 및 AOP 추적 메커니즘은 [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)를 참고하세요.
+### 3.2 타깃 에이전트 내부 구조 및 도구-자원 매핑 (Target Agent Internals)
+
+점검 대상 에이전트(`agent-scanner-target`, 8081)는 Spring AI 기반으로 프롬프트와 Function Calling을 처리하며, 비침습적 Spring AOP 계층을 통해 모든 런타임 행위를 추적합니다:
+
+```text
+       사용자 (공격자 / 일반 고객)
+                  ↓ (자연어 프롬프트)
+     [ LLM Agent (CustomerSupportAgent) ] ── (Spring AOP ToolExecutionAuditAspect 가로채기)
+                  │
+  ┌───────────────┼───────────────┬───────────────┬───────────────────────────────┐
+  │ [정상 업무]   │ [개인정보]    │ [DB 직접조회] │ [RAG 지식베이스]              │ [OS / 내부망]
+  ▼               ▼               ▼               ▼                               ▼
+searchProduct() getUserInfo() queryDatabase() searchKnowledgeBase()   readFile() / executeCommand() / fetchUrl()
+  │               │               │               │                               │
+  │ (카탈로그)    │ (사용자 조회) │ (SQL 실행)    │ (대외비 벡터문서)              │ (호스트 파일 / 쉘 / SSRF)
+  ▼               ▼               ▼               ▼                               ▼
+[ 상품 DB ]     [ 회원 PII ]   [ PostgreSQL 16 ] [ PostgreSQL 16 ]             [ Linux OS (/etc/passwd, env) ]
+                               (targetdb)       (rag_knowledge_base)          [ 사설망 192.168.x / AWS 169.254.x ]
+```
+
+- **비침습적 Spring AOP 감사 (`ToolExecutionAuditAspect`)**: 비즈니스 로직 수정 없이 LLM이 호출한 도구명, SQL 인자, 반환 데이터, 소요 시간을 가로채 `AgentExecutionTrace` JSON 객체로 무결하게 캡슐화합니다.
+- **실시간 가드레일 토글**: 재시작 없이 런타임에서 취약 모드(Vulnerable)와 최소 권한 도구 언바인딩 모드(Hardened)를 1초 만에 전환하여 Before/After를 즉각 검증할 수 있습니다.
 
 ---
 
@@ -196,7 +226,7 @@ agent-scanner/
 ├── agent-scanner-engine/      # 보안 스캔 오케스트레이터, 17종 분석기, RiskEvaluator, 보고서 생성
 ├── agent-scanner-target/      # Spring AI 기반 피실험체 에이전트, Spring AOP 감사 계층
 ├── agent-scanner-frontend/    # Vite + React 18 기반 실시간 보안 관제 대시보드
-├── docs/                      # 4대 심층 기술 문서 (Architecture, Security, Case Study, API)
+├── docs/                      # 3대 심층 기술 문서 (Security Assessment, Case Study, API & Operations)
 ├── docker-compose.yml         # PostgreSQL 16 멀티 데이터베이스 컨테이너 환경
 └── PORTFOLIO.md               # 채용 담당자/면접관을 위한 7단계 종합 백서 (STAR 4대 챌린지)
 ```
@@ -207,7 +237,6 @@ agent-scanner/
 
 | 문서명 | 주요 내용 | 바로가기 |
 | :--- | :--- | :---: |
-| **System Architecture** | 분산 컨트롤러-타깃 토폴로지, 타깃 내부 구조, AOP 감사 계층, 도구-자원 매핑 | [보기](./docs/ARCHITECTURE.md) |
 | **Security Assessment** | AI 17종 전수 카탈로그, 100점 위험도 평가 공식, 재진단 라이프사이클 | [보기](./docs/SECURITY-ASSESSMENT.md) |
 | **Case Studies** | DB 유출 및 AWS IMDS SSRF 실제 Trace JSON 비교 분석, 21개 시나리오 매트릭스 | [보기](./docs/CASE-STUDY.md) |
 | **API & Operations** | 엔진 및 타깃 REST API 명세서, 로컬 샌드박스 구동법, 감사 보고서 발행 | [보기](./docs/API-AND-OPERATIONS.md) |
