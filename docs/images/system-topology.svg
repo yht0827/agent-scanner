@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 490" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="100%" height="100%">
   <defs>
     <style>
       .title-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 13px; font-weight: 700; }
-      .header-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 13px; font-weight: 700; fill: #ffffff; }
-      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; }
+      .header-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 12.5px; font-weight: 700; fill: #ffffff; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 700; }
       .item-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11px; fill: #334155; }
       .label-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 10.5px; fill: #64748b; font-weight: 600; }
       .box { rx: 8px; ry: 8px; stroke-width: 1.5px; }
@@ -16,97 +16,88 @@
   </defs>
 
   <!-- Background Card -->
-  <rect width="880" height="490" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" rx="10" />
+  <rect width="880" height="420" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" rx="10" />
 
   <!-- User / Actor -->
   <g transform="translate(340, 14)">
-    <rect class="box" width="200" height="36" fill="#f1f5f9" stroke="#94a3b8" />
-    <text x="100" y="22" text-anchor="middle" class="title-text" fill="#1e293b">보안 관리자 / 개발자</text>
+    <rect class="box" width="200" height="34" fill="#f1f5f9" stroke="#94a3b8" />
+    <text x="100" y="21" text-anchor="middle" class="title-text" fill="#1e293b">보안 관리자 / 개발자</text>
   </g>
 
   <!-- Arrow Actor -> Frontend -->
-  <path d="M 440 50 L 440 68" class="arrow" marker-end="url(#arrow)" />
+  <path d="M 440 48 L 440 66" class="arrow" marker-end="url(#arrow)" />
 
   <!-- Frontend Container -->
-  <g transform="translate(150, 70)">
-    <rect class="box" width="580" height="74" fill="#f8fafc" stroke="#0284c7" />
-    <rect x="0" y="0" width="580" height="26" rx="8" fill="#0284c7" />
-    <rect x="0" y="18" width="580" height="8" fill="#0284c7" />
-    <text x="16" y="18" class="header-title">agent-scanner-frontend (Vite + React 18, Dev Port 5173)</text>
-    <text x="16" y="44" class="item-text">• 보안 대시보드 (진단 메트릭 / 0~100 위험도 게이지)</text>
-    <text x="16" y="62" class="item-text">• 타깃 에이전트 등록 &amp; Ping 체크 · 조치 등록 &amp; Pinpoint Re-Test</text>
+  <g transform="translate(150, 68)">
+    <rect class="box" width="580" height="52" fill="#f8fafc" stroke="#0284c7" />
+    <rect x="0" y="0" width="580" height="24" rx="8" fill="#0284c7" />
+    <rect x="0" y="16" width="580" height="8" fill="#0284c7" />
+    <text x="16" y="16" class="header-title">agent-scanner-frontend (Vite + React 18, Dev 5173)</text>
+    <text x="16" y="40" class="item-text">Dashboard &amp; Pinpoint Re-Test UI</text>
   </g>
 
   <!-- Arrow Frontend -> Engine -->
-  <path d="M 440 144 L 440 174" class="arrow" marker-end="url(#arrow)" />
-  <rect x="375" y="150" width="130" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
-  <text x="440" y="163" text-anchor="middle" class="label-text">HTTP / REST API</text>
+  <path d="M 440 120 L 440 144" class="arrow" marker-end="url(#arrow)" />
+  <rect x="380" y="125" width="120" height="16" fill="#ffffff" rx="3" stroke="#e2e8f0" />
+  <text x="440" y="137" text-anchor="middle" class="label-text">REST API</text>
 
   <!-- Engine Container -->
-  <g transform="translate(150, 176)">
-    <rect class="box" width="580" height="84" fill="#f8fafc" stroke="#6366f1" />
-    <rect x="0" y="0" width="580" height="26" rx="8" fill="#6366f1" />
-    <rect x="0" y="18" width="580" height="8" fill="#6366f1" />
-    <text x="16" y="18" class="header-title">agent-scanner-engine (중앙 컨트롤러 엔진, Port 8080)</text>
-    <text x="16" y="44" class="item-text">• Scan Session Orchestrator · OWASP LLM 기반 17대 보안 룰셋 진단 엔진</text>
-    <text x="16" y="60" class="item-text">• 자체 RiskEvaluator 기반 0~100 위험도 평가 · 조치(Remediation) 및 Re-Test</text>
-    <text x="16" y="76" class="item-text">• KISA 점검 항목 참고 감사 보고서 자동 생성 (MD / HTML)</text>
+  <g transform="translate(150, 146)">
+    <rect class="box" width="580" height="54" fill="#f8fafc" stroke="#6366f1" />
+    <rect x="0" y="0" width="580" height="24" rx="8" fill="#6366f1" />
+    <rect x="0" y="16" width="580" height="8" fill="#6366f1" />
+    <text x="16" y="16" class="header-title">agent-scanner-engine (중앙 컨트롤러 엔진, Port 8080)</text>
+    <text x="16" y="41" class="item-text">Scan Session Orchestrator &amp; Risk Evaluator</text>
   </g>
 
   <!-- Connectors Engine to Target & Postgres -->
   <!-- Left Branch to Target -->
-  <path d="M 280 260 L 280 298" class="arrow" marker-end="url(#arrow)" />
-  <rect x="220" y="268" width="120" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
-  <text x="280" y="281" text-anchor="middle" class="label-text">원격 점검 HTTP (8081)</text>
+  <path d="M 280 200 L 280 236" class="arrow" marker-end="url(#arrow)" />
+  <rect x="215" y="209" width="130" height="16" fill="#ffffff" rx="3" stroke="#e2e8f0" />
+  <text x="280" y="221" text-anchor="middle" class="label-text">HTTP 원격 점검 (8081)</text>
 
   <!-- Right Branch to DB 1: scannerdb -->
-  <path d="M 555 260 L 555 332" class="arrow" marker-end="url(#arrow)" />
-  <rect x="495" y="268" width="120" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
-  <text x="555" y="281" text-anchor="middle" class="label-text">JPA / JDBC (scannerdb)</text>
+  <path d="M 555 200 L 555 264" class="arrow" marker-end="url(#arrow)" />
+  <rect x="495" y="209" width="120" height="16" fill="#ffffff" rx="3" stroke="#e2e8f0" />
+  <text x="555" y="221" text-anchor="middle" class="label-text">JDBC (scannerdb)</text>
 
   <!-- Target Container (Docker 격리) -->
-  <g transform="translate(30, 300)">
-    <rect class="box" width="395" height="135" fill="#f8fafc" stroke="#475569" />
-    <rect x="0" y="0" width="395" height="26" rx="8" fill="#475569" />
-    <rect x="0" y="18" width="395" height="8" fill="#475569" />
-    <text x="16" y="18" class="header-title">agent-scanner-target (Docker Linux 격리, 8081)</text>
-    <text x="16" y="44" class="item-text">• Spring AI 1.0 (OpenAI Function Calling)</text>
-    <text x="16" y="62" class="item-text">• Dual Mode: API 키 유무에 따른 자동 폴백</text>
-    <text x="16" y="80" class="item-text">• AOP 런타임 감사 (ToolExecutionAuditAspect)</text>
-    <text x="16" y="98" class="item-text">• Linux OS 파일(/etc/passwd), 시스템 커맨드 격리</text>
-    <text x="16" y="116" class="item-text">• Docker 기반 격리 테스트 환경 (호스트 보호)</text>
+  <g transform="translate(30, 238)">
+    <rect class="box" width="395" height="114" fill="#f8fafc" stroke="#475569" />
+    <rect x="0" y="0" width="395" height="24" rx="8" fill="#475569" />
+    <rect x="0" y="16" width="395" height="8" fill="#475569" />
+    <text x="16" y="16" class="header-title">agent-scanner-target (점검 대상 에이전트, Port 8081)</text>
+    <text x="16" y="44" class="item-text">• Spring AI Tool Execution &amp; Runtime Trace</text>
+    <text x="16" y="68" class="item-text">• 비침습적 Spring AOP 감사 (ToolExecutionAuditAspect)</text>
+    <text x="16" y="92" class="item-text">• 동적 가드레일 토글 (Vulnerable / Hardened)</text>
   </g>
 
   <!-- PostgreSQL Container -->
-  <g transform="translate(455, 300)">
-    <rect class="box" width="395" height="135" fill="#f8fafc" stroke="#336791" />
-    <rect x="0" y="0" width="395" height="26" rx="8" fill="#336791" />
-    <rect x="0" y="18" width="395" height="8" fill="#336791" />
-    <text x="16" y="18" class="header-title">PostgreSQL 16 Container (Docker, Port 5432)</text>
+  <g transform="translate(455, 238)">
+    <rect class="box" width="395" height="114" fill="#f8fafc" stroke="#336791" />
+    <rect x="0" y="0" width="395" height="24" rx="8" fill="#336791" />
+    <rect x="0" y="16" width="395" height="8" fill="#336791" />
+    <text x="16" y="16" class="header-title">PostgreSQL 16 Multi-DB (Docker, Port 5432)</text>
 
     <!-- DB 1: scannerdb -->
-    <g transform="translate(10, 34)">
-      <rect width="180" height="92" fill="#eff6ff" stroke="#93c5fd" rx="6" />
+    <g transform="translate(10, 32)">
+      <rect width="180" height="72" fill="#eff6ff" stroke="#93c5fd" rx="6" />
       <text x="10" y="18" class="sub-title" fill="#1e40af">DB 1: scannerdb</text>
-      <text x="10" y="38" class="item-text">• 카탈로그/룰셋 시딩</text>
-      <text x="10" y="54" class="item-text">• 스캔 세션 및 실행결과</text>
-      <text x="10" y="70" class="item-text">• Finding &amp; 조치 이력</text>
-      <text x="10" y="86" class="item-text">• 리포트 &amp; 타깃 관리</text>
+      <text x="10" y="40" class="item-text">• 스캔 세션 &amp; 룰셋 카탈로그</text>
+      <text x="10" y="58" class="item-text">• 취약점 Finding &amp; 조치 증적</text>
     </g>
 
     <!-- DB 2: targetdb -->
-    <g transform="translate(205, 34)">
-      <rect width="180" height="92" fill="#eff6ff" stroke="#93c5fd" rx="6" />
+    <g transform="translate(205, 32)">
+      <rect width="180" height="72" fill="#eff6ff" stroke="#93c5fd" rx="6" />
       <text x="10" y="18" class="sub-title" fill="#1e40af">DB 2: targetdb</text>
-      <text x="10" y="38" class="item-text">• 엔터프라이즈 고객 DB</text>
-      <text x="10" y="54" class="item-text">• RAG 지식베이스</text>
-      <text x="16" y="68" class="label-text">(대외비 회의록, 급여)</text>
-      <text x="10" y="86" class="item-text">• 실전 모의 침투 대상</text>
+      <text x="10" y="40" class="item-text">• 고객 PII / 관리자 DB</text>
+      <text x="10" y="58" class="item-text">• RAG 대외비 지식베이스</text>
     </g>
   </g>
 
   <!-- Bottom JDBC connection from Target to targetdb -->
-  <path d="M 227 435 L 227 465 L 750 465 L 750 437" class="arrow" marker-end="url(#arrow)" />
-  <rect x="340" y="456" width="260" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
-  <text x="470" y="469" text-anchor="middle" class="label-text">JDBC 실전 RDBMS &amp; RAG 지식베이스 쿼리 (targetdb)</text>
+  <path d="M 227 352 L 227 384 L 750 384 L 750 354" class="arrow" marker-end="url(#arrow)" />
+  <rect x="350" y="375" width="240" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
+  <text x="470" y="388" text-anchor="middle" class="label-text">JDBC 타깃 RDBMS &amp; RAG 쿼리 (targetdb)</text>
 </svg>

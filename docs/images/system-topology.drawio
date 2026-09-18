@@ -1,18 +1,18 @@
-<mxfile host="app.diagrams.net" modified="2026-09-18T07:12:00.000Z" agent="5.0" version="21.0.0" type="device">
+<mxfile host="app.diagrams.net" modified="2026-09-18T07:45:00.000Z" agent="5.0" version="21.0.0" type="device">
   <diagram id="system-topology" name="System Topology">
-    <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="600" math="0" shadow="0">
+    <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="500" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
         <!-- User -->
         <mxCell id="user" value="&lt;b&gt;보안 관리자 / 개발자&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#94A3B8;strokeWidth=1.5;arcSize=15;" vertex="1" parent="1">
-          <mxGeometry x="350" y="20" width="200" height="40" as="geometry" />
+          <mxGeometry x="350" y="15" width="200" height="35" as="geometry" />
         </mxCell>
 
         <!-- Frontend -->
-        <mxCell id="frontend" value="&lt;b style=&quot;font-size:13px; color:#0284C7;&quot;&gt;agent-scanner-frontend (Vite + React 18, Dev Port 5173)&lt;/b&gt;&lt;br&gt;&lt;br&gt;• 보안 대시보드 (진단 메트릭 / 0~100 위험도 게이지)&lt;br&gt;• 타깃 에이전트 등록 &amp; Ping 체크 · 조치 등록 &amp; Pinpoint Re-Test" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
-          <mxGeometry x="160" y="90" width="580" height="80" as="geometry" />
+        <mxCell id="frontend" value="&lt;b style=&quot;font-size:12.5px; color:#0284C7;&quot;&gt;agent-scanner-frontend (Vite + React 18, Dev 5173)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px; color:#334155;&quot;&gt;Dashboard &amp;amp; Pinpoint Re-Test UI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="160" y="70" width="580" height="52" as="geometry" />
         </mxCell>
 
         <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;" edge="1" parent="1" source="user" target="frontend">
@@ -20,60 +20,60 @@
         </mxCell>
 
         <!-- Engine -->
-        <mxCell id="engine" value="&lt;b style=&quot;font-size:13px; color:#6366F1;&quot;&gt;agent-scanner-engine (중앙 컨트롤러 엔진, Port 8080)&lt;/b&gt;&lt;br&gt;&lt;br&gt;• Scan Session Orchestrator · OWASP LLM 기반 17대 보안 룰셋 진단 엔진&lt;br&gt;• 자체 RiskEvaluator 기반 0~100 위험도 평가 · 조치(Remediation) 및 Re-Test&lt;br&gt;• KISA 점검 항목 참고 감사 보고서 자동 생성 (MD / HTML)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#6366F1;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
-          <mxGeometry x="160" y="210" width="580" height="90" as="geometry" />
+        <mxCell id="engine" value="&lt;b style=&quot;font-size:12.5px; color:#6366F1;&quot;&gt;agent-scanner-engine (중앙 컨트롤러 엔진, Port 8080)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px; color:#334155;&quot;&gt;Scan Session Orchestrator &amp;amp; Risk Evaluator&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#6366F1;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="160" y="150" width="580" height="54" as="geometry" />
         </mxCell>
 
-        <mxCell id="edge2" value="HTTP / REST API" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;fontColor=#64748B;fontSize=11px;" edge="1" parent="1" source="frontend" target="engine">
+        <mxCell id="edge2" value="REST API" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;fontColor=#64748B;fontSize=11px;" edge="1" parent="1" source="frontend" target="engine">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
         <!-- Target -->
-        <mxCell id="target" value="&lt;b style=&quot;font-size:13px; color:#475569;&quot;&gt;agent-scanner-target (Docker Linux 격리, 8081)&lt;/b&gt;&lt;br&gt;&lt;br&gt;• Spring AI 1.0 (OpenAI Function Calling)&lt;br&gt;• Dual Mode: API 키 유무에 따른 자동 폴백&lt;br&gt;• AOP 런타임 감사 (ToolExecutionAuditAspect)&lt;br&gt;• Linux OS 파일(/etc/passwd), 시스템 커맨드 격리&lt;br&gt;• Docker 기반 격리 테스트 환경 (호스트 보호)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
-          <mxGeometry x="40" y="340" width="380" height="150" as="geometry" />
+        <mxCell id="target" value="&lt;b style=&quot;font-size:12.5px; color:#475569;&quot;&gt;agent-scanner-target (점검 대상 에이전트, Port 8081)&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align:left; padding-left:15px; font-size:11px; color:#334155;&quot;&gt;• Spring AI Tool Execution &amp;amp; Runtime Trace&lt;br&gt;• 비침습적 Spring AOP 감사 (ToolExecutionAuditAspect)&lt;br&gt;• 동적 가드레일 토글 (Vulnerable / Hardened)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="380" height="114" as="geometry" />
         </mxCell>
 
         <!-- Postgres Container -->
-        <mxCell id="pg" value="&lt;b style=&quot;font-size:13px; color:#336791;&quot;&gt;PostgreSQL 16 Container (Docker, Port 5432)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#336791;strokeWidth=2;arcSize=10;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
-          <mxGeometry x="460" y="340" width="400" height="150" as="geometry" />
+        <mxCell id="pg" value="&lt;b style=&quot;font-size:12.5px; color:#336791;&quot;&gt;PostgreSQL 16 Multi-DB (Docker, Port 5432)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#336791;strokeWidth=2;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="460" y="240" width="400" height="114" as="geometry" />
         </mxCell>
 
         <!-- DB1 inside PG -->
-        <mxCell id="db1" value="&lt;b style=&quot;color:#1E40AF;&quot;&gt;DB 1: scannerdb&lt;/b&gt;&lt;br&gt;&lt;br&gt;• 카탈로그/룰셋 시딩&lt;br&gt;• 스캔 세션 및 실행결과&lt;br&gt;• Finding &amp; 조치 이력&lt;br&gt;• 리포트 &amp; 타깃 관리" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#93C5FD;arcSize=10;align=left;spacingLeft=10;fontSize=11px;" vertex="1" parent="1">
-          <mxGeometry x="475" y="380" width="180" height="95" as="geometry" />
+        <mxCell id="db1" value="&lt;b style=&quot;color:#1E40AF;&quot;&gt;DB 1: scannerdb&lt;/b&gt;&lt;br&gt;&lt;br&gt;• 스캔 세션 &amp;amp; 룰셋 카탈로그&lt;br&gt;• 취약점 Finding &amp;amp; 조치 증적" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#93C5FD;arcSize=10;align=left;spacingLeft=10;fontSize=11px;" vertex="1" parent="1">
+          <mxGeometry x="475" y="272" width="180" height="72" as="geometry" />
         </mxCell>
 
         <!-- DB2 inside PG -->
-        <mxCell id="db2" value="&lt;b style=&quot;color:#1E40AF;&quot;&gt;DB 2: targetdb&lt;/b&gt;&lt;br&gt;&lt;br&gt;• 엔터프라이즈 고객 DB&lt;br&gt;• RAG 지식베이스&lt;br&gt;  (대외비 회의록, 급여)&lt;br&gt;• 실전 모의 침투 대상" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#93C5FD;arcSize=10;align=left;spacingLeft=10;fontSize=11px;" vertex="1" parent="1">
-          <mxGeometry x="665" y="380" width="180" height="95" as="geometry" />
+        <mxCell id="db2" value="&lt;b style=&quot;color:#1E40AF;&quot;&gt;DB 2: targetdb&lt;/b&gt;&lt;br&gt;&lt;br&gt;• 고객 PII / 관리자 DB&lt;br&gt;• RAG 대외비 지식베이스" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#93C5FD;arcSize=10;align=left;spacingLeft=10;fontSize=11px;" vertex="1" parent="1">
+          <mxGeometry x="665" y="272" width="180" height="72" as="geometry" />
         </mxCell>
 
         <!-- Engine to Target edge -->
-        <mxCell id="edge_target" value="원격 점검 HTTP (8081)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;fontColor=#64748B;fontSize=11px;" edge="1" parent="1" source="engine" target="target">
+        <mxCell id="edge_target" value="HTTP 원격 점검 (8081)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;fontColor=#64748B;fontSize=11px;" edge="1" parent="1" source="engine" target="target">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="300" y="300" />
-              <mxPoint x="230" y="300" />
+              <mxPoint x="300" y="204" />
+              <mxPoint x="230" y="204" />
             </Array>
           </mxGeometry>
         </mxCell>
 
         <!-- Engine to scannerdb edge -->
-        <mxCell id="edge_pg" value="JPA / JDBC (scannerdb)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;fontColor=#64748B;fontSize=11px;" edge="1" parent="1" source="engine" target="db1">
+        <mxCell id="edge_pg" value="JDBC (scannerdb)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;fontColor=#64748B;fontSize=11px;" edge="1" parent="1" source="engine" target="db1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="600" y="300" />
-              <mxPoint x="565" y="300" />
+              <mxPoint x="600" y="204" />
+              <mxPoint x="565" y="204" />
             </Array>
           </mxGeometry>
         </mxCell>
 
         <!-- Target to DB2 edge -->
-        <mxCell id="edge_query" value="JDBC 실전 RDBMS &amp; RAG 지식베이스 쿼리 (targetdb)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;fontColor=#64748B;fontSize=11px;" edge="1" parent="1" source="target" target="db2">
+        <mxCell id="edge_query" value="JDBC 타깃 RDBMS &amp;amp; RAG 쿼리 (targetdb)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#94A3B8;fontColor=#64748B;fontSize=11px;" edge="1" parent="1" source="target" target="db2">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="230" y="520" />
-              <mxPoint x="755" y="520" />
+              <mxPoint x="230" y="380" />
+              <mxPoint x="755" y="380" />
             </Array>
           </mxGeometry>
         </mxCell>
