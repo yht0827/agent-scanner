@@ -1,4 +1,4 @@
-# 🛡️ AgentScanner
+# AgentScanner
 
 <div align="center">
 
@@ -11,7 +11,7 @@
 ![Security Rules](https://img.shields.io/badge/Security%20Checks-17%20Rules-red.svg)
 
 **AI Agent Security Assessment & Runtime Guardrail Platform**  
-*OWASP Top 10 for LLM Applications 준용 AI 에이전트 도구 오용 및 인프라 침해 연쇄 위협 자동화 진단 플랫폼*
+*OWASP LLM Top 10 기반 AI 에이전트 도구 오용 및 인프라 연쇄 침투 자동 진단 플랫폼*
 
 [Security Assessment](./docs/SECURITY-ASSESSMENT.md) · [Case Study](./docs/CASE-STUDY.md) · [API & Operations](./docs/API-AND-OPERATIONS.md) · [Portfolio Whitepaper](./PORTFOLIO.md)
 
@@ -36,16 +36,16 @@
 
 AgentScanner는 AI 에이전트의 취약점과 이를 매개로 침해되는 백엔드 인프라 자원을 하나의 유기적 거버넌스 체계로 통합 진단합니다.
 
-### 🤖 AI Agent Security Checks (17종 전수 완비)
+### AI Agent Security Checks (17종 전수 완비)
 - **Prompt Injection & Jailbreak (3종)**: Direct Instruction Override, Multi-turn Context Hijacking, Indirect Injection
 - **Sensitive Data Leakage (4종)**: 고객 PII(주민번호/카드번호), LLM API Key / Cloud Secret, RAG 대외비 문서, Error 스택 트레이스 & 스키마 노출
 - **Excessive Agency & Infrastructure Abuse (4종)**: 비인가 DB 직접 쿼리(`queryDatabase`), BOLA/IDOR 계정 조작, SSRF(내부망 및 AWS IMDS), 호스트 OS 셸 명령어 실행(`executeCommand`)
 - **Tool Abuse & DoS (2종)**: 대량 피싱 알림 도구 오용(`sendNotification`), 무한 루프 재귀 호출 DoS
 - **System Integrity & Baseline (4종)**: 시스템 프롬프트 유출, 과도한 권한 바인딩 점검, 정상 상품/본인 정보 조회 오탐(False Positive) 방지
 
-### 🎯 에이전트 도구를 매개로 한 인프라 침해 표면 (Attack Surfaces)
+### 에이전트 도구를 매개로 한 인프라 침해 표면 (Attack Surfaces)
 ```text
-[ 악의적 프롬프트 주입 ] ➔ [ AI 에이전트 도구 실행 (Tool Calling) ]
+[ 악의적 프롬프트 주입 ] -> [ AI 에이전트 도구 실행 (Tool Calling) ]
                                     │
        ┌────────────────────────────┼────────────────────────────┐
        ▼                            ▼                            ▼
@@ -76,7 +76,7 @@ AgentScanner는 AI 에이전트의 취약점과 이를 매개로 침해되는 �
           ↓
 [ Finding 생성 & 보안 가드레일 조치 (Remediation) ]
           ↓
-[ 1-Click Pinpoint Re-Test ➔ RESOLVED 자동 종결 ]
+[ 1-Click Pinpoint Re-Test -> RESOLVED 자동 종결 ]
 ```
 
 핵심은 LLM의 최종 텍스트 응답만을 보는 표면적 검증이 아니라, **에이전트가 실제로 실행한 도구(Tool) 호출 여부, 전달된 파라미터, 백엔드 데이터 반환 결과를 Spring AOP로 무결하게 가로채서(Trace) 판정**하는 것입니다.
@@ -163,25 +163,25 @@ searchProduct() getUserInfo() queryDatabase() searchKnowledgeBase()   readFile()
 | **System & Robustness** | 2종 | 시스템 프롬프트 유출(`SEC-SPL-01`), 에러 스택/스키마 노출(`SEC-ERR-01`) | 중 |
 | **Baseline (오탐 검증)** | 2종 | 정상 상품 정보 문의(`SEC-BASE-01`), 인증 사용자 본인 정보 조회 | 하 |
 
-> 📋 전체 17종 룰셋 카탈로그 및 100점 만점 위험도 산정 알고리즘은 [docs/SECURITY-ASSESSMENT.md](./docs/SECURITY-ASSESSMENT.md)를 참고하세요.
+> 전체 17종 룰셋 카탈로그 및 100점 만점 위험도 산정 알고리즘은 [docs/SECURITY-ASSESSMENT.md](./docs/SECURITY-ASSESSMENT.md)를 참고하세요.
 
 ---
 
 ## 5. Case Study: Before vs After 실증
 
-### 🚨 Before: 가드레일 OFF (취약 상태)
+### Before: 가드레일 OFF (취약 상태)
 공격자가 고객지원 에이전트에게 업무 승인을 사칭하여 `admin_users` 조회를 요청하자, 에이전트가 `queryDatabase` 도구를 자율 호출하여 관리자 계정 해시를 전수 노출합니다.
 ```text
-Attack Prompt ──> LLM Agent ──> queryDatabase(SELECT * FROM admin_users;) ──> [FAIL] 90점 CRITICAL
+Attack Prompt -> LLM Agent -> queryDatabase(SELECT * FROM admin_users;) -> [FAIL] 90점 CRITICAL
 ```
 
-### ✅ After: 가드레일 ON (보안 적용)
+### After: 가드레일 ON (보안 적용)
 최소 권한 원칙(Least Privilege)에 따라 비즈니스 무관 고위험 도구를 런타임에서 즉각 언바인딩(Unbind)하고, 비인가 쿼리 요청을 단호히 거절합니다.
 ```text
-동일 공격 Prompt ──> Guardrail ──> toolCalls: 0건 (도구 호출 원천 차단) ──> [PASS] 0점 LOW (안전 종결)
+동일 공격 Prompt -> Guardrail -> toolCalls: 0건 (도구 호출 원천 차단) -> [PASS] 0점 LOW (안전 종결)
 ```
 
-> 🔬 실제 Before/After `AgentExecutionTrace` JSON 로그 비교 및 AWS IMDS SSRF 실증은 [docs/CASE-STUDY.md](./docs/CASE-STUDY.md)를 참고하세요.
+> 실제 Before/After `AgentExecutionTrace` JSON 로그 비교 및 AWS IMDS SSRF 실증은 [docs/CASE-STUDY.md](./docs/CASE-STUDY.md)를 참고하세요.
 
 ---
 
@@ -240,5 +240,3 @@ agent-scanner/
 | **Case Studies** | DB 유출 및 AWS IMDS SSRF 실제 Trace JSON 비교 분석, 21개 시나리오 매트릭스 | [보기](./docs/CASE-STUDY.md) |
 | **API & Operations** | 엔진 및 타깃 REST API 명세서, 로컬 샌드박스 구동법, 감사 보고서 발행 | [보기](./docs/API-AND-OPERATIONS.md) |
 | **Portfolio Whitepaper** | 5대 핵심 메트릭, 4대 STAR 기술 챌린지, 21개 전수 시나리오 실증 백서 | [보기](./PORTFOLIO.md) |
-
-
