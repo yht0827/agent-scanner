@@ -9,7 +9,6 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791.svg)
 ![React](https://img.shields.io/badge/React-18-61DAFB.svg)
 ![Security Rules](https://img.shields.io/badge/Security%20Checks-17%20Rules-red.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 **AI Agent Security Assessment & Runtime Guardrail Platform**  
 *OWASP Top 10 for LLM Applications 준용 AI 에이전트 도구 오용 및 인프라 침해 연쇄 위협 자동화 진단 플랫폼*
@@ -242,8 +241,4 @@ agent-scanner/
 | **API & Operations** | 엔진 및 타깃 REST API 명세서, 로컬 샌드박스 구동법, 감사 보고서 발행 | [보기](./docs/API-AND-OPERATIONS.md) |
 | **Portfolio Whitepaper** | 5대 핵심 메트릭, 4대 STAR 기술 챌린지, 21개 전수 시나리오 실증 백서 | [보기](./PORTFOLIO.md) |
 
----
 
-## 9. License
-
-This project is open source and available under the [MIT License](LICENSE).
