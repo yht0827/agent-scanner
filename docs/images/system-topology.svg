@@ -32,7 +32,7 @@
     <rect class="box" width="580" height="74" fill="#f8fafc" stroke="#0284c7" />
     <rect x="0" y="0" width="580" height="26" rx="8" fill="#0284c7" />
     <rect x="0" y="18" width="580" height="8" fill="#0284c7" />
-    <text x="16" y="18" class="header-title">agent-scanner-frontend (Vite + React 18, Port 5173)</text>
+    <text x="16" y="18" class="header-title">agent-scanner-frontend (Vite + React 18, Dev Port 5173)</text>
     <text x="16" y="44" class="item-text">• 실시간 보안 대시보드 (메트릭 / 100점 위험도 게이지)</text>
     <text x="16" y="62" class="item-text">• nGrinder 스타일 타깃 등록 &amp; 1-Click Ping 체크 · 조치 등록 &amp; 1-Click Re-Test</text>
   </g>
@@ -49,8 +49,8 @@
     <rect x="0" y="18" width="580" height="8" fill="#6366f1" />
     <text x="16" y="18" class="header-title">agent-scanner-engine (중앙 컨트롤러 엔진, Port 8080)</text>
     <text x="16" y="44" class="item-text">• Scan Session Orchestrator · OWASP LLM 기반 17대 보안 룰셋 진단 엔진</text>
-    <text x="16" y="60" class="item-text">• 100점 가중치 위험도 평가 (RiskEvaluator) · 조치(Remediation) 및 1-Click Re-Test</text>
-    <text x="16" y="76" class="item-text">• KISA 표준 감사 보고서 자동 발행 (MD / HTML)</text>
+    <text x="16" y="60" class="item-text">• 자체 RiskEvaluator 기반 0~100 위험도 평가 · 조치(Remediation) 및 Re-Test</text>
+    <text x="16" y="76" class="item-text">• KISA 점검 항목 참고 감사 보고서 자동 생성 (MD / HTML)</text>
   </g>
 
   <!-- Connectors Engine to Target & Postgres -->
@@ -59,10 +59,10 @@
   <rect x="220" y="268" width="120" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
   <text x="280" y="281" text-anchor="middle" class="label-text">원격 점검 HTTP (8081)</text>
 
-  <!-- Right Branch to Postgres -->
-  <path d="M 600 260 L 600 298" class="arrow" marker-end="url(#arrow)" />
-  <rect x="540" y="268" width="120" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
-  <text x="600" y="281" text-anchor="middle" class="label-text">JPA / JDBC (5432)</text>
+  <!-- Right Branch to DB 1: scannerdb -->
+  <path d="M 555 260 L 555 332" class="arrow" marker-end="url(#arrow)" />
+  <rect x="495" y="268" width="120" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
+  <text x="555" y="281" text-anchor="middle" class="label-text">JPA / JDBC (scannerdb)</text>
 
   <!-- Target Container (Docker 격리) -->
   <g transform="translate(30, 300)">
@@ -74,7 +74,7 @@
     <text x="16" y="62" class="item-text">• Dual Mode: API 키 유무에 따른 자동 폴백</text>
     <text x="16" y="80" class="item-text">• AOP 런타임 감사 (ToolExecutionAuditAspect)</text>
     <text x="16" y="98" class="item-text">• Linux OS 파일(/etc/passwd), 시스템 커맨드 격리</text>
-    <text x="16" y="116" class="item-text">• 호스트(Mac) 보호 완벽 격리 샌드박스</text>
+    <text x="16" y="116" class="item-text">• Docker 기반 격리 테스트 환경 (호스트 보호)</text>
   </g>
 
   <!-- PostgreSQL Container -->
@@ -107,6 +107,6 @@
 
   <!-- Bottom JDBC connection from Target to targetdb -->
   <path d="M 227 435 L 227 465 L 750 465 L 750 437" class="arrow" marker-end="url(#arrow)" />
-  <rect x="360" y="456" width="220" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
-  <text x="470" y="469" text-anchor="middle" class="label-text">JDBC 실전 RDBMS &amp; RAG 지식베이스 쿼리</text>
+  <rect x="340" y="456" width="260" height="18" fill="#ffffff" rx="4" stroke="#e2e8f0" />
+  <text x="470" y="469" text-anchor="middle" class="label-text">JDBC 실전 RDBMS &amp; RAG 지식베이스 쿼리 (targetdb)</text>
 </svg>

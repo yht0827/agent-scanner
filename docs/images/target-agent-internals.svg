@@ -84,7 +84,7 @@
     <rect class="box" width="156" height="170" fill="#f8fafc" stroke="#dc2626" />
     <rect x="0" y="0" width="156" height="24" rx="8" fill="#fef2f2" />
     <rect x="0" y="16" width="156" height="8" fill="#fef2f2" />
-    <text x="78" y="16" text-anchor="middle" class="tag-text" fill="#dc2626">DB 직접조회 (SQLi)</text>
+    <text x="78" y="16" text-anchor="middle" class="tag-text" font-size="9.5px" fill="#dc2626">DB 직접조회 / SQL Injection</text>
     <text x="78" y="44" text-anchor="middle" class="tool-name" fill="#b91c1c">queryDatabase()</text>
     <text x="78" y="60" text-anchor="middle" class="sub-text">(임의 SQL 직접 실행)</text>
     <path d="M 78 72 L 78 88" class="arrow" marker-end="url(#arrow)" />

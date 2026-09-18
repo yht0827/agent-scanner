@@ -48,7 +48,7 @@ AgentScanner는 AI 에이전트의 Tool Calling을 매개로 발생할 수 있�
 
 ## 3. Architecture (시스템 아키텍처 및 타깃 에이전트 구조)
 
-오픈소스 부하 테스트 프레임워크인 **nGrinder의 분산 구조(Controller - Agent)**를 차용하여, 보안 제어 엔진과 점검 대상을 격리된 마이크로서비스로 분리했습니다.
+오픈소스 부하 테스트 프레임워크인 **nGrinder의 Controller-Agent 분리 개념**을 참고하여, 보안 제어 엔진과 점검 대상을 독립된 애플리케이션 서비스로 분리했습니다.
 
 ### 3.1 전체 시스템 토폴로지 (System Topology)
 
@@ -64,8 +64,8 @@ AgentScanner는 AI 에이전트의 Tool Calling을 매개로 발생할 수 있�
   <img src="docs/images/target-agent-internals.svg" alt="Target Agent Internals & Tool Mapping" width="850">
 </p>
 
-- **비침습적 Spring AOP 감사 (`ToolExecutionAuditAspect`)**: 비즈니스 로직 수정 없이 LLM이 호출한 도구명, SQL 인자, 반환 데이터, 소요 시간을 가로채 `AgentExecutionTrace` JSON 객체로 무결하게 캡슐화합니다.
-- **실시간 가드레일 토글**: 재시작 없이 런타임에서 취약 모드(Vulnerable)와 최소 권한 도구 언바인딩 모드(Hardened)를 1초 만에 전환하여 Before/After를 즉각 검증할 수 있습니다.
+- **Spring AOP 기반 Runtime Audit (`ToolExecutionAuditAspect`)**: 비즈니스 로직을 수정하지 않고 Agent가 호출한 Tool, Arguments, Return Value, Execution Time을 가로채 구조화된 `AgentExecutionTrace` JSON으로 기록합니다.
+- **실증용 Guardrail Toggle**: 서버 재시작 없이 Vulnerable/Hardened 모드를 즉시 전환하여 동일 공격 시나리오의 Before/After를 비교 검증합니다.
 
 ---
 
