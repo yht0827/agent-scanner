@@ -11,7 +11,7 @@
         </mxCell>
 
         <!-- Frontend -->
-        <mxCell id="frontend" value="&lt;b style=&quot;font-size:13px; color:#0284C7;&quot;&gt;agent-scanner-frontend (Vite + React 18, Dev Port 5173)&lt;/b&gt;&lt;br&gt;&lt;br&gt;• 실시간 보안 대시보드 (메트릭 / 100점 위험도 게이지)&lt;br&gt;• nGrinder 스타일 타깃 등록 &amp; 1-Click Ping 체크 · 조치 등록 &amp; 1-Click Re-Test" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+        <mxCell id="frontend" value="&lt;b style=&quot;font-size:13px; color:#0284C7;&quot;&gt;agent-scanner-frontend (Vite + React 18, Dev Port 5173)&lt;/b&gt;&lt;br&gt;&lt;br&gt;• 보안 대시보드 (진단 메트릭 / 0~100 위험도 게이지)&lt;br&gt;• 타깃 에이전트 등록 &amp; Ping 체크 · 조치 등록 &amp; Pinpoint Re-Test" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
           <mxGeometry x="160" y="90" width="580" height="80" as="geometry" />
         </mxCell>
 

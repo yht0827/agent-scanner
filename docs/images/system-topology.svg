@@ -33,8 +33,8 @@
     <rect x="0" y="0" width="580" height="26" rx="8" fill="#0284c7" />
     <rect x="0" y="18" width="580" height="8" fill="#0284c7" />
     <text x="16" y="18" class="header-title">agent-scanner-frontend (Vite + React 18, Dev Port 5173)</text>
-    <text x="16" y="44" class="item-text">• 실시간 보안 대시보드 (메트릭 / 100점 위험도 게이지)</text>
-    <text x="16" y="62" class="item-text">• nGrinder 스타일 타깃 등록 &amp; 1-Click Ping 체크 · 조치 등록 &amp; 1-Click Re-Test</text>
+    <text x="16" y="44" class="item-text">• 보안 대시보드 (진단 메트릭 / 0~100 위험도 게이지)</text>
+    <text x="16" y="62" class="item-text">• 타깃 에이전트 등록 &amp; Ping 체크 · 조치 등록 &amp; Pinpoint Re-Test</text>
   </g>
 
   <!-- Arrow Frontend -> Engine -->

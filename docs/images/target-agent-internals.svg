@@ -75,7 +75,7 @@
     <!-- Target Resource -->
     <rect x="12" y="94" width="132" height="62" fill="#ffffff" stroke="#3b82f6" stroke-dasharray="3 2" rx="6" />
     <text x="78" y="116" text-anchor="middle" class="title-text" fill="#1e40af">회원 DB (PII)</text>
-    <text x="78" y="132" text-anchor="middle" class="sub-text">BOLA / 타인 계정 탈취</text>
+    <text x="78" y="132" text-anchor="middle" class="sub-text">BOLA / 타인 계정 접근 시</text>
     <text x="78" y="146" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (타인정보 노출)</text>
   </g>
 
@@ -111,12 +111,12 @@
     <text x="78" y="146" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (대외비/급여 탈취)</text>
   </g>
 
-  <!-- Column 5: OS / 사설망 -->
+  <!-- Column 5: OS / 내부망·Cloud Metadata -->
   <g transform="translate(704, 154)">
     <rect class="box" width="156" height="170" fill="#f8fafc" stroke="#ea580c" />
     <rect x="0" y="0" width="156" height="24" rx="8" fill="#fff7ed" />
     <rect x="0" y="16" width="156" height="8" fill="#fff7ed" />
-    <text x="78" y="16" text-anchor="middle" class="tag-text" fill="#c2410c">OS / 사설망 (SSRF)</text>
+    <text x="78" y="16" text-anchor="middle" class="tag-text" font-size="9px" fill="#c2410c">OS / 내부망·Cloud Metadata</text>
     <text x="78" y="38" text-anchor="middle" class="tool-name" fill="#9a3412">readFile()</text>
     <text x="78" y="52" text-anchor="middle" class="tool-name" fill="#9a3412">executeCommand()</text>
     <text x="78" y="66" text-anchor="middle" class="sub-text">(OS 셸 / curl 요청)</text>
@@ -125,6 +125,6 @@
     <rect x="12" y="94" width="132" height="62" fill="#ffffff" stroke="#ea580c" stroke-dasharray="3 2" rx="6" />
     <text x="78" y="114" text-anchor="middle" class="title-text" fill="#9a3412">Host OS &amp; IMDS</text>
     <text x="78" y="128" text-anchor="middle" class="sub-text">/etc/passwd, 169.254.x</text>
-    <text x="78" y="146" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (RCE/SSRF 위험)</text>
+    <text x="78" y="146" text-anchor="middle" class="tag-text" font-size="8.5px" fill="#dc2626">FAIL (Command Execution / SSRF)</text>
   </g>
 </svg>
