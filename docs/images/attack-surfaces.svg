@@ -74,7 +74,7 @@
     <text x="120" y="21" text-anchor="middle" class="title-text" fill="#ffffff">사설망 / 클라우드 IMDS</text>
     <text x="16" y="60" class="item-text">• <tspan font-weight="600">192.168.x</tspan> 내부망 포트 정찰</text>
     <text x="16" y="84" class="item-text">• <tspan font-weight="600">AWS 169.254.169.254</tspan> SSRF</text>
-    <text x="24" y="102" class="sub-text">(IAM 마스터 자격증명 토큰 유출)</text>
-    <text x="16" y="126" class="sub-text">매개 도구: <tspan fill="#ea580c" font-weight="600">executeCommand / curl</tspan></text>
+    <text x="24" y="102" class="sub-text">(IAM Role 임시 자격증명 유출 위험)</text>
+    <text x="16" y="126" class="sub-text">매개 도구: <tspan fill="#ea580c" font-weight="600">executeCommand</tspan></text>
   </g>
 </svg>
