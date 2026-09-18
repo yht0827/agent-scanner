@@ -37,25 +37,10 @@ AgentScanner는 AI 에이전트의 Tool Calling을 매개로 발생할 수 있�
 
 ## 2. Core Flow (진단 라이프사이클)
 
-```text
-[ 17 Security Check Cases ]
-          ↓
-[ AgentScanner Engine (8080) ]
-          ↓ (HTTP 원격 점검)
-[ Target AI Agent (8081) ]
-          ↓ (OpenAI Function Calling)
-[ Tool Call: DB / RAG / OS / Internal Network ]
-          ↓ (Spring AOP 런타임 가로채기)
-[ AgentExecutionTrace (도구명, 파라미터, 반환값, 응답시간) ]
-          ↓
-[ Domain Analyzers (ToolAbuse, ExcessiveAgency, SensitiveData) ]
-          ↓
-[ PASS / FAIL 판정 & KISA 가중치 100점 위험도 산정 ]
-          ↓
-[ Finding 생성 & 보안 가드레일 조치 (Remediation) ]
-          ↓
-[ 1-Click Pinpoint Re-Test -> RESOLVED 자동 종결 ]
-```
+<p align="center">
+  <img src="docs/images/core-flow.svg" alt="AgentScanner Core Lifecycle Flow" width="850">
+</p>
+
 
 핵심은 LLM의 최종 텍스트 응답만을 보는 표면적 검증이 아니라, **에이전트가 실제로 실행한 도구(Tool) 호출 여부, 전달된 파라미터, 백엔드 데이터 반환 결과를 Spring AOP로 무결하게 가로채서(Trace) 판정**하는 것입니다.
 

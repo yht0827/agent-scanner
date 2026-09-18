@@ -1,0 +1,44 @@
+<mxfile host="app.diagrams.net" modified="2026-09-18T06:45:00.000Z" agent="5.0" version="21.0.0" type="device">
+  <diagram id="core-flow" name="Core Lifecycle Flow">
+    <mxGraphModel dx="1000" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- STEP 01 -->
+        <mxCell id="step1" value="&lt;b style=&quot;color:#2563EB; font-size:10px;&quot;&gt;STEP 01&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;font-size:13px;&quot;&gt;점검 요청 발송&lt;/b&gt;&lt;br&gt;&lt;br&gt;• 17대 보안 점검 시나리오&lt;br&gt;• Engine(8080) 세션 제어&lt;br&gt;• HTTP 원격 주입 테스트&lt;br&gt;&lt;br&gt;&lt;hr&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:11px;&quot;&gt;발신: &lt;b color=&quot;#2563EB&quot;&gt;Scanner Engine&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#3B82F6;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+          <mxGeometry x="20" y="40" width="190" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- STEP 02 -->
+        <mxCell id="step2" value="&lt;b style=&quot;color:#7C3AED; font-size:10px;&quot;&gt;STEP 02&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;font-size:13px;&quot;&gt;에이전트 도구 실행&lt;/b&gt;&lt;br&gt;&lt;br&gt;• OpenAI Function Calling&lt;br&gt;• DB / OS / 사설망 도구 호출&lt;br&gt;• 공격 유도 프롬프트 실행&lt;br&gt;&lt;br&gt;&lt;hr&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:11px;&quot;&gt;수행: &lt;b color=&quot;#7C3AED&quot;&gt;Target Agent(8081)&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#8B5CF6;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="190" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- STEP 03 -->
+        <mxCell id="step3" value="&lt;b style=&quot;color:#0284C7; font-size:10px;&quot;&gt;STEP 03&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;font-size:13px;&quot;&gt;런타임 AOP 감사&lt;/b&gt;&lt;br&gt;&lt;br&gt;• Spring AOP 비침습적 가로채기&lt;br&gt;• 도구명·파라미터·반환값 캡처&lt;br&gt;• AgentExecutionTrace 수집&lt;br&gt;&lt;br&gt;&lt;hr&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:11px;&quot;&gt;감사: &lt;b color=&quot;#0284C7&quot;&gt;AOP Trace Interceptor&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+          <mxGeometry x="460" y="40" width="190" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- STEP 04 -->
+        <mxCell id="step4" value="&lt;b style=&quot;color:#059669; font-size:10px;&quot;&gt;STEP 04&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;font-size:13px;&quot;&gt;위험도 판정 &amp; 재검증&lt;/b&gt;&lt;br&gt;&lt;br&gt;• PASS / FAIL 정밀 판정&lt;br&gt;• KISA 가중치 100점 위험도&lt;br&gt;• 가드레일 적용 ➔ 1초 Re-Test&lt;br&gt;&lt;br&gt;&lt;hr&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:11px;&quot;&gt;종결: &lt;b color=&quot;#059669&quot;&gt;1-Click Re-Test&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#10B981;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+          <mxGeometry x="680" y="40" width="190" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#94A3B8;" edge="1" parent="1" source="step1" target="step2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#94A3B8;" edge="1" parent="1" source="step2" target="step3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#94A3B8;" edge="1" parent="1" source="step3" target="step4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
