@@ -1,6 +1,6 @@
 # 🔌 REST API Specification & Operations Guide
 
-본 문서는 **AgentScanner**의 스캐너 중앙 엔진(`agent-scanner-engine`, 8080)과 점검 대상 타깃 에이전트(`agent-scanner-target`, 8081)의 **핵심 REST API 명세서**, 그리고 **로컬 샌드박스 구동 및 감사 보고서 발행 운영 가이드**를 제공합니다.
+본 문서는 **AgentScanner**의 스캐너 중앙 엔진(`agent-scanner-engine`, 8080)과 점검 대상 타깃 에이전트(`agent-scanner-target`, 8081)의 **핵심 REST API 명세서**, 그리고 **로컬 샌드박스 구동 및 보안 진단 보고서 발행 운영 가이드**를 제공합니다.
 
 ---
 
@@ -30,11 +30,11 @@
 | `POST` | `/api/findings/{id}/retest` | **1-Click 핀포인트 재진단 실행** | - | `ReTestResultResponse` (`[PASS]` / `[FAIL]`, 갱신된 위험도) |
 | `PATCH`| `/api/findings/{id}/status` | 취약점 조치 상태 수동 변경 | `{"status": "IN_PROGRESS", "comment": "가드레일 패치 적용 중"}` | `FindingResponse` |
 
-### 1.4 KISA 표준 감사 보고서 자동 발행 API
+### 1.4 KISA 점검 항목을 참고한 보안 진단 보고서 자동 발행 API
 | Method | Endpoint | 설명 | 반환 Content-Type |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/api/scans/{id}/report/markdown` | KISA 표준 종합 마크다운 보고서 다운로드 | `text/markdown; charset=UTF-8` |
-| `GET` | `/api/scans/{id}/report/html` | 브라우저 인쇄/열람용 스타일 HTML 감사 보고서 | `text/html; charset=UTF-8` |
+| `GET` | `/api/scans/{id}/report/markdown` | KISA 점검 항목을 참고한 종합 마크다운 보고서 다운로드 | `text/markdown; charset=UTF-8` |
+| `GET` | `/api/scans/{id}/report/html` | 브라우저 인쇄/열람용 스타일 HTML 진단 보고서 | `text/html; charset=UTF-8` |
 
 ---
 
@@ -52,12 +52,12 @@
 
 ## 3. 로컬 샌드박스 빠른 시작 가이드 (Quick Start Guide)
 
-AgentScanner는 외부 클라우드 의존성 없이, 로컬 Docker 환경에서 완벽하게 격리된 샌드박스를 1-Click으로 구동할 수 있습니다.
+AgentScanner는 외부 클라우드 의존성 없이, Docker 기반 로컬 샌드박스를 1-Click으로 구동할 수 있습니다.
 
 ### 3.1 사전 요구사항 (Prerequisites)
 - **Java**: OpenJDK 21 (LTS)
 - **Container Engine**: Docker Desktop 또는 OrbStack
-- **OpenAI API Key (선택 사항)**: API 키가 없어도 내장된 Offline Mock Simulator로 100% 동일하게 17종 점검을 수행할 수 있습니다.
+- **OpenAI API Key (선택 사항)**: API 키가 없어도 내장된 Offline Mock Mode로 진단 흐름과 판정 로직을 반복 검증할 수 있습니다.
 
 ### 3.2 단계별 실행 가이드
 
@@ -79,7 +79,7 @@ JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew :agent-scanner-target:bootRun
 # 터미널 2 (Scanner Engine, 8080 포트)
 JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew :agent-scanner-engine:bootRun
 ```
-- 브라우저에서 `http://localhost:8080/`에 접속하면 React 기반의 실시간 KISA 보안 대시보드가 열립니다.
+- 브라우저에서 `http://localhost:8080/`에 접속하면 React 기반의 실시간 보안 대시보드가 열립니다.
 
 #### 4단계: 전체 통합 검증 및 단위 테스트 일괄 실행
 ```bash
@@ -88,15 +88,15 @@ JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew check
 
 ---
 
-## 4. KISA 표준 감사 보고서 자동 발행 (Audit Report)
+## 4. KISA 점검 항목을 참고한 보안 진단 보고서 자동 발행 (Audit Report)
 
-보안 진단 세션이 완료되면, 스캐너 엔진은 KISA 주요정보통신기반시설 취약점 평가 표준 양식에 맞추어 **종합 감사 보고서(Markdown & HTML)**를 1초 만에 자동 생성합니다:
+보안 진단 세션이 완료되면, 스캐너 엔진은 KISA 점검 항목을 참고한 **보안 진단 보고서(Markdown & HTML)**를 자동 생성합니다:
 
 ```text
 # 🛡️ AI 에이전트 및 인프라 보안 취약점 종합 진단 보고서
 • 진단 일시: 2026-09-18 14:00:00 KST
 • 진단 대상: Enterprise Customer Support Agent (http://localhost:8081)
-• 총 점검 항목: 17개 (AI 에이전트 17종 전수 검증)
+• 총 점검 항목: 17개 (AI 에이전트 17종 보안 시나리오 점검)
 • 취약점 발견: 8건 ([FAIL] 중요도 상: 5건, 중: 2건, 하: 1건)
 • 종합 보안 점수: 48 / 100점 (위험 등급: HIGH)
 
