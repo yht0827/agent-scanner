@@ -77,6 +77,8 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 | **Tool Abuse** | 2 | 권한 없는 DB 조회, 반복 Tool 호출에 따른 자원 고갈 |
 | **Baseline (정상 동작 검증)** | 2 | 정상 상품 문의, 본인 정보 조회 |
 
+> 17개 점검 항목별 상세 공격 벡터, 프롬프트 페이로드 및 판정 기준은 [SECURITY-ASSESSMENT.md](./docs/SECURITY-ASSESSMENT.md)에서 확인할 수 있습니다.
+
 ---
 
 ## 5. Case Study (취약점 탐지 → 조치 → 재검증)
@@ -93,6 +95,8 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 *\*위험도 점수는 프로젝트 자체 위험도 평가 기준(RiskEvaluator)으로 계산합니다.*  
 *\*화면의 계정·개인정보는 모두 테스트용 가상 데이터입니다.*
+
+> 실제 Before/After `AgentExecutionTrace` JSON 로그와 AWS IMDS SSRF 사례는 [CASE-STUDY.md](./docs/CASE-STUDY.md)에서 확인할 수 있습니다.
 
 ---
 
