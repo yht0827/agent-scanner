@@ -55,9 +55,9 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
   <img src="docs/images/system-topology.svg" alt="AgentScanner System Topology" width="850">
 </p>
 
-- **독립 서비스 분리**: nGrinder의 Controller-Agent 구조를 참고하여 보안 점검 엔진(`agent-scanner-engine`, 8080)과 대상 에이전트(`agent-scanner-target`, 8081)를 격리
-- **데이터베이스 논리 격리**: 스캐너 세션 및 증적 관리(`scannerdb`)와 모의 침투 대상 엔터프라이즈 자산(`targetdb`)을 분리하여 진단 신뢰성 보장
-- **로컬 샌드박스 재현성**: Docker Compose 기반 멀티 DB 환경 구성으로 외부 클라우드 의존 없이 100% 로컬 재현 지원
+- **독립 서비스 분리**: Controller-Agent 구조를 참고해 Scanner Engine과 Target Agent의 실행 책임을 분리
+- **데이터 논리 분리**: 스캔 결과(`scannerdb`)와 테스트 대상 데이터(`targetdb`)를 분리해 데이터 간 간섭 최소화
+- **로컬 재현 환경**: Docker Compose 기반으로 주요 보안 시나리오를 로컬 환경에서 반복 검증
 
 ### 3.2 타깃 에이전트 내부 구조 및 도구-자원 매핑 (Target Agent Internals)
 

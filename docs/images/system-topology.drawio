@@ -11,7 +11,7 @@
         </mxCell>
 
         <!-- Frontend -->
-        <mxCell id="frontend" value="&lt;b style=&quot;font-size:12.5px; color:#0284C7;&quot;&gt;agent-scanner-frontend (Vite + React 18, Dev 5173)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px; color:#334155;&quot;&gt;Dashboard &amp;amp; Pinpoint Re-Test UI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
+        <mxCell id="frontend" value="&lt;b style=&quot;font-size:12.5px; color:#0284C7;&quot;&gt;agent-scanner-frontend (Vite + React 18 · Dev 5173 / Prod via Engine 8080)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px; color:#334155;&quot;&gt;Dashboard &amp;amp; Pinpoint Re-Test UI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;strokeWidth=2;arcSize=10;align=center;" vertex="1" parent="1">
           <mxGeometry x="160" y="70" width="580" height="52" as="geometry" />
         </mxCell>
 
