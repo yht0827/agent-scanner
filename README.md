@@ -131,31 +131,37 @@ React production build는 Scanner Engine에서 정적 리소스로 제공합니�
 
 ## 8. Quick Start (Local Sandbox)
 
-외부 클라우드 가입 없이 로컬 환경에서 즉시 구동 가능합니다.
+Mock Mode 기준 외부 클라우드 없이 로컬에서 실행할 수 있습니다.
 
 ### Requirements
-- Java 21 LTS (OpenJDK 21)
+- Java 21 LTS
 - Docker 또는 OrbStack
 
-### 1) DB 인프라 실행 (PostgreSQL 16 Multi-DB)
+### 1) DB 인프라 실행
 ```bash
 docker compose up -d postgres
 ```
-*(Target Agent까지 Docker 컨테이너 격리 환경으로 함께 띄우려면 `docker compose up -d`를 사용합니다)*
 
-### 2) 타깃 에이전트 실행 (포트 8081)
+Target Agent까지 Docker로 실행하려면:
+```bash
+docker compose up -d
+```
+
+### 2) Target Agent 실행
 ```bash
 ./gradlew :agent-scanner-target:bootRun
 ```
-*웹 테스트베드: `http://localhost:8081/test`*
 
-### 3) 스캐너 중앙 엔진 실행 (포트 8080)
+Web Testbed: `http://localhost:8081/test`
+
+### 3) Scanner Engine 실행
 ```bash
 ./gradlew :agent-scanner-engine:bootRun
 ```
-*웹 대시보드: `http://localhost:8080/` (React 빌드가 Engine에 내장되어 통합 제공)*
 
-### 4) 전체 테스트 검증
+Dashboard: `http://localhost:8080`
+
+### 4) 빌드 및 테스트 검증
 ```bash
 ./gradlew check
 ```
