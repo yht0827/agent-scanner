@@ -72,12 +72,12 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 | Category | 항목 수 | 대표 시나리오 |
 |---|:---:|---|
 | **Prompt Injection** | 4 | 시스템 지침 우회, 멀티턴 탈옥, 간접 프롬프트 주입 |
-| **Sensitive Data Leakage** | 4 | API Key, 개인정보(PII), RAG 내부 문서 노출 |
-| **Excessive Agency** | 5 | SSRF, 타인 계정 접근(BOLA), 허용 범위를 벗어난 Tool 실행 |
-| **Tool Abuse** | 2 | 권한 없는 DB 조회, 반복 Tool 호출에 따른 자원 고갈 |
+| **Sensitive Data Leakage (민감정보 유출)** | 4 | API Key, 개인정보(PII), RAG 내부 문서 노출 |
+| **Excessive Agency (과도한 권한 행사)** | 5 | SSRF, 타인 계정 접근(BOLA), 허용 범위를 벗어난 Tool 실행 |
+| **Tool Abuse (도구 오용)** | 2 | 권한 없는 DB 조회, 반복 Tool 호출에 따른 자원 고갈 |
 | **Baseline (정상 동작 검증)** | 2 | 정상 상품 문의, 본인 정보 조회 |
 
-> 17개 점검 항목별 상세 공격 벡터, 프롬프트 페이로드 및 판정 기준은 [SECURITY-ASSESSMENT.md](./docs/SECURITY-ASSESSMENT.md)에서 확인할 수 있습니다.
+> 17개 점검 항목의 테스트 방법, 판정 기준, 위험도 평가 방식은 [SECURITY-ASSESSMENT.md](./docs/SECURITY-ASSESSMENT.md)에서 확인할 수 있습니다.
 
 ---
 
@@ -96,7 +96,7 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 *\*위험도는 프로젝트 자체 RiskEvaluator 기준입니다.*  
 *\*모든 계정·개인정보는 테스트용 가상 데이터입니다.*
 
-> 실제 Before/After `AgentExecutionTrace` JSON 로그와 AWS IMDS SSRF 사례는 [CASE-STUDY.md](./docs/CASE-STUDY.md)에서 확인할 수 있습니다.
+> 보호 설정 적용 전·후의 실행 기록(`AgentExecutionTrace`)과 AWS IMDS SSRF 사례는 [CASE-STUDY.md](./docs/CASE-STUDY.md)에서 확인할 수 있습니다.
 
 ---
 
