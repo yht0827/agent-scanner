@@ -41,7 +41,7 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
   <img src="docs/images/core-flow.svg" alt="AgentScanner Core Lifecycle Flow" width="850">
 </p>
 
-최종 LLM 응답뿐 아니라 실제 Tool 호출 여부, 실행 인자와 반환 결과를 Spring AOP로 추적하여 Evidence 기반으로 PASS/FAIL을 판정합니다.
+최종 LLM 응답뿐 아니라 실제 Tool 호출 여부, 실행 인자와 반환 결과를 Spring AOP로 추적하여 수집된 근거(Evidence)를 바탕으로 PASS/FAIL을 판정합니다.
 
 ---
 
@@ -106,14 +106,13 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 ## 6. Web Dashboard
 
-Web UI: `http://localhost:8080`  
-React production build는 Scanner Engine에서 정적 리소스로 제공합니다.
+React 대시보드는 Scanner Engine과 함께 `http://localhost:8080`에서 제공합니다.
 
 <p align="center">
   <img src="docs/images/dashboard.png" alt="AgentScanner Web Dashboard" width="850">
 </p>
 
-진단 결과, Finding Evidence, Remediation 상태 및 Pinpoint Re-Test를 웹 대시보드에서 확인·관리할 수 있습니다.
+진단 결과, 취약점 근거, 조치 상태, 재검증 결과를 웹 대시보드에서 확인할 수 있습니다.
 
 ---
 
@@ -121,11 +120,11 @@ React production build는 Scanner Engine에서 정적 리소스로 제공합니�
 
 | 영역 | 적용 내용 |
 | :--- | :--- |
-| **Backend** | Java 21 · Spring Boot · Spring AOP 기반 Scanner Engine 및 Tool Execution Trace |
-| **AI / Agent** | Spring AI 기반 Tool Calling, Real/Mock 실행 및 Guardrail 검증 |
+| **Backend** | Java 21 · Spring Boot 기반 Scanner Engine, Spring AOP를 활용한 Tool 실행 추적 |
+| **AI / Agent** | Spring AI 기반 Tool Calling, 실제 LLM / Mock 실행, Guardrail 적용 전·후 검증 |
 | **Database** | PostgreSQL `scannerdb` / `targetdb` 논리 분리 |
-| **Frontend** | React · Vite 기반 진단 / Finding / Re-Test Dashboard |
-| **Infra & CI** | Docker Compose 기반 로컬 환경, GitHub Actions CI |
+| **Frontend** | React · Vite 기반 보안 진단 및 재검증 대시보드 |
+| **Infra & CI** | Docker Compose 기반 로컬 실행 환경, GitHub Actions 빌드·테스트 자동화 |
 
 ---
 
@@ -136,15 +135,14 @@ Mock Mode 기준 외부 클라우드 없이 로컬에서 실행할 수 있습니
 ### Requirements
 - Java 21 LTS
 - Docker 또는 OrbStack
+- *`OPENAI_API_KEY`는 실제 LLM 모드 사용 시에만 필요합니다.*
+
+기본 실행 방식: PostgreSQL만 Docker로 실행하고 Target/Engine은 Gradle로 실행  
+전체 Docker 실행: `docker compose up -d`
 
 ### 1) DB 인프라 실행
 ```bash
 docker compose up -d postgres
-```
-
-Target Agent까지 Docker로 실행하려면:
-```bash
-docker compose up -d
 ```
 
 ### 2) Target Agent 실행
@@ -168,18 +166,15 @@ Dashboard: `http://localhost:8080`
 
 ---
 
-## 9. API & Operations
-
-### Main APIs
+## 9. Main APIs
 
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/scans` | Security Scan 실행 |
-| GET | `/api/scans/{id}` | Scan 결과 조회 |
-| GET | `/api/scans/{id}/findings` | Finding 조회 |
-| POST | `/api/findings/{id}/retest` | Pinpoint Re-Test |
+| POST | `/api/scans` | 보안 진단 실행 |
+| GET | `/api/scans/{id}` | 진단 결과 조회 |
+| GET | `/api/scans/{id}/findings` | 취약점 조회 |
+| POST | `/api/findings/{id}/retest` | 해당 취약점 재검증 |
 
-상세 API 명세와 운영 가이드는
-[API & Operations Guide](./docs/API-AND-OPERATIONS.md)를 참고하세요.
+상세 API 명세와 운영 가이드는 [API & Operations Guide](./docs/API-AND-OPERATIONS.md)를 참고하세요.
 
 
