@@ -17,7 +17,7 @@
 
 ---
 
-## 1. Overview (AI Agent 보안 및 공격 표면)
+## 1. Overview (AI Agent 보안 및 주요 위협)
 
 AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Prompt Injection, Tool Abuse, 권한 오용, 민감정보 유출 및 인프라 연계 위협을 자동 진단합니다.
 
@@ -35,7 +35,7 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 ---
 
-## 2. Core Flow (진단 라이프사이클)
+## 2. Core Flow (보안 진단 흐름)
 
 <p align="center">
   <img src="docs/images/core-flow.svg" alt="AgentScanner Core Lifecycle Flow" width="850">
@@ -45,9 +45,9 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 ---
 
-## 3. Architecture (시스템 아키텍처 및 타깃 에이전트 구조)
+## 3. Architecture (전체 시스템 구조)
 
-오픈소스 부하 테스트 프레임워크인 **nGrinder의 Controller-Agent 분리 개념**을 참고하여, 보안 제어 엔진과 점검 대상을 독립된 애플리케이션 서비스로 분리했습니다.
+보안 점검 시스템과 점검 대상 Agent가 서로 독립적으로 동작하도록 Scanner Engine과 Target Agent를 분리했습니다. 구조 설계에는 nGrinder의 Controller-Agent 방식을 참고했습니다.
 
 ### 3.1 전체 시스템 구조
 
