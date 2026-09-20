@@ -48,10 +48,10 @@
     <rect x="0" y="0" width="264" height="32" rx="8" fill="#336791" />
     <rect x="0" y="24" width="264" height="8" fill="#336791" />
     <text x="132" y="21" text-anchor="middle" class="title-text" fill="#ffffff">PostgreSQL 16 DB</text>
-    <text x="16" y="60" class="item-text">• <tspan font-weight="600">admin_users</tspan> 관리자 계정 조회</text>
-    <text x="16" y="84" class="item-text">• 고객 인증정보(PII) 노출</text>
-    <text x="24" y="102" class="sub-text">(customer_credentials, 카드·주민번호)</text>
-    <text x="16" y="126" class="sub-text">호출 Tool: <tspan fill="#336791" font-weight="600">queryDatabase</tspan></text>
+    <text x="16" y="58" class="item-text">• <tspan font-weight="600">admin_users</tspan> 관리자 계정 조회</text>
+    <text x="16" y="80" class="item-text">• <tspan font-weight="600">customer_credentials</tspan></text>
+    <text x="26" y="98" class="sub-text">고객 인증정보(카드·주민번호) 노출</text>
+    <text x="16" y="124" class="sub-text">호출 Tool: <tspan fill="#336791" font-weight="600">queryDatabase</tspan></text>
   </g>
 
   <!-- Branch 2: Linux Host OS -->
@@ -60,10 +60,10 @@
     <rect x="0" y="0" width="264" height="32" rx="8" fill="#475569" />
     <rect x="0" y="24" width="264" height="8" fill="#475569" />
     <text x="132" y="21" text-anchor="middle" class="title-text" fill="#ffffff">Linux Host OS</text>
-    <text x="16" y="60" class="item-text">• <tspan font-weight="600">/etc/passwd</tspan> 시스템 파일 열람</text>
-    <text x="16" y="84" class="item-text">• <tspan font-weight="600">비인가 OS 명령 실행</tspan></text>
-    <text x="24" y="102" class="sub-text">(호스트 시스템 무단 접근 위험)</text>
-    <text x="16" y="126" class="sub-text">호출 Tool: <tspan fill="#475569" font-weight="600">executeCommand</tspan></text>
+    <text x="16" y="58" class="item-text">• <tspan font-weight="600">/etc/passwd</tspan> 시스템 파일 열람</text>
+    <text x="16" y="80" class="item-text">• <tspan font-weight="600">비인가 OS 명령 실행</tspan></text>
+    <text x="26" y="98" class="sub-text">(호스트 시스템 무단 접근 위험)</text>
+    <text x="16" y="124" class="sub-text">호출 Tool: <tspan fill="#475569" font-weight="600">executeCommand</tspan></text>
   </g>
 
   <!-- Branch 3: 내부망 / Cloud Metadata -->
@@ -72,9 +72,9 @@
     <rect x="0" y="0" width="264" height="32" rx="8" fill="#ea580c" />
     <rect x="0" y="24" width="264" height="8" fill="#ea580c" />
     <text x="132" y="21" text-anchor="middle" class="title-text" fill="#ffffff">내부망 / Cloud Metadata</text>
-    <text x="16" y="60" class="item-text">• <tspan font-weight="600">192.168.x</tspan> 내부 서비스 접근</text>
-    <text x="16" y="84" class="item-text">• <tspan font-weight="600">AWS IMDS</tspan> 접근 유도 (SSRF)</text>
-    <text x="24" y="102" class="sub-text">(IAM Role 임시 자격증명 유출 위험)</text>
-    <text x="16" y="126" class="sub-text">호출 Tool: <tspan fill="#ea580c" font-weight="600">executeCommand</tspan></text>
+    <text x="16" y="58" class="item-text">• <tspan font-weight="600">192.168.x</tspan> 내부 서비스 접근</text>
+    <text x="16" y="80" class="item-text">• <tspan font-weight="600">AWS IMDS</tspan> 접근 유도 (SSRF)</text>
+    <text x="26" y="98" class="sub-text">(IAM Role 임시 자격증명 유출 위험)</text>
+    <text x="16" y="124" class="sub-text">호출 Tool: <tspan fill="#ea580c" font-weight="600">executeCommand</tspan></text>
   </g>
 </svg>

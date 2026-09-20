@@ -41,7 +41,7 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
   <img src="docs/images/core-flow.svg" alt="AgentScanner Core Lifecycle Flow" width="850">
 </p>
 
-최종 LLM 응답뿐 아니라 실제 Tool 호출 여부, 실행 인자, 반환 결과를 Spring AOP로 추적하여 **Evidence 기반으로 PASS/FAIL을 판정**합니다.
+최종 LLM 응답뿐 아니라 실제 Tool 호출 여부, 실행 인자와 반환 결과를 Spring AOP로 추적하여 Evidence 기반으로 PASS/FAIL을 판정합니다.
 
 ---
 

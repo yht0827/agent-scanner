@@ -24,7 +24,7 @@
     <rect x="0" y="18" width="195" height="8" fill="#eff6ff" />
     <text x="12" y="17" class="step-badge" fill="#2563eb">STEP 01</text>
     <text x="12" y="44" class="title-text">Security Test 실행</text>
-    <text x="12" y="68" class="item-text">• 17대 보안 점검 시나리오</text>
+    <text x="12" y="68" class="item-text">• 17개 보안 테스트 시나리오</text>
     <text x="12" y="88" class="item-text">• Engine(8080) 세션 제어</text>
     <text x="12" y="108" class="item-text">• HTTP 원격 주입 테스트</text>
     <line x1="12" y1="132" x2="183" y2="132" stroke="#e2e8f0" stroke-width="1" />
@@ -42,7 +42,7 @@
     <text x="12" y="17" class="step-badge" fill="#7c3aed">STEP 02</text>
     <text x="12" y="44" class="title-text">AI Agent Tool Calling</text>
     <text x="12" y="68" class="item-text">• OpenAI Function Calling</text>
-    <text x="12" y="88" class="item-text">• DB / OS / 사설망 도구 호출</text>
+    <text x="12" y="88" class="item-text">• DB / OS / 내부망 Tool 호출</text>
     <text x="12" y="108" class="item-text">• 공격 유도 프롬프트 실행</text>
     <line x1="12" y1="132" x2="183" y2="132" stroke="#e2e8f0" stroke-width="1" />
     <text x="12" y="154" class="sub-text" fill="#64748b">수행: <tspan font-weight="600" fill="#7c3aed">Target Agent(8081)</tspan></text>
@@ -62,7 +62,7 @@
     <text x="12" y="88" class="item-text">• 도구명·실행인자·반환값 캡처</text>
     <text x="12" y="108" class="item-text">• AgentExecutionTrace 생성</text>
     <line x1="12" y1="132" x2="183" y2="132" stroke="#e2e8f0" stroke-width="1" />
-    <text x="12" y="154" class="sub-text" fill="#64748b">감사: <tspan font-weight="600" fill="#0284c7">AOP Trace Interceptor</tspan></text>
+    <text x="12" y="154" class="sub-text" fill="#64748b">수집: <tspan font-weight="600" fill="#0284c7">AOP Trace Interceptor</tspan></text>
   </g>
 
   <!-- Arrow 3 -> 4 -->
@@ -75,7 +75,7 @@
     <rect x="0" y="18" width="195" height="8" fill="#ecfdf5" />
     <text x="12" y="17" class="step-badge" fill="#059669">STEP 04</text>
     <text x="12" y="44" class="title-text">Evidence 판정 &amp; Re-Test</text>
-    <text x="12" y="68" class="item-text">• PASS / FAIL 증적 기반 판정</text>
+    <text x="12" y="68" class="item-text">• Evidence 기반 PASS / FAIL 판정</text>
     <text x="12" y="88" class="item-text">• 자체 RiskEvaluator 기반 0~100 위험도</text>
     <text x="12" y="108" class="item-text">• 가드레일 적용 ➔ Pinpoint Re-Test</text>
     <line x1="12" y1="132" x2="183" y2="132" stroke="#e2e8f0" stroke-width="1" />

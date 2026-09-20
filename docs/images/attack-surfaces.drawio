@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2026-09-20T06:00:00.000Z" agent="5.0" version="21.0.0" type="device">
+<mxfile host="app.diagrams.net" modified="2026-09-20T06:02:00.000Z" agent="5.0" version="21.0.0" type="device">
   <diagram id="attack-surfaces" name="AI Agent Attack Surfaces">
     <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="880" pageHeight="360" math="0" shadow="0">
       <root>
@@ -21,17 +21,17 @@
         </mxCell>
 
         <!-- Target 1: PostgreSQL 16 DB -->
-        <mxCell id="db" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;PostgreSQL 16 DB&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;admin_users&lt;/b&gt; 관리자 계정 조회&lt;br&gt;• 고객 인증정보(PII) 노출&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;(customer_credentials, 카드·주민번호)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#1565C0&quot;&gt;호출 Tool: queryDatabase&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#336791;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+        <mxCell id="db" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;PostgreSQL 16 DB&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;admin_users&lt;/b&gt; 관리자 계정 조회&lt;br&gt;• &lt;b&gt;customer_credentials&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;&amp;nbsp;고객 인증정보(카드·주민번호) 노출&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#1565C0&quot;&gt;호출 Tool: queryDatabase&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#336791;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
           <mxGeometry x="22" y="160" width="264" height="150" as="geometry" />
         </mxCell>
 
         <!-- Target 2: Linux Host OS -->
-        <mxCell id="os" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;Linux Host OS&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;/etc/passwd&lt;/b&gt; 시스템 파일 열람&lt;br&gt;• &lt;b&gt;비인가 OS 명령 실행&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;(호스트 시스템 무단 접근 위험)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#455A64&quot;&gt;호출 Tool: executeCommand&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+        <mxCell id="os" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;Linux Host OS&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;/etc/passwd&lt;/b&gt; 시스템 파일 열람&lt;br&gt;• &lt;b&gt;비인가 OS 명령 실행&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;&amp;nbsp;(호스트 시스템 무단 접근 위험)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#455A64&quot;&gt;호출 Tool: executeCommand&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
           <mxGeometry x="308" y="160" width="264" height="150" as="geometry" />
         </mxCell>
 
         <!-- Target 3: Cloud IMDS -->
-        <mxCell id="cloud" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;내부망 / Cloud Metadata&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;192.168.x&lt;/b&gt; 내부 서비스 접근&lt;br&gt;• &lt;b&gt;AWS IMDS&lt;/b&gt; 접근 유도 (SSRF)&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;(IAM Role 임시 자격증명 유출 위험)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#E65100&quot;&gt;호출 Tool: executeCommand&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#EA580C;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
+        <mxCell id="cloud" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;내부망 / Cloud Metadata&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;192.168.x&lt;/b&gt; 내부 서비스 접근&lt;br&gt;• &lt;b&gt;AWS IMDS&lt;/b&gt; 접근 유도 (SSRF)&lt;br&gt;&lt;font color=&quot;#666666&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;&amp;nbsp;(IAM Role 임시 자격증명 유출 위험)&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#E65100&quot;&gt;호출 Tool: executeCommand&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#EA580C;strokeWidth=2;arcSize=10;align=left;spacingLeft=15;" vertex="1" parent="1">
           <mxGeometry x="594" y="160" width="264" height="150" as="geometry" />
         </mxCell>
 
