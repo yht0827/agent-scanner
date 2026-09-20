@@ -19,15 +19,8 @@
 
 ## 1. Overview (AI Agent 보안 및 주요 위협)
 
-AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Prompt Injection, Tool Abuse, 권한 오용, 민감정보 유출 및 인프라 연계 위협을 자동 진단합니다.
-
-총 **17종의 AI Agent 보안 시나리오**를 기반으로 공격 표면을 검증합니다:
-
-- **프롬프트 주입 & 탈옥 (3종)**: 직접·간접 프롬프트 주입 및 멀티턴 탈옥
-- **권한 오용 & 인프라 접근 (4종)**: 비인가 DB 조회, OS 명령 실행, Cloud IMDS 접근
-- **민감 데이터 유출 (4종)**: 고객 개인정보(PII), API Key, 대외비 문서 노출
-- **도구 오용 & 서비스 거부 (2종)**: 피싱 메시지 전송, 반복 Tool 호출에 의한 자원 고갈
-- **가드레일 및 정상 동작 검증 (4종)**: 시스템 지침 보호, 정상 업무 허용 및 False Positive 검증
+AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Prompt Injection, 권한 오용, 민감정보 유출, Tool Abuse, 인프라 연계 위험을 자동으로 점검합니다.  
+총 17개의 점검 항목을 통해 AI Agent의 주요 보안 위험과 정상 동작을 검증합니다.
 
 <p align="center">
   <img src="docs/images/attack-surfaces.svg" alt="AI Agent Attack Surfaces" width="850">
