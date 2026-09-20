@@ -177,4 +177,6 @@ Dashboard: `http://localhost:8080`
 
 상세 API 명세와 운영 가이드는 [API & Operations Guide](./docs/API-AND-OPERATIONS.md)를 참고하세요.
 
+---
 
+**Documentation**: [보안 진단 체계 (Security Assessment)](./docs/SECURITY-ASSESSMENT.md) · [취약점 시나리오 (Case Study)](./docs/CASE-STUDY.md) · [API 상세 명세 (API Guide)](./docs/API-AND-OPERATIONS.md)
