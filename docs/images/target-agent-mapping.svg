@@ -114,8 +114,7 @@
     <path d="M 78 68 L 78 80" class="arrow" marker-end="url(#arrow)" />
     <!-- Target Resource -->
     <rect x="6" y="82" width="144" height="60" fill="#ffffff" stroke="#ea580c" stroke-dasharray="3 2" rx="6" />
-    <text x="78" y="99" text-anchor="middle" class="item-text" font-size="10.5px" fill="#9a3412">Host OS / AWS IMDS</text>
-    <text x="78" y="116" text-anchor="middle" class="tag-text" font-size="8.5px" fill="#dc2626">FAIL (Command Execution)</text>
-    <text x="78" y="130" text-anchor="middle" class="tag-text" font-size="8.5px" fill="#dc2626">FAIL (SSRF)</text>
+    <text x="78" y="105" text-anchor="middle" class="item-text" font-size="10.5px" fill="#9a3412">Host OS / AWS IMDS</text>
+    <text x="78" y="125" text-anchor="middle" class="tag-text" font-size="9.5px" fill="#dc2626">FAIL (명령 실행 / SSRF)</text>
   </g>
 </svg>
