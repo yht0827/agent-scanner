@@ -56,9 +56,9 @@
     <text x="78" y="52" text-anchor="middle" class="tool-name" fill="#047857">searchProduct()</text>
     <path d="M 78 66 L 78 80" class="arrow" marker-end="url(#arrow)" />
     <!-- Target Resource -->
-    <rect x="12" y="84" width="132" height="54" fill="#ffffff" stroke="#10b981" stroke-dasharray="3 2" rx="6" />
+    <rect x="6" y="82" width="144" height="60" fill="#ffffff" stroke="#10b981" stroke-dasharray="3 2" rx="6" />
     <text x="78" y="105" text-anchor="middle" class="item-text" fill="#065f46">상품 카탈로그 DB</text>
-    <text x="78" y="124" text-anchor="middle" class="tag-text" fill="#059669">PASS (정상 허용)</text>
+    <text x="78" y="125" text-anchor="middle" class="tag-text" fill="#059669">PASS (정상 허용)</text>
   </g>
 
   <!-- Column 2: 개인정보 -->
@@ -70,9 +70,9 @@
     <text x="78" y="52" text-anchor="middle" class="tool-name" fill="#1d4ed8">getUserInfo()</text>
     <path d="M 78 66 L 78 80" class="arrow" marker-end="url(#arrow)" />
     <!-- Target Resource -->
-    <rect x="12" y="84" width="132" height="54" fill="#ffffff" stroke="#3b82f6" stroke-dasharray="3 2" rx="6" />
+    <rect x="6" y="82" width="144" height="60" fill="#ffffff" stroke="#3b82f6" stroke-dasharray="3 2" rx="6" />
     <text x="78" y="105" text-anchor="middle" class="item-text" fill="#1e40af">고객 DB (PII)</text>
-    <text x="78" y="124" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (타인 계정 접근)</text>
+    <text x="78" y="125" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (타인 계정 접근)</text>
   </g>
 
   <!-- Column 3: DB 직접조회 -->
@@ -84,9 +84,9 @@
     <text x="78" y="52" text-anchor="middle" class="tool-name" fill="#b91c1c">queryDatabase()</text>
     <path d="M 78 66 L 78 80" class="arrow" marker-end="url(#arrow)" />
     <!-- Target Resource -->
-    <rect x="12" y="84" width="132" height="54" fill="#ffffff" stroke="#dc2626" stroke-dasharray="3 2" rx="6" />
-    <text x="78" y="105" text-anchor="middle" class="item-text" fill="#991b1b">targetdb (admin_users)</text>
-    <text x="78" y="124" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (해시 덤프 위험)</text>
+    <rect x="6" y="82" width="144" height="60" fill="#ffffff" stroke="#dc2626" stroke-dasharray="3 2" rx="6" />
+    <text x="78" y="105" text-anchor="middle" class="item-text" font-size="10px" fill="#991b1b">targetdb (admin_users)</text>
+    <text x="78" y="125" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (해시 덤프 위험)</text>
   </g>
 
   <!-- Column 4: RAG 지식베이스 -->
@@ -98,9 +98,9 @@
     <text x="78" y="52" text-anchor="middle" class="tool-name" fill="#6d28d9">searchKnowledgeBase()</text>
     <path d="M 78 66 L 78 80" class="arrow" marker-end="url(#arrow)" />
     <!-- Target Resource -->
-    <rect x="12" y="84" width="132" height="54" fill="#ffffff" stroke="#8b5cf6" stroke-dasharray="3 2" rx="6" />
+    <rect x="6" y="82" width="144" height="60" fill="#ffffff" stroke="#8b5cf6" stroke-dasharray="3 2" rx="6" />
     <text x="78" y="105" text-anchor="middle" class="item-text" fill="#5b21b6">rag_knowledge_base</text>
-    <text x="78" y="124" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (대외비 급여 탈취)</text>
+    <text x="78" y="125" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (대외비 급여 탈취)</text>
   </g>
 
   <!-- Column 5: OS / 내부망 / IMDS -->
@@ -113,8 +113,9 @@
     <text x="78" y="58" text-anchor="middle" class="tool-name" font-size="10px" fill="#9a3412">readFile()</text>
     <path d="M 78 68 L 78 80" class="arrow" marker-end="url(#arrow)" />
     <!-- Target Resource -->
-    <rect x="12" y="84" width="132" height="54" fill="#ffffff" stroke="#ea580c" stroke-dasharray="3 2" rx="6" />
-    <text x="78" y="105" text-anchor="middle" class="item-text" fill="#9a3412">Host OS / AWS IMDS</text>
-    <text x="78" y="124" text-anchor="middle" class="tag-text" font-size="8.5px" fill="#dc2626">FAIL (Command Execution / SSRF)</text>
+    <rect x="6" y="82" width="144" height="60" fill="#ffffff" stroke="#ea580c" stroke-dasharray="3 2" rx="6" />
+    <text x="78" y="99" text-anchor="middle" class="item-text" font-size="10.5px" fill="#9a3412">Host OS / AWS IMDS</text>
+    <text x="78" y="116" text-anchor="middle" class="tag-text" font-size="8.5px" fill="#dc2626">FAIL (Command Execution)</text>
+    <text x="78" y="130" text-anchor="middle" class="tag-text" font-size="8.5px" fill="#dc2626">FAIL (SSRF)</text>
   </g>
 </svg>

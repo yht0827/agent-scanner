@@ -40,7 +40,7 @@
         </mxCell>
 
         <!-- Col 5: OS / 내부망 / IMDS -->
-        <mxCell id="col5" value="&lt;b style=&quot;color:#C2410C; font-size:9.5px;&quot;&gt;OS / 내부망 / IMDS&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#9A3412; font-family:monospace; font-size:10.5px;&quot;&gt;executeCommand()&lt;br&gt;readFile()&lt;/b&gt;&lt;br&gt;&lt;br&gt;▼&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#9A3412; font-size:11px;&quot;&gt;Host OS / AWS IMDS&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#DC2626; font-size:8.5px;&quot;&gt;FAIL (Command Execution / SSRF)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#EA580C;strokeWidth=1.5;arcSize=10;align=center;" vertex="1" parent="1">
+        <mxCell id="col5" value="&lt;b style=&quot;color:#C2410C; font-size:9.5px;&quot;&gt;OS / 내부망 / IMDS&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#9A3412; font-family:monospace; font-size:10.5px;&quot;&gt;executeCommand()&lt;br&gt;readFile()&lt;/b&gt;&lt;br&gt;&lt;br&gt;▼&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#9A3412; font-size:11px;&quot;&gt;Host OS / AWS IMDS&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#DC2626; font-size:8.5px;&quot;&gt;FAIL (Command Execution)&lt;br&gt;FAIL (SSRF)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#EA580C;strokeWidth=1.5;arcSize=10;align=center;" vertex="1" parent="1">
           <mxGeometry x="704" y="150" width="156" height="152" as="geometry" />
         </mxCell>
 
