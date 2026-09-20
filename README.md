@@ -61,14 +61,14 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 ### 3.2 Target Agent 내부 구조 및 Tool-to-Resource Mapping
 
-점검 대상 에이전트(`agent-scanner-target`, 8081)는 Spring AI 기반으로 프롬프트와 Function Calling을 처리하며, 비침습적 Spring AOP 계층을 통해 Agent의 Tool 실행 행위를 추적합니다:
+점검 대상 Agent(`agent-scanner-target`, 8081)는 Spring AI 기반으로 사용자 프롬프트를 처리하고 Tool Calling을 수행하며, Spring AOP를 통해 실제 Tool 실행 정보를 추적합니다:
 
 <p align="center">
   <img src="docs/images/target-agent-internals.svg" alt="Target Agent Internals & Tool Mapping" width="850">
 </p>
 
-- **비침습적 Spring AOP 감사 (`ToolExecutionAuditAspect`)**: 비즈니스 로직을 수정하지 않고 Agent가 호출한 Tool, Arguments, Return Value, Execution Time을 Spring AOP로 수집하여 구조화된 `AgentExecutionTrace` JSON으로 기록합니다.
-- **실증용 동적 가드레일 토글**: 서버 재시작 없이 Vulnerable/Hardened 모드를 즉시 전환해 동일 공격 시나리오의 Before/After를 비교 검증합니다.
+- **Spring AOP 기반 Tool 실행 추적 (`ToolExecutionAuditAspect`)**: 비즈니스 로직을 변경하지 않고 Agent가 호출한 Tool, 실행 인자, 반환값, 실행 시간을 수집하여 `AgentExecutionTrace` 형태로 기록합니다.
+- **Guardrail 모드 전환 및 재검증**: 서버 재시작 없이 Vulnerable/Hardened 모드를 전환하여 동일한 공격 시나리오를 다시 실행하고 방어 적용 전·후 결과를 비교합니다.
 
 ---
 
