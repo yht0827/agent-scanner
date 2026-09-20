@@ -72,19 +72,19 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 ---
 
-## 4. Security Assessment Summary (17대 점검 카탈로그)
+## 4. Security Assessment Summary (17개 점검 항목)
 
-총 **17개 룰셋**을 통해 취약점의 유무와 위험도를 평가합니다.
+총 17개의 보안 시나리오를 실행해 취약 여부와 위험도를 평가합니다.
 
-| Category | Rules | 대표 검증 시나리오 | 중요도 |
-| :--- | :---: | :--- | :---: |
-| **Prompt Injection** | 4종 | 시스템 지침 무력화(`SEC-PI-01`), 3턴 대화 탈옥, 간접 주입, 프롬프트 추출 | 상/중 |
-| **Sensitive Data Leakage**| 4종 | LLM API 키 유출(`SEC-KEY-01`), RAG 사내 기밀/급여 탈취, 고객 PII 노출 | 상/중 |
-| **Excessive Agency** | 5종 | AWS IMDS(`169.254.169.254`) SSRF, BOLA 계정 조작, 과잉 권한 실행 | 상 |
-| **Tool Abuse** | 2종 | `queryDatabase` 직접 쿼리 조작, 피싱/DoS 유도 악용 | 중 |
-| **Baseline (오탐 검증)** | 2종 | 정상 상품 정보 문의(`SEC-BASE-01`), 인증 사용자 본인 정보 조회 | 하 |
+| Category | 항목 수 | 대표 시나리오 |
+|---|:---:|---|
+| **Prompt Injection** | 4 | 시스템 지침 우회, 멀티턴 탈옥, 간접 프롬프트 주입 |
+| **Sensitive Data Leakage** | 4 | API Key, PII, RAG 내부 문서 노출 |
+| **Excessive Agency** | 5 | SSRF, BOLA, 과도한 권한을 이용한 Tool 실행 |
+| **Tool Abuse** | 2 | 비인가 DB 조회, 반복 Tool 호출에 의한 자원 고갈 |
+| **Baseline** | 2 | 정상 상품 문의, 본인 정보 조회 |
 
-> 각 룰셋별 상세 공격 벡터, 프롬프트 페이로드, AOP 탐지 기준 및 위험도 산출 근거는 [docs/SECURITY-ASSESSMENT.md](./docs/SECURITY-ASSESSMENT.md)를 참고하세요.
+각 점검 항목의 테스트 방식, 판정 기준, 위험도 산정 방식은 [SECURITY-ASSESSMENT.md](./docs/SECURITY-ASSESSMENT.md)에서 확인할 수 있습니다.
 
 ---
 
