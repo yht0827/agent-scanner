@@ -80,7 +80,7 @@
     <rect class="box" width="156" height="152" fill="#f8fafc" stroke="#dc2626" />
     <rect x="0" y="0" width="156" height="24" rx="8" fill="#fef2f2" />
     <rect x="0" y="16" width="156" height="8" fill="#fef2f2" />
-    <text x="78" y="16" text-anchor="middle" class="tag-text" font-size="9.5px" fill="#dc2626">DB 직접조회 / SQLi</text>
+    <text x="78" y="16" text-anchor="middle" class="tag-text" font-size="9px" fill="#dc2626">DB 조회 / SQL Injection</text>
     <text x="78" y="52" text-anchor="middle" class="tool-name" fill="#b91c1c">queryDatabase()</text>
     <path d="M 78 66 L 78 80" class="arrow" marker-end="url(#arrow)" />
     <!-- Target Resource -->
@@ -103,18 +103,18 @@
     <text x="78" y="124" text-anchor="middle" class="tag-text" fill="#dc2626">FAIL (대외비 급여 탈취)</text>
   </g>
 
-  <!-- Column 5: OS / 내부망·IMDS -->
+  <!-- Column 5: OS / 내부망 / IMDS -->
   <g transform="translate(704, 150)">
     <rect class="box" width="156" height="152" fill="#f8fafc" stroke="#ea580c" />
     <rect x="0" y="0" width="156" height="24" rx="8" fill="#fff7ed" />
     <rect x="0" y="16" width="156" height="8" fill="#fff7ed" />
-    <text x="78" y="16" text-anchor="middle" class="tag-text" font-size="9.5px" fill="#c2410c">OS / 내부망·IMDS</text>
+    <text x="78" y="16" text-anchor="middle" class="tag-text" font-size="9.5px" fill="#c2410c">OS / 내부망 / IMDS</text>
     <text x="78" y="44" text-anchor="middle" class="tool-name" fill="#9a3412">executeCommand()</text>
     <text x="78" y="58" text-anchor="middle" class="tool-name" font-size="10px" fill="#9a3412">readFile()</text>
     <path d="M 78 68 L 78 80" class="arrow" marker-end="url(#arrow)" />
     <!-- Target Resource -->
     <rect x="12" y="84" width="132" height="54" fill="#ffffff" stroke="#ea580c" stroke-dasharray="3 2" rx="6" />
     <text x="78" y="105" text-anchor="middle" class="item-text" fill="#9a3412">Host OS / AWS IMDS</text>
-    <text x="78" y="124" text-anchor="middle" class="tag-text" font-size="9.5px" fill="#dc2626">FAIL (Command / SSRF)</text>
+    <text x="78" y="124" text-anchor="middle" class="tag-text" font-size="8.5px" fill="#dc2626">FAIL (Command Execution / SSRF)</text>
   </g>
 </svg>

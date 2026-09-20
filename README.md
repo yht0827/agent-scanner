@@ -59,7 +59,7 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 - **데이터 논리 분리**: 스캔 결과(`scannerdb`)와 테스트 대상 데이터(`targetdb`)를 분리해 데이터 간 간섭 최소화
 - **로컬 재현 환경**: Docker Compose 기반으로 주요 보안 시나리오를 로컬 환경에서 반복 검증
 
-### 3.2 타깃 에이전트 내부 구조 및 도구-자원 매핑 (Target Agent Internals)
+### 3.2 Target Agent 내부 구조 및 Tool-to-Resource Mapping
 
 점검 대상 에이전트(`agent-scanner-target`, 8081)는 Spring AI 기반으로 프롬프트와 Function Calling을 처리하며, 비침습적 Spring AOP 계층을 통해 Agent의 Tool 실행 행위를 추적합니다:
 
@@ -67,8 +67,8 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
   <img src="docs/images/target-agent-internals.svg" alt="Target Agent Internals & Tool Mapping" width="850">
 </p>
 
-- **비침습적 Spring AOP 감사 (`ToolExecutionAuditAspect`)**: 비즈니스 로직을 수정하지 않고 Agent가 호출한 Tool, Arguments, Return Value, Execution Time을 가로채 구조화된 `AgentExecutionTrace` JSON으로 수집합니다.
-- **실증용 동적 가드레일 토글**: 서버 재시작 없이 가드레일 모드(`Vulnerable` / `Hardened`)를 전환하여 동일 공격 시나리오의 방어 성공 여부(`Before vs After`)를 비교 검증합니다.
+- **비침습적 Spring AOP 감사 (`ToolExecutionAuditAspect`)**: 비즈니스 로직을 수정하지 않고 Agent가 호출한 Tool, Arguments, Return Value, Execution Time을 Spring AOP로 수집하여 구조화된 `AgentExecutionTrace` JSON으로 기록합니다.
+- **실증용 동적 가드레일 토글**: 서버 재시작 없이 Vulnerable/Hardened 모드를 즉시 전환해 동일 공격 시나리오의 Before/After를 비교 검증합니다.
 
 ---
 

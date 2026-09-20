@@ -30,7 +30,7 @@
         </mxCell>
 
         <!-- Col 3: DB 직접조회 -->
-        <mxCell id="col3" value="&lt;b style=&quot;color:#DC2626; font-size:9.5px;&quot;&gt;DB 직접조회 / SQLi&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#B91C1C; font-family:monospace; font-size:11px;&quot;&gt;queryDatabase()&lt;/b&gt;&lt;br&gt;&lt;br&gt;▼&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#991B1B; font-size:11px;&quot;&gt;targetdb (admin_users)&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#DC2626; font-size:10px;&quot;&gt;FAIL (해시 덤프 위험)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#DC2626;strokeWidth=1.5;arcSize=10;align=center;" vertex="1" parent="1">
+        <mxCell id="col3" value="&lt;b style=&quot;color:#DC2626; font-size:9px;&quot;&gt;DB 조회 / SQL Injection&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#B91C1C; font-family:monospace; font-size:11px;&quot;&gt;queryDatabase()&lt;/b&gt;&lt;br&gt;&lt;br&gt;▼&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#991B1B; font-size:11px;&quot;&gt;targetdb (admin_users)&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#DC2626; font-size:10px;&quot;&gt;FAIL (해시 덤프 위험)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#DC2626;strokeWidth=1.5;arcSize=10;align=center;" vertex="1" parent="1">
           <mxGeometry x="362" y="150" width="156" height="152" as="geometry" />
         </mxCell>
 
@@ -39,8 +39,8 @@
           <mxGeometry x="533" y="150" width="156" height="152" as="geometry" />
         </mxCell>
 
-        <!-- Col 5: OS / 내부망·IMDS -->
-        <mxCell id="col5" value="&lt;b style=&quot;color:#C2410C; font-size:9.5px;&quot;&gt;OS / 내부망·IMDS&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#9A3412; font-family:monospace; font-size:10.5px;&quot;&gt;executeCommand()&lt;br&gt;readFile()&lt;/b&gt;&lt;br&gt;&lt;br&gt;▼&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#9A3412; font-size:11px;&quot;&gt;Host OS / AWS IMDS&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#DC2626; font-size:9.5px;&quot;&gt;FAIL (Command / SSRF)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#EA580C;strokeWidth=1.5;arcSize=10;align=center;" vertex="1" parent="1">
+        <!-- Col 5: OS / 내부망 / IMDS -->
+        <mxCell id="col5" value="&lt;b style=&quot;color:#C2410C; font-size:9.5px;&quot;&gt;OS / 내부망 / IMDS&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#9A3412; font-family:monospace; font-size:10.5px;&quot;&gt;executeCommand()&lt;br&gt;readFile()&lt;/b&gt;&lt;br&gt;&lt;br&gt;▼&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#9A3412; font-size:11px;&quot;&gt;Host OS / AWS IMDS&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#DC2626; font-size:8.5px;&quot;&gt;FAIL (Command Execution / SSRF)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#EA580C;strokeWidth=1.5;arcSize=10;align=center;" vertex="1" parent="1">
           <mxGeometry x="704" y="150" width="156" height="152" as="geometry" />
         </mxCell>
 
