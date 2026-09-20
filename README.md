@@ -64,7 +64,7 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 점검 대상 Agent(`agent-scanner-target`, 8081)는 Spring AI 기반으로 사용자 프롬프트를 처리하고 Tool Calling을 수행하며, Spring AOP를 통해 실제 Tool 실행 정보를 추적합니다:
 
 <p align="center">
-  <img src="docs/images/target-agent-internals.svg" alt="Target Agent Internals & Tool Mapping" width="850">
+  <img src="docs/images/target-agent-internals.svg?v=2" alt="Target Agent Internals & Tool Mapping" width="850">
 </p>
 
 - **Spring AOP 기반 Tool 실행 추적 (`ToolExecutionAuditAspect`)**: 비즈니스 로직을 변경하지 않고 Agent가 호출한 Tool, 실행 인자, 반환값, 실행 시간을 수집하여 `AgentExecutionTrace` 형태로 기록합니다.
