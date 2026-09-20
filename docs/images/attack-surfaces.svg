@@ -17,10 +17,10 @@
   <rect width="880" height="300" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" rx="10" />
 
   <!-- Top Level Flow -->
-  <!-- Box 1: 악의적 프롬프트 주입 -->
+  <!-- Box 1: 공격 프롬프트 입력 -->
   <g transform="translate(140, 22)">
     <rect class="box" width="240" height="52" fill="#fef2f2" stroke="#ef4444" />
-    <text x="120" y="25" text-anchor="middle" class="title-text" fill="#b91c1c">악의적 프롬프트 주입</text>
+    <text x="120" y="25" text-anchor="middle" class="title-text" fill="#b91c1c">공격 프롬프트 입력</text>
     <text x="120" y="42" text-anchor="middle" class="sub-text">Direct / Indirect Prompt Injection</text>
   </g>
 
@@ -48,10 +48,10 @@
     <rect x="0" y="0" width="240" height="32" rx="8" fill="#336791" />
     <rect x="0" y="24" width="240" height="8" fill="#336791" />
     <text x="120" y="21" text-anchor="middle" class="title-text" fill="#ffffff">PostgreSQL 16 DB</text>
-    <text x="16" y="60" class="item-text">• <tspan font-weight="600">admin_users</tspan> 해시 덤프</text>
-    <text x="16" y="84" class="item-text">• <tspan font-weight="600">customer_credentials</tspan> 탈취</text>
+    <text x="16" y="60" class="item-text">• <tspan font-weight="600">admin_users</tspan> 관리자 계정 정보 조회</text>
+    <text x="16" y="84" class="item-text">• <tspan font-weight="600">customer_credentials</tspan> 고객 인증정보 노출</text>
     <text x="24" y="102" class="sub-text">(카드번호, 주민등록번호 노출)</text>
-    <text x="16" y="126" class="sub-text">매개 도구: <tspan fill="#336791" font-weight="600">queryDatabase</tspan></text>
+    <text x="16" y="126" class="sub-text">호출 Tool: <tspan fill="#336791" font-weight="600">queryDatabase</tspan></text>
   </g>
 
   <!-- Branch 2: Linux Host OS -->
@@ -63,18 +63,18 @@
     <text x="16" y="60" class="item-text">• <tspan font-weight="600">/etc/passwd</tspan> 시스템 파일 열람</text>
     <text x="16" y="84" class="item-text">• <tspan font-weight="600">비인가 OS 명령 실행</tspan></text>
     <text x="24" y="102" class="sub-text">(호스트 시스템 무단 접근 위험)</text>
-    <text x="16" y="126" class="sub-text">매개 도구: <tspan fill="#475569" font-weight="600">executeCommand</tspan></text>
+    <text x="16" y="126" class="sub-text">호출 Tool: <tspan fill="#475569" font-weight="600">executeCommand</tspan></text>
   </g>
 
-  <!-- Branch 3: 사설망 / 클라우드 IMDS -->
+  <!-- Branch 3: 내부망 / Cloud Metadata -->
   <g transform="translate(600, 135)">
     <rect class="box" width="240" height="140" fill="#f8fafc" stroke="#ea580c" />
     <rect x="0" y="0" width="240" height="32" rx="8" fill="#ea580c" />
     <rect x="0" y="24" width="240" height="8" fill="#ea580c" />
-    <text x="120" y="21" text-anchor="middle" class="title-text" fill="#ffffff">사설망 / 클라우드 IMDS</text>
-    <text x="16" y="60" class="item-text">• <tspan font-weight="600">192.168.x</tspan> 내부망 포트 정찰</text>
-    <text x="16" y="84" class="item-text">• <tspan font-weight="600">AWS 169.254.169.254</tspan> SSRF</text>
+    <text x="120" y="21" text-anchor="middle" class="title-text" fill="#ffffff">내부망 / Cloud Metadata</text>
+    <text x="16" y="60" class="item-text">• <tspan font-weight="600">192.168.x</tspan> 내부 서비스 접근 시도</text>
+    <text x="16" y="84" class="item-text">• <tspan font-weight="600">AWS IMDS</tspan> 접근 유도 (SSRF)</text>
     <text x="24" y="102" class="sub-text">(IAM Role 임시 자격증명 유출 위험)</text>
-    <text x="16" y="126" class="sub-text">매개 도구: <tspan fill="#ea580c" font-weight="600">executeCommand</tspan></text>
+    <text x="16" y="126" class="sub-text">호출 Tool: <tspan fill="#ea580c" font-weight="600">executeCommand</tspan></text>
   </g>
 </svg>
