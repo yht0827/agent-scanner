@@ -119,13 +119,13 @@ React production build는 Scanner Engine에서 정적 리소스로 제공합니�
 
 ## 7. Tech Stack
 
-| 영역 | 기술 스택 | 설명 |
-| :--- | :--- | :--- |
-| **Backend** | Java 21 LTS, Spring Boot 3.3.5, Spring Data JPA, Spring AOP | 스캐너 중앙 엔진 및 Tool Execution Trace 수집 |
-| **AI / Agent** | Spring AI 1.0.0, OpenAI Tool Calling | Spring AI 기반 LLM Tool Calling 및 Real/Mock 실행 |
-| **Database** | PostgreSQL 16 (Multi-DB: `scannerdb`, `targetdb`) | Scanner / Target 데이터 논리 분리 |
-| **Frontend** | React 18, Vite, Tailwind CSS, Lucide Icons | 보안 진단·Finding·Re-Test 대시보드 |
-| **Infra & CI** | Docker, Docker Compose, GitHub Actions | Docker 기반 로컬 실행 환경 및 CI 테스트 자동화 |
+| 영역 | 적용 내용 |
+| :--- | :--- |
+| **Backend** | Java 21 · Spring Boot · Spring AOP 기반 Scanner Engine 및 Tool Execution Trace |
+| **AI / Agent** | Spring AI 기반 Tool Calling, Real/Mock 실행 및 Guardrail 검증 |
+| **Database** | PostgreSQL `scannerdb` / `targetdb` 논리 분리 |
+| **Frontend** | React · Vite 기반 진단 / Finding / Re-Test Dashboard |
+| **Infra & CI** | Docker Compose 기반 로컬 환경, GitHub Actions CI |
 
 ---
 
