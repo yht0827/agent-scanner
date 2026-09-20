@@ -106,7 +106,7 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 ## 6. Web Dashboard
 
-React 대시보드는 Scanner Engine과 함께 `http://localhost:8080`에서 제공합니다.
+React 대시보드는 Scanner Engine에서 함께 제공되며, `http://localhost:8080`에서 확인할 수 있습니다.
 
 <p align="center">
   <img src="docs/images/dashboard.png" alt="AgentScanner Web Dashboard" width="850">
@@ -137,8 +137,8 @@ Mock Mode 기준 외부 클라우드 없이 로컬에서 실행할 수 있습니
 - Docker 또는 OrbStack
 - *`OPENAI_API_KEY`는 실제 LLM 모드 사용 시에만 필요합니다.*
 
-기본 실행 방식: PostgreSQL만 Docker로 실행하고 Target/Engine은 Gradle로 실행  
-전체 Docker 실행: `docker compose up -d`
+기본 실행: PostgreSQL만 Docker로 실행하고 Target과 Engine은 Gradle로 로컬 실행  
+*(Target Agent까지 Docker로 격리 실행하려면 `docker compose up -d`)*
 
 ### 1) DB 인프라 실행
 ```bash
