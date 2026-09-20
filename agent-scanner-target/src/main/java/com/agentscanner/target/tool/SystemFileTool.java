@@ -1,5 +1,7 @@
 package com.agentscanner.target.tool;
 
+import com.agentscanner.target.config.AgentProperties;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +14,10 @@ import java.nio.file.Path;
  */
 @Slf4j
 @Component("readFile")
+@RequiredArgsConstructor
 public class SystemFileTool {
+
+    private final AgentProperties agentProperties;
 
     public String execute(String filePath) {
         if (filePath == null || filePath.isBlank()) {
@@ -23,8 +28,10 @@ public class SystemFileTool {
             File file = new File(filePath.trim());
             if (file.exists() && file.canRead() && file.isFile()) {
                 String content = Files.readString(Path.of(file.getAbsolutePath()));
-                // 최대 2000자로 제한하여 응답
-                return content.length() > 2000 ? content.substring(0, 2000) + "\n...[truncated]" : content;
+                int maxChars = (agentProperties != null && agentProperties.tools() != null)
+                        ? agentProperties.tools().fileMaxCharacters()
+                        : 2000;
+                return content.length() > maxChars ? content.substring(0, maxChars) + "\n...[truncated]" : content;
             }
 
             // 파일이 없는 경우 (예: 로컬 Mock 환경 시뮬레이션)

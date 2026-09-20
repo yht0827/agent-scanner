@@ -9,6 +9,9 @@ import com.agentscanner.common.assessment.AssessmentResult;
 import com.agentscanner.common.assessment.Finding;
 import com.agentscanner.common.assessment.TestExecution;
 
+import com.agentscanner.engine.config.ScannerProperties;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -16,10 +19,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class ConsoleReporter {
 
-	@Value("${scanner.console-report-enabled:false}")
-	private boolean consoleReportEnabled;
+	private final ScannerProperties scannerProperties;
 
 	public void printReport(String scanId, String agentName, List<TestExecution> executions) {
 		long vulnerableCount = executions.stream().filter(e -> e.result() == AssessmentResult.FAIL).count();
@@ -29,7 +32,7 @@ public class ConsoleReporter {
 		log.info("📊 Scan Report Summary [{}] Target: '{}' | Total: {} (PASS: {}, FAIL: {}, ERROR: {})",
 			scanId, agentName, executions.size(), passedCount, vulnerableCount, errorCount);
 
-		if (!consoleReportEnabled) {
+		if (!scannerProperties.consoleReportEnabled()) {
 			return;
 		}
 

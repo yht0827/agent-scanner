@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import com.agentscanner.engine.config.ScannerProperties;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,8 +23,11 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional(readOnly = true)
 public class TargetAgentService {
 
+	public static final String MOCK_INTERNAL_URL = "mock://internal";
+
 	private final TargetAgentRepository targetAgentRepository;
 	private final WebClient.Builder webClientBuilder;
+	private final ScannerProperties scannerProperties;
 
 	public List<TargetAgentDto.Response> getAllTargets() {
 		return targetAgentRepository.findAll().stream()
@@ -40,11 +45,11 @@ public class TargetAgentService {
 	public TargetAgentDto.Response registerTarget(TargetAgentDto.Request request) {
 		String baseUrl = request.baseUrl();
 		if (request.adapterType() == AdapterType.MOCK && (baseUrl == null || baseUrl.isBlank())) {
-			baseUrl = "mock://internal";
+			baseUrl = MOCK_INTERNAL_URL;
 		}
 		TargetAgentEntity entity = TargetAgentEntity.builder()
 			.name(request.name())
-			.baseUrl(baseUrl != null && !baseUrl.isBlank() ? baseUrl : "mock://internal")
+			.baseUrl(baseUrl != null && !baseUrl.isBlank() ? baseUrl : MOCK_INTERNAL_URL)
 			.description(request.description())
 			.adapterType(request.adapterType() != null ? request.adapterType() : AdapterType.HTTP)
 			.status(TargetStatus.UNKNOWN)
@@ -72,7 +77,7 @@ public class TargetAgentService {
 		String baseUrl = request.baseUrl();
 		AdapterType adapterType = request.adapterType() != null ? request.adapterType() : entity.getAdapterType();
 		if (adapterType == AdapterType.MOCK && (baseUrl == null || baseUrl.isBlank())) {
-			baseUrl = "mock://internal";
+			baseUrl = MOCK_INTERNAL_URL;
 		}
 
 		if (request.name() != null && !request.name().isBlank()) {
@@ -120,13 +125,14 @@ public class TargetAgentService {
 		}
 		try {
 			WebClient client = webClientBuilder.baseUrl(baseUrl).build();
+			Duration timeout = scannerProperties.http().healthCheckTimeout();
 			// 1차: /actuator/health 엔드포인트 프로브 (Spring Boot)
 			try {
 				client.get()
-					.uri("/actuator/health")
+					.uri(scannerProperties.http().healthEndpoint())
 					.retrieve()
 					.toBodilessEntity()
-					.timeout(Duration.ofSeconds(2))
+					.timeout(timeout)
 					.block();
 				return TargetStatus.ONLINE;
 			} catch (WebClientResponseException e) {
@@ -139,10 +145,10 @@ public class TargetAgentService {
 			// 2차: 루트(/) 경로 범용 프로브 (FastAPI, Flask, Express, Go 등)
 			try {
 				client.get()
-					.uri("/")
+					.uri(scannerProperties.http().fallbackProbeEndpoint())
 					.retrieve()
 					.toBodilessEntity()
-					.timeout(Duration.ofSeconds(2))
+					.timeout(timeout)
 					.block();
 				return TargetStatus.ONLINE;
 			} catch (WebClientResponseException e) {

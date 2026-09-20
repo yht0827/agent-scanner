@@ -11,6 +11,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.agentscanner.common.assessment.Finding;
 import com.agentscanner.common.assessment.TestExecution;
 
+import com.agentscanner.engine.config.ScannerProperties;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -23,8 +25,8 @@ public class SlackReporter {
 	private final String webhookUrl;
 	private final WebClient webClient;
 
-	public SlackReporter(@Value("${scanner.slack-webhook-url:}") String webhookUrl) {
-		this.webhookUrl = webhookUrl;
+	public SlackReporter(ScannerProperties scannerProperties) {
+		this.webhookUrl = scannerProperties != null ? scannerProperties.slackWebhookUrl() : "";
 		this.webClient = WebClient.builder().build();
 	}
 
