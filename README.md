@@ -49,26 +49,26 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 오픈소스 부하 테스트 프레임워크인 **nGrinder의 Controller-Agent 분리 개념**을 참고하여, 보안 제어 엔진과 점검 대상을 독립된 애플리케이션 서비스로 분리했습니다.
 
-### 3.1 전체 시스템 토폴로지 (System Topology)
+### 3.1 전체 시스템 구조
 
 <p align="center">
-  <img src="docs/images/system-topology.svg" alt="AgentScanner System Topology" width="850">
+  <img src="docs/images/system-structure.svg" alt="AgentScanner System Structure" width="850">
 </p>
 
-- **독립 서비스 분리**: Controller-Agent 구조를 참고해 Scanner Engine과 Target Agent의 실행 책임을 분리
-- **데이터 논리 분리**: 스캔 결과(`scannerdb`)와 테스트 대상 데이터(`targetdb`)를 분리해 데이터 간 간섭 최소화
-- **로컬 재현 환경**: Docker Compose 기반으로 주요 보안 시나리오를 로컬 환경에서 반복 검증
+- **Scanner / Target 분리**: 보안 점검을 수행하는 Scanner Engine과 점검 대상 Agent를 별도 서비스로 구성했습니다.
+- **데이터 분리**: 점검 결과(`scannerdb`)와 테스트 대상 데이터(`targetdb`)를 분리해 서로 영향을 주지 않도록 구성했습니다.
+- **로컬 테스트 환경**: Docker Compose를 이용해 주요 보안 시나리오를 로컬에서 반복 실행할 수 있습니다.
 
-### 3.2 Target Agent 내부 구조 및 Tool-to-Resource Mapping
+### 3.2 Target Agent 내부 구조와 Tool 연결 흐름
 
-점검 대상 Agent(`agent-scanner-target`, 8081)는 Spring AI 기반으로 사용자 프롬프트를 처리하고 Tool Calling을 수행하며, Spring AOP를 통해 실제 Tool 실행 정보를 추적합니다:
+점검 대상 Agent는 Spring AI로 사용자 요청을 처리하고 필요한 Tool을 호출합니다. Spring AOP를 사용해 Tool 실행 여부, 전달 인자, 반환 결과를 기록하고 이를 보안 판정에 활용합니다:
 
 <p align="center">
   <img src="docs/images/target-agent-mapping.svg" alt="Target Agent Internals & Tool Mapping" width="850">
 </p>
 
-- **Spring AOP 기반 Tool 실행 추적 (`ToolExecutionAuditAspect`)**: 비즈니스 로직을 변경하지 않고 Agent가 호출한 Tool, 실행 인자, 반환값, 실행 시간을 수집하여 `AgentExecutionTrace` 형태로 기록합니다.
-- **Guardrail 모드 전환 및 재검증**: 서버 재시작 없이 Vulnerable/Hardened 모드를 전환하여 동일한 공격 시나리오를 다시 실행하고 방어 적용 전·후 결과를 비교합니다.
+- **Tool 실행 기록 수집 (`ToolExecutionAuditAspect`)**: Agent가 호출한 Tool, 실행 인자, 반환값, 실행 시간을 기록해 `AgentExecutionTrace`에 저장합니다.
+- **방어 적용 전·후 비교**: Vulnerable/Hardened 모드를 전환해 같은 공격을 다시 실행하고 방어 적용 전후의 결과를 비교합니다.
 
 ---
 

@@ -11,7 +11,7 @@
         </mxCell>
 
         <!-- Agent & AOP Container -->
-        <mxCell id="agent_core" value="&lt;b style=&quot;font-size:12.5px; color:#1D4ED8;&quot;&gt;LLM Agent (CustomerSupportAgent)&lt;/b&gt; &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;b style=&quot;font-size:12.5px; color:#0369A1;&quot;&gt;Spring AOP 런타임 감사 인터셉터&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;strokeWidth=2;arcSize=10;" vertex="1" parent="1">
+        <mxCell id="agent_core" value="&lt;b style=&quot;font-size:12.5px; color:#1D4ED8;&quot;&gt;LLM Agent (CustomerSupportAgent)&lt;/b&gt; &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;b style=&quot;font-size:12.5px; color:#0369A1;&quot;&gt;Spring AOP Tool 실행 추적&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;strokeWidth=2;arcSize=10;" vertex="1" parent="1">
           <mxGeometry x="140" y="72" width="600" height="44" as="geometry" />
         </mxCell>
 
@@ -30,7 +30,7 @@
         </mxCell>
 
         <!-- Col 3: DB 직접조회 -->
-        <mxCell id="col3" value="&lt;b style=&quot;color:#DC2626; font-size:9px;&quot;&gt;DB 조회 / SQL Injection&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#B91C1C; font-family:monospace; font-size:11px;&quot;&gt;queryDatabase()&lt;/b&gt;&lt;br&gt;&lt;br&gt;▼&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#991B1B; font-size:11px;&quot;&gt;targetdb (admin_users)&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#DC2626; font-size:10px;&quot;&gt;FAIL (해시 덤프 위험)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#DC2626;strokeWidth=1.5;arcSize=10;align=center;" vertex="1" parent="1">
+        <mxCell id="col3" value="&lt;b style=&quot;color:#DC2626; font-size:9px;&quot;&gt;DB 조회 / SQL Injection&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#B91C1C; font-family:monospace; font-size:11px;&quot;&gt;queryDatabase()&lt;/b&gt;&lt;br&gt;&lt;br&gt;▼&lt;br&gt;&lt;br&gt;&lt;b style=&quot;color:#991B1B; font-size:11px;&quot;&gt;targetdb (admin_users)&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#DC2626; font-size:9px;&quot;&gt;FAIL (관리자 계정 정보 노출)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#DC2626;strokeWidth=1.5;arcSize=10;align=center;" vertex="1" parent="1">
           <mxGeometry x="362" y="150" width="156" height="152" as="geometry" />
         </mxCell>
 
