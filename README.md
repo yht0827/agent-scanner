@@ -182,15 +182,4 @@ Dashboard: `http://localhost:8080`
 상세 API 명세와 운영 가이드는
 [API & Operations Guide](./docs/API-AND-OPERATIONS.md)를 참고하세요.
 
----
-
-## 10. Documentation
-
-| 문서명 | 주요 내용 | 바로가기 |
-| :--- | :--- | :---: |
-| **Security Assessment** | 17대 보안 점검 카탈로그, 자체 RiskEvaluator 산정 모델, 재진단 절차 | [보기](./docs/SECURITY-ASSESSMENT.md) |
-| **Case Studies** | DB 덤프 및 AWS IMDS SSRF 실제 Trace JSON 비교 분석, 실증 시나리오 | [보기](./docs/CASE-STUDY.md) |
-| **API & Operations** | 엔진 및 타깃 REST API 명세서, 로컬 샌드박스 구동법, 보안 진단 보고서 생성 | [보기](./docs/API-AND-OPERATIONS.md) |
-| **Portfolio Whitepaper** | 문제 정의, 4대 기술 챌린지, 상세 아키텍처 및 21개 시나리오 실증 백서 | [보기](./PORTFOLIO.md) |
-
 
