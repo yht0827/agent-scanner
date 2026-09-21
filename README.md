@@ -178,4 +178,5 @@ Dashboard: `http://localhost:8080`
 
 - [Security Assessment](./docs/SECURITY-ASSESSMENT.md) — 점검 항목 및 판정 기준
 - [Case Study](./docs/CASE-STUDY.md) — 취약점 탐지 및 재검증 사례
+- [Execution Traces](./docs/EXECUTION-TRACES.md) — 17개 점검 항목 Before / After 실행 로그 원본
 - [API & Operations](./docs/API-AND-OPERATIONS.md) — 전체 API 명세 및 실행 가이드
