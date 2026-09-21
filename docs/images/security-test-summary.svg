@@ -5,11 +5,12 @@
       .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11px; fill: #64748b; }
       .cat-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11.5px; font-weight: 700; }
       .count-badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; font-weight: 800; }
-      .rep-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 8.5px; font-weight: 600; fill: #94a3b8; }
-      .item-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 10px; fill: #475569; }
+      .eng-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 8.5px; font-weight: 600; fill: #64748b; }
+      .rep-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 8px; font-weight: 600; fill: #94a3b8; }
+      .item-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 9.5px; fill: #475569; }
       .pass-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 10px; font-weight: 700; fill: #166534; }
       .flow-step { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11px; font-weight: 700; }
-      .flow-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 9.5px; fill: #64748b; }
+      .flow-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 9px; fill: #64748b; }
       .box { rx: 8px; ry: 8px; stroke-width: 1px; }
       .arrow { stroke: #94a3b8; stroke-width: 1.5px; fill: none; }
       .arrow-head { fill: #94a3b8; }
@@ -24,42 +25,44 @@
 
   <!-- Header Section -->
   <g transform="translate(24, 20)">
-    <text x="0" y="0" class="main-title" dominant-baseline="hanging">AgentScanner 17개 보안 점검 카탈로그 및 검증 흐름</text>
-    <text x="0" y="20" class="sub-title" dominant-baseline="hanging">OWASP LLM 기반 5개 카테고리 진단 → 보안 가드레일 적용 → 1-Click Re-Test를 통한 PASS 검증</text>
+    <text x="0" y="0" class="main-title" dominant-baseline="hanging">AgentScanner 17개 보안 점검 항목 및 검증 흐름</text>
+    <text x="0" y="20" class="sub-title" dominant-baseline="hanging">총 17개 보안 점검 항목을 진단하고, 보호 설정 적용 후 Re-Test로 조치 결과를 검증합니다.</text>
   </g>
 
   <!-- 5 Categories Row (y = 62) -->
-  <!-- Category 1: Prompt Injection -->
+  <!-- Category 1: 프롬프트 주입 -->
   <g transform="translate(24, 62)">
     <rect class="box" width="156" height="120" fill="#f8fafc" stroke="#3b82f6" />
     <rect x="0" y="0" width="156" height="24" rx="8" fill="#eff6ff" />
     <rect x="0" y="16" width="156" height="8" fill="#eff6ff" />
-    <text x="10" y="16" class="cat-title" fill="#1e40af">Prompt Injection</text>
+    <text x="10" y="16" class="cat-title" fill="#1e40af">프롬프트 주입</text>
     <rect x="120" y="4" width="26" height="16" rx="4" fill="#dbeafe" />
     <text x="133" y="16" class="count-badge" fill="#1d4ed8" text-anchor="middle">4건</text>
     
-    <text x="10" y="34" class="rep-label">대표 항목</text>
+    <text x="10" y="34" class="eng-sub">Prompt Injection</text>
+    <text x="146" y="34" class="rep-label" text-anchor="end">대표 항목</text>
     <text x="10" y="48" class="item-text">• 시스템 지침 우회</text>
-    <text x="10" y="63" class="item-text">• 멀티턴 탈옥(Crescendo)</text>
-    <text x="10" y="78" class="item-text">• 간접 프롬프트 주입</text>
+    <text x="10" y="63" class="item-text">• 다단계 문맥 유도(크레센도)</text>
+    <text x="10" y="78" class="item-text">• 외부 데이터 기반 간접 주입</text>
     
     <line x1="10" y1="88" x2="146" y2="88" stroke="#e2e8f0" stroke-width="1" />
     <rect x="10" y="96" width="56" height="16" rx="4" fill="#dcfce7" />
     <text x="38" y="108" class="pass-text" text-anchor="middle">4 PASS</text>
   </g>
 
-  <!-- Category 2: Sensitive Data Leakage -->
+  <!-- Category 2: 민감정보 유출 -->
   <g transform="translate(192, 62)">
     <rect class="box" width="156" height="120" fill="#f8fafc" stroke="#f43f5e" />
     <rect x="0" y="0" width="156" height="24" rx="8" fill="#fff1f2" />
     <rect x="0" y="16" width="156" height="8" fill="#fff1f2" />
-    <text x="10" y="16" class="cat-title" fill="#be123c">Data Leakage</text>
+    <text x="10" y="16" class="cat-title" fill="#be123c">민감정보 유출</text>
     <rect x="120" y="4" width="26" height="16" rx="4" fill="#ffe4e6" />
     <text x="133" y="16" class="count-badge" fill="#be123c" text-anchor="middle">4건</text>
     
-    <text x="10" y="34" class="rep-label">대표 항목</text>
-    <text x="10" y="48" class="item-text">• PII 개인정보·신용카드</text>
-    <text x="10" y="63" class="item-text">• API Key·클라우드 키</text>
+    <text x="10" y="34" class="eng-sub">Sensitive Data</text>
+    <text x="146" y="34" class="rep-label" text-anchor="end">대표 항목</text>
+    <text x="10" y="48" class="item-text">• 개인정보(PII)·신용카드 노출</text>
+    <text x="10" y="63" class="item-text">• API Key·클라우드 자격증명</text>
     <text x="10" y="78" class="item-text">• RAG 대외비 문서 노출</text>
     
     <line x1="10" y1="88" x2="146" y2="88" stroke="#e2e8f0" stroke-width="1" />
@@ -67,18 +70,19 @@
     <text x="38" y="108" class="pass-text" text-anchor="middle">4 PASS</text>
   </g>
 
-  <!-- Category 3: Excessive Agency -->
+  <!-- Category 3: 과도한 권한 -->
   <g transform="translate(360, 62)">
     <rect class="box" width="160" height="120" fill="#f8fafc" stroke="#f59e0b" />
     <rect x="0" y="0" width="160" height="24" rx="8" fill="#fffbeb" />
     <rect x="0" y="16" width="160" height="8" fill="#fffbeb" />
-    <text x="10" y="16" class="cat-title" fill="#b45309">Excessive Agency</text>
+    <text x="10" y="16" class="cat-title" fill="#b45309">과도한 권한</text>
     <rect x="124" y="4" width="26" height="16" rx="4" fill="#fef3c7" />
     <text x="137" y="16" class="count-badge" fill="#b45309" text-anchor="middle">5건</text>
     
-    <text x="10" y="34" class="rep-label">대표 항목</text>
-    <text x="10" y="48" class="item-text">• 권한 없는 DB 조회(Dump)</text>
-    <text x="10" y="63" class="item-text">• Prompt-to-SQL Injection</text>
+    <text x="10" y="34" class="eng-sub">Excessive Agency</text>
+    <text x="150" y="34" class="rep-label" text-anchor="end">대표 항목</text>
+    <text x="10" y="48" class="item-text">• 권한 없는 DB 조회</text>
+    <text x="10" y="63" class="item-text">• Tool 기반 SQL Injection</text>
     <text x="10" y="78" class="item-text">• SSRF 및 권한 우회(BOLA)</text>
     
     <line x1="10" y1="88" x2="150" y2="88" stroke="#e2e8f0" stroke-width="1" />
@@ -86,35 +90,37 @@
     <text x="38" y="108" class="pass-text" text-anchor="middle">5 PASS</text>
   </g>
 
-  <!-- Category 4: Tool Abuse -->
+  <!-- Category 4: 도구 오남용 -->
   <g transform="translate(532, 62)">
     <rect class="box" width="156" height="120" fill="#f8fafc" stroke="#8b5cf6" />
     <rect x="0" y="0" width="156" height="24" rx="8" fill="#f5f3ff" />
     <rect x="0" y="16" width="156" height="8" fill="#f5f3ff" />
-    <text x="10" y="16" class="cat-title" fill="#6d28d9">Tool Abuse</text>
+    <text x="10" y="16" class="cat-title" fill="#6d28d9">도구 오남용</text>
     <rect x="120" y="4" width="26" height="16" rx="4" fill="#ede9fe" />
     <text x="133" y="16" class="count-badge" fill="#6d28d9" text-anchor="middle">2건</text>
     
-    <text x="10" y="34" class="rep-label">대표 항목</text>
-    <text x="10" y="52" class="item-text">• 기관 사칭 피싱 알림 발송</text>
-    <text x="10" y="69" class="item-text">• 무한 재귀 호출 DoS</text>
+    <text x="10" y="34" class="eng-sub">Tool Abuse</text>
+    <text x="146" y="34" class="rep-label" text-anchor="end">대표 항목</text>
+    <text x="10" y="52" class="item-text">• 기관 사칭·피싱 메시지 발송</text>
+    <text x="10" y="69" class="item-text">• 반복 호출 자원 고갈(DoS)</text>
     
     <line x1="10" y1="88" x2="146" y2="88" stroke="#e2e8f0" stroke-width="1" />
     <rect x="10" y="96" width="56" height="16" rx="4" fill="#dcfce7" />
     <text x="38" y="108" class="pass-text" text-anchor="middle">2 PASS</text>
   </g>
 
-  <!-- Category 5: Baseline -->
+  <!-- Category 5: 정상 동작 검증 -->
   <g transform="translate(700, 62)">
     <rect class="box" width="156" height="120" fill="#f8fafc" stroke="#10b981" />
     <rect x="0" y="0" width="156" height="24" rx="8" fill="#ecfdf5" />
     <rect x="0" y="16" width="156" height="8" fill="#ecfdf5" />
-    <text x="10" y="16" class="cat-title" fill="#047857">Baseline (정상 검증)</text>
+    <text x="10" y="16" class="cat-title" fill="#047857">정상 동작 검증</text>
     <rect x="120" y="4" width="26" height="16" rx="4" fill="#d1fae5" />
     <text x="133" y="16" class="count-badge" fill="#047857" text-anchor="middle">2건</text>
     
-    <text x="10" y="34" class="rep-label">대표 항목</text>
-    <text x="10" y="52" class="item-text">• 정상 업무 질의 (환불/배송)</text>
+    <text x="10" y="34" class="eng-sub">Baseline</text>
+    <text x="146" y="34" class="rep-label" text-anchor="end">대표 항목</text>
+    <text x="10" y="52" class="item-text">• 정상 업무 질의(환불/배송)</text>
     <text x="10" y="69" class="item-text">• 본인 주문 조회 및 PII 마스킹</text>
     
     <line x1="10" y1="88" x2="146" y2="88" stroke="#e2e8f0" stroke-width="1" />
@@ -127,39 +133,39 @@
     <rect width="832" height="56" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" />
 
     <!-- Step 1: FAIL -->
-    <g transform="translate(20, 10)">
+    <g transform="translate(16, 10)">
       <rect width="160" height="36" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1" />
-      <text x="12" y="16" class="flow-step" fill="#991b1b">취약점 확인 (FAIL)</text>
+      <text x="12" y="16" class="flow-step" fill="#991b1b">취약점 탐지 (FAIL)</text>
       <text x="12" y="29" class="flow-sub">도구 오남용 · 민감정보 노출</text>
     </g>
 
     <!-- Arrow 1 -->
-    <path d="M 190 28 L 214 28" class="arrow" marker-end="url(#arrow)" />
+    <path d="M 184 28 L 208 28" class="arrow" marker-end="url(#arrow)" />
 
     <!-- Step 2: Guardrail -->
-    <g transform="translate(224, 10)">
-      <rect width="180" height="36" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" />
-      <text x="12" y="16" class="flow-step" fill="#1e40af">Guardrail 적용</text>
-      <text x="12" y="29" class="flow-sub">Tool 언바인딩 · 출력 살균</text>
+    <g transform="translate(216, 10)">
+      <rect width="176" height="36" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" />
+      <text x="12" y="16" class="flow-step" fill="#1e40af">보호 설정 적용</text>
+      <text x="12" y="29" class="flow-sub">Tool 비활성화 · 출력 필터링</text>
     </g>
 
     <!-- Arrow 2 -->
-    <path d="M 414 28 L 438 28" class="arrow" marker-end="url(#arrow)" />
+    <path d="M 400 28 L 424 28" class="arrow" marker-end="url(#arrow)" />
 
     <!-- Step 3: Re-Test -->
-    <g transform="translate(448, 10)">
-      <rect width="170" height="36" rx="6" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1" />
-      <text x="12" y="16" class="flow-step" fill="#6d28d9">1-Click Re-Test</text>
-      <text x="12" y="29" class="flow-sub">해당 항목만 재검증</text>
+    <g transform="translate(432, 10)">
+      <rect width="176" height="36" rx="6" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1" />
+      <text x="12" y="16" class="flow-step" fill="#6d28d9">재검증 실행 (Re-Test)</text>
+      <text x="12" y="29" class="flow-sub">해당 항목만 1-Click 재검증</text>
     </g>
 
     <!-- Arrow 3 -->
-    <path d="M 628 28 L 652 28" class="arrow" marker-end="url(#arrow)" />
+    <path d="M 616 28 L 640 28" class="arrow" marker-end="url(#arrow)" />
 
     <!-- Step 4: PASS -->
-    <g transform="translate(662, 10)">
-      <rect width="156" height="36" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1" />
-      <text x="12" y="16" class="flow-step" fill="#166534">PASS 확인 (0점)</text>
+    <g transform="translate(648, 10)">
+      <rect width="168" height="36" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1" />
+      <text x="12" y="16" class="flow-step" fill="#166534">안전 상태 확인 (PASS · 0점)</text>
       <text x="12" y="29" class="flow-sub">위험 징후 없음 · 정상 동작 확인</text>
     </g>
   </g>
