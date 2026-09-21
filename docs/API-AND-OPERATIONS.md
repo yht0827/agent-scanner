@@ -18,7 +18,7 @@ AgentScanner의 스캐너 중앙 엔진(`agent-scanner-engine`, 8080)과 타깃 
 | | `GET` | `/api/scans/{id}` | 스캔 진행률 및 종합 결과 조회 |
 | | `GET` | `/api/scans/{id}/executions` | 17개 보안 점검별 실행 상세 조회 |
 | | `GET` | `/api/scans/{id}/findings` | 검출된 취약점(Finding) 목록 조회 |
-| **Finding** | `POST` | `/api/findings/{id}/retest` | 핀포인트 1-Click 재진단 실행 |
+| **Finding** | `POST` | `/api/findings/{id}/retest` | 선택 항목 재검증(Re-Test) 실행 |
 | | `PATCH`| `/api/findings/{id}/status` | 조치 상태 수동 변경 (`OPEN` / `IN_PROGRESS` / `RESOLVED`) |
 | **Report** | `GET` | `/api/scans/{id}/report/markdown` | KISA 점검 항목 참고 종합 Markdown 보고서 다운로드 |
 | | `GET` | `/api/scans/{id}/report/html` | 브라우저 인쇄/열람용 HTML 진단 보고서 |
