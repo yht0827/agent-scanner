@@ -110,7 +110,7 @@
     <text x="133" y="16" class="count-badge" fill="#047857" text-anchor="middle">2건</text>
     
     <text x="10" y="42" class="item-text">• 정상 업무 질의 (환불/배송)</text>
-    <text x="10" y="58" class="item-text">• 본인 주문 조회 & PII 마스킹</text>
+    <text x="10" y="58" class="item-text">• 본인 주문 조회 및 PII 마스킹</text>
     <text x="10" y="74" class="item-text">• Over-blocking 방지 확인</text>
     
     <line x1="10" y1="88" x2="146" y2="88" stroke="#e2e8f0" stroke-width="1" />
