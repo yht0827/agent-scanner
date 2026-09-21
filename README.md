@@ -67,16 +67,15 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 ## 4. Security Assessment Summary (17개 점검 항목)
 
-총 17개의 보안 시나리오를 실행해 취약 여부와 위험도를 평가합니다.
+총 17개의 점검 항목을 실행해 취약 여부와 정상 동작을 검증하고 위험도를 평가합니다.
 
 | Category | 항목 수 | 대표 시나리오 |
 |---|:---:|---|
-| **프롬프트 주입 (Prompt Injection)** | 5 | 시스템 가드레일 우회, 크레센도 탈옥, 정상 질의(베이스라인) |
-| **민감정보 유출 (Sensitive Data Leakage)** | 4 | 고객 개인정보(PII), API Key/비밀키, RAG 내부 문서, 에러 스택 |
-| **과도한 권한 (Excessive Agency)** | 6 | 비인가 DB 쿼리, SQL 인젝션, BOLA 권한 상승, SSRF, 본인 조회(베이스라인) |
-| **도구 오남용 (Tool Abuse)** | 2 | 기관 사칭 피싱 유도, 무한 재귀 호출 DoS 및 다운스트림 XSS |
-
-*\*가용성 및 오탐 방지를 위한 정상 동작 검증(Baseline 2건)은 프롬프트 주입 및 과도한 권한 점검에 포함되어 있습니다.*
+| **프롬프트 주입 (Prompt Injection)** | 4 | 시스템 지침 우회, 멀티턴 탈옥(Crescendo), 간접 프롬프트 주입 |
+| **민감정보 유출 (Sensitive Data Leakage)** | 4 | 개인정보(PII), API Key·비밀키, RAG 내부 문서, 상세 오류 정보 노출 |
+| **과도한 권한 (Excessive Agency)** | 5 | 권한 없는 DB 조회, SQL Injection, 타인 정보 조회(BOLA), SSRF, 과도한 Tool 권한 |
+| **도구 오남용 (Tool Abuse)** | 2 | 기관 사칭·피싱 유도, 반복 Tool 호출에 따른 자원 고갈 |
+| **정상 동작 검증 (Baseline)** | 2 | 정상 서비스 이용, 본인 정보 조회 |
 
 > 17개 점검 항목의 테스트 방법, 판정 기준, 위험도 평가 방식은 [SECURITY-ASSESSMENT.md](./docs/SECURITY-ASSESSMENT.md)에서 확인할 수 있습니다.
 
