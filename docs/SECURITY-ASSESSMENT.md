@@ -1,14 +1,16 @@
-# Security Assessment Catalog & Risk Evaluation Model
+# Security Assessment Catalog & Risk Evaluation
 
-본 문서는 **AgentScanner**의 17개 AI Agent 보안 점검 항목과 프로젝트 자체 위험도 평가 모델(`RiskEvaluator`)을 설명합니다. 점검 항목은 OWASP LLM Top 10의 주요 위협을 참고해 AI Agent의 Tool Calling 및 인프라 연계 시나리오에 맞게 구성했으며, 중요도 표기는 KISA의 상·중·하 분류 체계를 참고합니다.
+이 문서는 AgentScanner가 어떤 보안 항목을 점검하고, 점검 결과의 위험도를 어떻게 계산하는지 설명합니다.
+
+AgentScanner는 OWASP LLM Top 10의 주요 위협을 참고해 총 17개의 AI Agent 보안 점검 항목을 구성했습니다. 위험도 평가는 프로젝트 자체 `RiskEvaluator`를 사용하며, 중요도 구분은 KISA의 상·중·하 체계를 참고합니다.
 
 ---
 
-## 1. 평가 프레임워크 및 인프라 공격 표면
+## 1. 점검 범위와 인프라 연계 위험
 
-AI Agent는 LLM뿐 아니라 DB, Host OS, 내부망, Cloud 등의 자원과 Tool Calling으로 연결될 수 있습니다.
+AI Agent는 LLM만 사용하는 것이 아니라 Database, Host OS, 내부망, Cloud 등의 자원과 Tool을 통해 연결될 수 있습니다.
 
-따라서 AgentScanner는 OWASP LLM Top 10의 주요 위협을 참고하여 AI Agent의 취약점을 점검하고, Tool을 통해 노출되는 주요 인프라 공격 표면(Database, Host Linux OS, 사설망 및 Cloud Metadata, RAG Knowledge Base)을 함께 검증합니다.
+AgentScanner는 이러한 구조를 기준으로 Prompt Injection, 민감정보 노출, 권한 오용뿐 아니라 DB·Host OS·내부망·Cloud Metadata·RAG 등 Tool과 연결된 자원의 위험도 함께 점검합니다.
 
 ---
 
