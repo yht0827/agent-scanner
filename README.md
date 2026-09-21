@@ -7,8 +7,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-brightgreen.svg)
 ![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0.0-blue.svg)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791.svg)
-![React](https://img.shields.io/badge/React-18-61DAFB.svg)
-![Security Rules](https://img.shields.io/badge/Security%20Checks-17%20Rules-red.svg)
+![Security Tests](https://img.shields.io/badge/Security%20Tests-17-red.svg)
 
 **AI Agent Security Assessment & Runtime Guardrail Platform**  
 *OWASP LLM Top 10 기반 AI Agent Tool Abuse · 권한 오용 · 인프라 연계 위협 자동 진단*
@@ -118,10 +117,10 @@ React 대시보드는 Scanner Engine에서 함께 제공되며, `http://localhos
 
 | 영역 | 적용 내용 |
 | :--- | :--- |
-| **Backend** | Java 21 · Spring Boot 기반 Scanner Engine, Spring AOP를 활용한 Tool 실행 추적 |
-| **AI / Agent** | Spring AI 기반 Tool Calling, 실제 LLM / Mock 실행, Guardrail 적용 전·후 검증 |
-| **Database** | PostgreSQL `scannerdb` / `targetdb` 논리 분리 |
-| **Frontend** | React · Vite 기반 보안 진단 및 재검증 대시보드 |
+| **Backend** | Scanner Engine 구현, Spring AOP 기반 Tool 실행 추적 |
+| **AI / Agent** | Tool Calling 기반 Target Agent 구현, 실제 LLM / Mock 실행, Guardrail 전·후 검증 |
+| **Database** | 진단 데이터와 Target 데이터를 `scannerdb` / `targetdb`로 논리 분리 |
+| **Frontend** | 진단 결과, 취약점, 조치 및 재검증 결과를 확인하는 대시보드 |
 | **Infra & CI** | Docker Compose 기반 로컬 실행 환경, GitHub Actions 빌드·테스트 자동화 |
 
 ---
