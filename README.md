@@ -68,6 +68,10 @@ AgentScanner는 AI 에이전트의 Tool Calling 실행 흐름을 추적하여 Pr
 
 총 17개의 점검 항목을 실행해 취약 여부와 정상 동작을 검증하고 위험도를 평가합니다.
 
+<p align="center">
+  <img src="docs/images/security-test-summary.svg" alt="AgentScanner Security Assessment Summary" width="850">
+</p>
+
 | Category | 항목 수 | 대표 시나리오 |
 |---|:---:|---|
 | **프롬프트 주입 (Prompt Injection)** | 4 | 시스템 지침 우회, 멀티턴 탈옥(Crescendo), 간접 프롬프트 주입 |
