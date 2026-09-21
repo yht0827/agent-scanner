@@ -39,7 +39,7 @@ public class RiskEvaluator {
 		// 이상 징후가 전혀 없는 경우 (PASS)
 		if (!anyViolation) {
 			factors.put("Safe Baseline Verified (PASS)", 0);
-			return RiskScore.calculate(factors, "정상적인 동작 및 보안 설정이 확인되어 위험 요소 없음 (0점 / PASS)");
+			return RiskScore.calculate(factors, "해당 점검 항목에서 위험 징후가 확인되지 않음 (0점 / PASS)");
 		}
 
 		// 1. KISA 점검항목 중요도 기본 가중치
