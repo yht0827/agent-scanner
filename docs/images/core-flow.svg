@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="250" viewBox="0 0 1600 250" role="img" aria-labelledby="title desc">
+  <title id="title">AgentScanner 보안 진단 흐름</title>
+  <desc id="desc">보안 시나리오 15개와 정상 동작 검증 2개를 실행하고 Agent 응답과 Tool명, 실행 인자, 반환값을 수집합니다. 실행 근거로 취약점을 판정하고 프로젝트 자체 기준으로 위험도를 산정합니다. 대시보드에서 결과를 확인한 뒤 조치 내용을 기록하고 동일 시나리오를 재실행합니다. ERROR는 실행 또는 판정 실패를 의미합니다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#a6b7ce"/>
+    </marker>
+    <style>
+      text { font-family: "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; text-anchor: middle; }
+      .node { fill: #222831; stroke: #59677a; stroke-width: 1.5; }
+      .heading { fill: #eef2f7; font-size: 24px; font-weight: 600; }
+      .detail { fill: #bdc8d7; font-size: 19px; font-weight: 400; }
+      .flow { fill: none; stroke: #a6b7ce; stroke-width: 2; stroke-linecap: round; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <path d="M312 110H363" class="flow"/>
+  <path d="M620 110H671" class="flow"/>
+  <path d="M928 110H979" class="flow"/>
+  <path d="M1236 110H1287" class="flow"/>
+
+  <g>
+    <rect x="56" y="48" width="256" height="148" rx="10" class="node"/>
+    <text x="184" y="86" class="heading">시나리오 실행</text>
+    <text x="184" y="119" class="detail">공격 요청 · 정상 요청</text>
+    <text x="184" y="145" class="detail">보안 시나리오 15개</text>
+    <text x="184" y="171" class="detail">정상 동작 검증 2개</text>
+  </g>
+
+  <g>
+    <rect x="364" y="48" width="256" height="148" rx="10" class="node"/>
+    <text x="492" y="86" class="heading">실행 기록 수집</text>
+    <text x="492" y="119" class="detail">Agent 응답 + Tool 실행 기록</text>
+    <text x="492" y="148" class="detail">Tool명 · 실행 인자 · 반환값</text>
+  </g>
+
+  <g>
+    <rect x="672" y="48" width="256" height="148" rx="10" class="node"/>
+    <text x="800" y="86" class="heading">판정 · 위험도 평가</text>
+    <text x="800" y="119" class="detail">PASS / FAIL / ERROR</text>
+    <text x="800" y="145" class="detail">프로젝트 자체 기준으로</text>
+    <text x="800" y="171" class="detail">위험도 산정</text>
+  </g>
+
+  <g>
+    <rect x="980" y="48" width="256" height="148" rx="10" class="node"/>
+    <text x="1108" y="86" class="heading">결과 확인</text>
+    <text x="1108" y="119" class="detail">취약점 · 근거 확인</text>
+    <text x="1108" y="148" class="detail">대시보드에서 결과 확인</text>
+  </g>
+
+  <g>
+    <rect x="1288" y="48" width="256" height="148" rx="10" fill="#23334b" stroke="#6a9ad5" stroke-width="1.5"/>
+    <text x="1416" y="86" class="heading">조치 · 재검증</text>
+    <text x="1416" y="119" class="detail">조치 내용 기록</text>
+    <text x="1416" y="148" class="detail">동일 시나리오 재실행</text>
+  </g>
+  <text x="1544" y="231" style="text-anchor:end;fill:#475569;font-size:16px">ERROR: 실행 또는 판정 실패</text>
+</svg>

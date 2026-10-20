@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 370" width="100%" height="100%">
+  <defs>
+    <style>
+      .title-main { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 14.5px; font-weight: 700; fill: #0f172a; }
+      .desc-main { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11px; fill: #64748b; }
+      .section-badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11.5px; font-weight: 700; }
+      .category-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11px; font-weight: 700; }
+      .category-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 9.5px; fill: #64748b; }
+      .infra-header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11.5px; font-weight: 700; fill: #ffffff; }
+      .infra-tool { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 10px; font-weight: 600; }
+      .infra-item { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 10px; fill: #334155; }
+      .center-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 9.5px; font-weight: 700; fill: #6366f1; letter-spacing: 0.5px; }
+      .center-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 11.5px; font-weight: 700; fill: #1e1b4b; }
+      .center-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif; font-size: 9px; fill: #4338ca; }
+      .box { rx: 7px; ry: 7px; }
+      .arrow { stroke: #94a3b8; stroke-width: 1.5px; fill: none; }
+      .arrow-head { fill: #94a3b8; }
+      .connector { stroke: #6366f1; stroke-width: 1.5px; fill: none; stroke-dasharray: 4, 3; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-indigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#6366f1" />
+    </marker>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="880" height="370" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" rx="10" />
+
+  <!-- Top Header Bar -->
+  <g transform="translate(24, 16)">
+    <text x="0" y="16" class="title-main">AI Agent Security &amp; Infrastructure Attack Surface</text>
+    <text x="0" y="32" class="desc-main">17개 AI Agent 보안 점검 항목과 도구 호출(Tool Calling)을 매개로 노출되는 4대 인프라 공격 표면</text>
+  </g>
+  <line x1="24" y1="58" x2="856" y2="58" stroke="#f1f5f9" stroke-width="1.5" />
+
+  <!-- ================= LEFT COLUMN: 17 Security Check Items ================= -->
+  <g transform="translate(24, 70)">
+    <!-- Section Title -->
+    <rect x="0" y="0" width="300" height="26" rx="5" fill="#f1f5f9" />
+    <text x="12" y="17" class="section-badge" fill="#1e293b">1. AI Agent 보안 점검 항목 (17개)</text>
+
+    <!-- Item 1: Prompt Injection (4) -->
+    <g transform="translate(0, 34)">
+      <rect class="box" width="300" height="42" fill="#fef2f2" stroke="#fecaca" stroke-width="1" />
+      <circle cx="16" cy="21" r="5" fill="#ef4444" />
+      <text x="30" y="17" class="category-title" fill="#991b1b">Prompt Injection (4개)</text>
+      <text x="30" y="31" class="category-sub">Direct Override · Jailbreak · IPI · System Prompt 노출</text>
+    </g>
+
+    <!-- Item 2: Sensitive Data Leakage (4) -->
+    <g transform="translate(0, 82)">
+      <rect class="box" width="300" height="42" fill="#fff7ed" stroke="#fed7aa" stroke-width="1" />
+      <circle cx="16" cy="21" r="5" fill="#ea580c" />
+      <text x="30" y="17" class="category-title" fill="#9a3412">Sensitive Data Leakage (4개)</text>
+      <text x="30" y="31" class="category-sub">고객 PII · API Key/Secrets · RAG 벡터 탈취 · 스택 에러</text>
+    </g>
+
+    <!-- Item 3: Excessive Agency (5) -->
+    <g transform="translate(0, 130)">
+      <rect class="box" width="300" height="42" fill="#fffbeb" stroke="#fde68a" stroke-width="1" />
+      <circle cx="16" cy="21" r="5" fill="#d97706" />
+      <text x="30" y="17" class="category-title" fill="#92400e">Excessive Agency (5개)</text>
+      <text x="30" y="31" class="category-sub">DB 불일치 · SQLi · BOLA · Cloud SSRF · 과다 권한 바인딩</text>
+    </g>
+
+    <!-- Item 4: Tool Abuse (2) -->
+    <g transform="translate(0, 178)">
+      <rect class="box" width="300" height="42" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1" />
+      <circle cx="16" cy="21" r="5" fill="#9333ea" />
+      <text x="30" y="17" class="category-title" fill="#6b21a8">Tool Abuse (2개)</text>
+      <text x="30" y="31" class="category-sub">페르소나 탈취 피싱 · 도구 무한 호출 자원 고갈(DoS)</text>
+    </g>
+
+    <!-- Item 5: Baseline (2) -->
+    <g transform="translate(0, 226)">
+      <rect class="box" width="300" height="42" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" />
+      <circle cx="16" cy="21" r="5" fill="#16a34a" />
+      <text x="30" y="17" class="category-title" fill="#166534">Baseline (2개)</text>
+      <text x="30" y="31" class="category-sub">정상 상품 안내 · 인증 본인 조회 (오탐 방지 및 가용성)</text>
+    </g>
+  </g>
+
+  <!-- ================= CENTER: Mediator Flow ================= -->
+  <!-- Connector Left -> Center -->
+  <path d="M 324 205 L 348 205" class="arrow" marker-end="url(#arrow)" />
+
+  <!-- Center Card: Tool Calling Mediator -->
+  <g transform="translate(348, 168)">
+    <rect class="box" width="108" height="74" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5" />
+    <text x="54" y="20" text-anchor="middle" class="center-label">매개체 (Mediator)</text>
+    <text x="54" y="38" text-anchor="middle" class="center-title">Tool Calling</text>
+    <text x="54" y="52" text-anchor="middle" class="center-sub">Function Execution</text>
+    <text x="54" y="65" text-anchor="middle" class="center-sub" fill="#6b7280">(인자 위변조 / 오용)</text>
+  </g>
+
+  <!-- Connectors Center -> Right Branches -->
+  <!-- Branching line from Center (x=456, y=205) -->
+  <path d="M 456 205 L 476 205" class="arrow" />
+  <path d="M 476 156 L 476 254" stroke="#94a3b8" stroke-width="1.5" />
+  <path d="M 476 156 L 492 156" class="arrow" marker-end="url(#arrow)" />
+  <path d="M 476 254 L 492 254" class="arrow" marker-end="url(#arrow)" />
+
+  <!-- ================= RIGHT COLUMN: 4 Infrastructure Attack Surfaces ================= -->
+  <g transform="translate(492, 70)">
+    <!-- Section Title -->
+    <rect x="0" y="0" width="364" height="26" rx="5" fill="#f1f5f9" />
+    <text x="12" y="17" class="section-badge" fill="#1e293b">2. Tool 연계 인프라 공격 표면 (4개 리소스)</text>
+
+    <!-- 2x2 Grid of Infrastructure Targets -->
+
+    <!-- Target 1: PostgreSQL 16 DB (Row 1, Col 1) -->
+    <g transform="translate(0, 34)">
+      <rect class="box" width="176" height="110" fill="#f8fafc" stroke="#336791" stroke-width="1.2" />
+      <rect x="0" y="0" width="176" height="25" rx="7" fill="#336791" />
+      <rect x="0" y="17" width="176" height="8" fill="#336791" />
+      <text x="10" y="17" class="infra-header">PostgreSQL 16 DB</text>
+      <text x="10" y="42" class="infra-tool" fill="#336791">Tool: queryDatabase</text>
+      <text x="10" y="61" class="infra-item">• admin_users 계정 덤프</text>
+      <text x="10" y="78" class="infra-item">• 고객 금융 식별정보 유출</text>
+      <text x="10" y="95" class="infra-item">• SQL Injection 파라미터 주입</text>
+    </g>
+
+    <!-- Target 2: Host Linux OS (Row 1, Col 2) -->
+    <g transform="translate(188, 34)">
+      <rect class="box" width="176" height="110" fill="#f8fafc" stroke="#475569" stroke-width="1.2" />
+      <rect x="0" y="0" width="176" height="25" rx="7" fill="#475569" />
+      <rect x="0" y="17" width="176" height="8" fill="#475569" />
+      <text x="10" y="17" class="infra-header">Host Linux OS</text>
+      <text x="10" y="42" class="infra-tool" fill="#475569">Tool: executeCommand, readFile</text>
+      <text x="10" y="61" class="infra-item">• /etc/passwd 시스템 파일 열람</text>
+      <text x="10" y="78" class="infra-item">• 비인가 OS 셸 명령 실행</text>
+      <text x="10" y="95" class="infra-item">• 호스트 서버 무단 접근 위험</text>
+    </g>
+
+    <!-- Target 3: 사설망 & Cloud Metadata (Row 2, Col 1) -->
+    <g transform="translate(0, 156)">
+      <rect class="box" width="176" height="112" fill="#f8fafc" stroke="#ea580c" stroke-width="1.2" />
+      <rect x="0" y="0" width="176" height="25" rx="7" fill="#ea580c" />
+      <rect x="0" y="17" width="176" height="8" fill="#ea580c" />
+      <text x="10" y="17" class="infra-header">사설망 &amp; Cloud Metadata</text>
+      <text x="10" y="42" class="infra-tool" fill="#ea580c">Tool: executeCommand (curl)</text>
+      <text x="10" y="61" class="infra-item">• AWS IMDS (169.254.169.254)</text>
+      <text x="10" y="78" class="infra-item">• IAM Role 임시 자격증명 노출</text>
+      <text x="10" y="95" class="infra-item">• 사설 결제망(RFC 1918) SSRF</text>
+    </g>
+
+    <!-- Target 4: RAG Knowledge Base (Row 2, Col 2) -->
+    <g transform="translate(188, 156)">
+      <rect class="box" width="176" height="112" fill="#f8fafc" stroke="#4f46e5" stroke-width="1.2" />
+      <rect x="0" y="0" width="176" height="25" rx="7" fill="#4f46e5" />
+      <rect x="0" y="17" width="176" height="8" fill="#4f46e5" />
+      <text x="10" y="17" class="infra-header">RAG Knowledge Base</text>
+      <text x="10" y="42" class="infra-tool" fill="#4f46e5">Tool: searchKnowledgeBase</text>
+      <text x="10" y="61" class="infra-item">• 사내 대외비 회의록 접근</text>
+      <text x="10" y="78" class="infra-item">• 임직원 급여·인사정보 열람</text>
+      <text x="10" y="95" class="infra-item">• Vector DB 비인가 검색 유도</text>
+    </g>
+  </g>
+</svg>

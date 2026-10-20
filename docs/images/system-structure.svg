@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="850" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc">
+  <title id="title">AgentScanner 서비스와 데이터 구조</title>
+  <desc id="desc">관리자는 대시보드로 Scanner Engine에 진단을 요청합니다. Scanner Engine과 Target Agent는 별도 서비스입니다. Target 내부에서 Spring AI가 Tool을 실행하고 AOP가 실행 기록을 수집합니다. Engine은 scannerdb, Target은 targetdb에 연결하며 두 DB는 같은 PostgreSQL 서버 안에서 논리적으로 분리됩니다.</desc>
+  <defs>
+    <marker id="request-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#376da5"/></marker>
+    <marker id="trace-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2b7b68"/></marker>
+    <marker id="data-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#87722b"/></marker>
+    <marker id="audit-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#88bcac"/></marker>
+    <style>
+      text { font-family: "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; text-anchor: middle; }
+      .title { fill: #eef2f7; font-size: 25px; font-weight: 600; }
+      .body { fill: #dee7f2; font-size: 19px; }
+      .small { fill: #cbd7e6; font-size: 17px; font-weight: 500; }
+      .zone-label { fill: #243247; font-size: 20px; font-weight: 600; }
+      .connection-label { fill: #334155; font-size: 20px; font-weight: 600; }
+      .outside-note { fill: #475569; font-size: 18px; font-weight: 500; }
+      .zone { fill: none; stroke: #647388; stroke-width: 1.5; stroke-dasharray: 7 6; }
+      .service { fill: #222831; stroke: #647388; stroke-width: 1.6; }
+      .request { fill: none; stroke: #376da5; stroke-width: 2; marker-end: url(#request-arrow); }
+      .trace { fill: none; stroke: #2b7b68; stroke-width: 2; stroke-dasharray: 6 5; marker-end: url(#trace-arrow); }
+      .audit-trace { fill: none; stroke: #88bcac; stroke-width: 2; stroke-dasharray: 6 5; marker-end: url(#audit-arrow); }
+      .data { fill: none; stroke: #87722b; stroke-width: 2; stroke-linejoin: round; marker-end: url(#data-arrow); }
+    </style>
+  </defs>
+
+  <!-- 분리된 서비스 경계 -->
+  <rect x="90" y="130" width="550" height="400" rx="12" class="zone"/>
+  <text x="112" y="155" class="zone-label" style="text-anchor:start">진단·관리 서비스</text>
+  <rect x="865" y="130" width="640" height="400" rx="12" class="zone"/>
+  <text x="887" y="155" class="zone-label" style="text-anchor:start">점검 대상 서비스</text>
+  <rect x="475" y="625" width="1030" height="190" rx="12" fill="none" stroke="#817856" stroke-width="1.5"/>
+  <text x="498" y="651" class="zone-label" style="text-anchor:start;fill:#62521c">PostgreSQL 인스턴스</text>
+
+  <!-- 사용자와 관리 화면 -->
+  <path d="M365 96V179" class="request"/>
+  <path d="M365 284V364" class="request"/>
+  <text x="390" y="331" class="connection-label" style="text-anchor:start">REST API</text>
+
+  <!-- 진단 요청과 실행 근거의 응답 -->
+  <path d="M590 405H914" class="request"/>
+  <text x="752" y="389" class="connection-label" style="fill:#1e4d80">진단 요청 / Trace 조회</text>
+  <path d="M915 453H591" class="trace"/>
+  <text x="752" y="480" class="connection-label" style="fill:#18554c">Agent 응답 · 실행 기록</text>
+
+  <!-- 데이터 저장소 연결 -->
+  <path d="M365 495V575H780V669" class="data"/>
+  <text x="574" y="561" class="connection-label" style="fill:#62521c">점검 결과 저장·조회</text>
+  <path d="M1230 485V669" class="data"/>
+  <text x="1253" y="583" class="connection-label" style="text-anchor:start;fill:#62521c">테스트 데이터 조회</text>
+
+  <g>
+    <rect x="235" y="30" width="260" height="66" rx="6" class="service"/>
+    <text x="365" y="72" class="title" style="font-size:22px">보안 관리자 / 개발자</text>
+  </g>
+
+  <!-- 브라우저 형태의 대시보드 -->
+  <g>
+    <rect x="140" y="180" width="450" height="104" rx="6" class="service"/>
+    <line x1="140" y1="207" x2="590" y2="207" stroke="#647388" stroke-width="1"/>
+    <circle cx="157" cy="194" r="3" fill="#8a98aa"/><circle cx="170" cy="194" r="3" fill="#8a98aa"/><circle cx="183" cy="194" r="3" fill="#8a98aa"/>
+    <text x="570" y="199" class="small" style="text-anchor:end;font-size:14px">React</text>
+    <text x="365" y="239" class="title">대시보드</text>
+    <text x="365" y="268" class="body">진단 실행 · 결과 / 재검증 확인</text>
+  </g>
+
+  <g>
+    <rect x="140" y="365" width="450" height="130" rx="6" fill="#23334b" stroke="#7da5d6" stroke-width="1.6"/>
+    <text x="365" y="405" class="title">Scanner Engine</text>
+    <text x="365" y="442" class="body">시나리오 실행 · 판정 · 위험도 평가</text>
+    <text x="365" y="474" class="body">진단 결과 · 조치 상태 관리</text>
+  </g>
+
+  <!-- Target 내부의 Tool 실행과 실행 기록 수집 -->
+  <g>
+    <rect x="915" y="180" width="535" height="305" rx="6" class="service"/>
+    <text x="1182" y="220" class="title">Target Agent</text>
+    <text x="1182" y="252" class="body">Spring AI · 실제 LLM / Mock</text>
+    <line x1="940" y1="273" x2="1425" y2="273" stroke="#526075" stroke-width="1"/>
+    <path d="M1187 344H1229" class="audit-trace"/>
+    <text x="1208" y="326" class="connection-label" style="font-size:17px;fill:#bcebdc">기록</text>
+    <text x="1182" y="429" class="body">Guardrail OFF / ON</text>
+    <text x="1182" y="461" class="small">제공 Tool 목록 제한 · 출력 필터</text>
+    <g>
+      <rect x="947" y="302" width="240" height="84" rx="4" fill="#2a303a" stroke="#758399" stroke-width="1.3"/>
+      <text x="1067" y="338" class="title" style="font-size:23px">Tool 실행</text>
+      <text x="1067" y="369" class="body">DB · 문서 · 시스템</text>
+    </g>
+    <g>
+      <rect x="1230" y="302" width="194" height="84" rx="4" fill="#25362f" stroke="#88bcac" stroke-width="1.3"/>
+      <text x="1327" y="326" class="title" style="font-size:20px">Tool 실행 기록</text>
+      <text x="1327" y="351" class="title" style="font-size:20px">수집</text>
+      <text x="1327" y="376" class="body" style="font-size:17px">Spring AOP</text>
+    </g>
+  </g>
+
+  <!-- 실린더 표기로 서비스와 데이터 저장소를 구분 -->
+  <g>
+    <path d="M640 685V754C640 782 920 782 920 754V685Z" fill="#302d22" stroke="#b7a371" stroke-width="1.5"/>
+    <ellipse cx="780" cy="685" rx="140" ry="16" fill="#3b3424" stroke="#b7a371" stroke-width="1.5"/>
+    <text x="780" y="692" class="title" style="font-size:23px">scannerdb</text>
+    <text x="780" y="728" class="body">점검 항목 · 실행 결과</text>
+    <text x="780" y="754" class="small">Finding · 조치 메모</text>
+  </g>
+  <g>
+    <path d="M1090 685V754C1090 782 1370 782 1370 754V685Z" fill="#302d22" stroke="#b7a371" stroke-width="1.5"/>
+    <ellipse cx="1230" cy="685" rx="140" ry="16" fill="#3b3424" stroke="#b7a371" stroke-width="1.5"/>
+    <text x="1230" y="692" class="title" style="font-size:23px">targetdb</text>
+    <text x="1230" y="728" class="body">테스트용 사용자 데이터</text>
+    <text x="1230" y="754" class="small">검색 대상 문서</text>
+  </g>
+  <text x="990" y="802" class="outside-note">동일 인스턴스 내 scannerdb · targetdb 논리 분리</text>
+</svg>
