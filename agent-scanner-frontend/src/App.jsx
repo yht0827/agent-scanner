@@ -9,23 +9,23 @@ import {
 } from 'lucide-react';
 
 const KOREAN_TC_NAMES = {
-  // 엔터프라이즈 AI 에이전트 범용 보안 점검 (12종 공격 + 1종 정상 베이스라인 + 커스텀)
+  // 엔터프라이즈 AI 에이전트 보안 점검 항목 (15종 공격 + 2종 정상 베이스라인 + 커스텀)
   'TEST-AI-001': '직접 프롬프트 주입 및 시스템 가드레일 우회',
-  'TEST-AI-002': '크레센도 다단계 유도 및 난독화 탈옥',
-  'TEST-AI-003': '외부 데이터 문맥 간접 프롬프트 주입',
+  'TEST-AI-002': '멀티턴 탈옥(Crescendo) 및 우회 시도',
+  'TEST-AI-003': '외부 데이터를 통한 간접 프롬프트 주입',
   'TEST-AI-004': '고객·임직원 개인정보 및 금융 자격증명 노출',
-  'TEST-AI-005': 'LLM 공급사 API Key 및 클라우드 비밀키 유출',
-  'TEST-AI-006': 'RAG 벡터 지식베이스 대외비 문서 탈취',
-  'TEST-AI-007': '비인가 데이터베이스 직접 쿼리 및 위장 은폐',
-  'TEST-AI-008': '도구 매개 프롬프트-SQL 인젝션',
-  'TEST-AI-009': '도구 매개변수 변조 및 수평적 권한 상승',
+  'TEST-AI-005': 'API Key 및 클라우드 자격증명 유출',
+  'TEST-AI-006': 'RAG 내부 문서 권한 외 노출',
+  'TEST-AI-007': '권한 없는 데이터베이스 Tool 실행',
+  'TEST-AI-008': 'Tool을 통한 SQL Injection',
+  'TEST-AI-009': '타인 정보 조회 및 권한 우회(BOLA)',
   'TEST-AI-010': '내부 사설망 및 클라우드 메타데이터 SSRF',
-  'TEST-AI-011': '기관 사칭 페르소나 하이재킹 및 피싱 유도',
-  'TEST-AI-012': '무한 재귀 호출 DoS 및 다운스트림 XSS',
+  'TEST-AI-011': '기관 사칭 및 피싱 유도',
+  'TEST-AI-012': '반복 Tool 호출 및 무한 재귀에 따른 자원 고갈(DoS)',
   'TEST-AI-SAFE-001': '정상 서비스 이용 질의 (오탐 방지 베이스라인)',
   'TEST-AI-013': '시스템 프롬프트 및 내부 보안 정책 노출',
   'TEST-AI-014': '상세 오류 스택트레이스 및 내부 접속 정보 유출',
-  'TEST-AI-015': '에이전트 서비스 계정 과도 권한 남용',
+  'TEST-AI-015': '에이전트의 과도한 Tool 권한',
   'TEST-AI-SAFE-002': '정상 본인 주문 조회 (오탐 방지 및 PII 마스킹)',
   'TEST-CUSTOM-001': '사용자 정의 동적 프롬프트 주입 점검'
 };
@@ -41,12 +41,16 @@ const DAY_LABELS = {
   'SUN': '매주 일요일'
 };
 
-const getCategoryBadge = (category) => {
+const getCategoryBadge = (category, testCaseId) => {
+  if (testCaseId && testCaseId.startsWith('TEST-AI-SAFE')) {
+    return { label: '정상 동작 검증', color: '#047857', bg: '#ecfdf5', border: '#a7f3d0' };
+  }
   const map = {
     'PROMPT_INJECTION': { label: '프롬프트 주입', color: '#be123c', bg: '#fff1f2', border: '#fda4af' },
     'SENSITIVE_DATA_LEAKAGE': { label: '민감정보 유출', color: '#b45309', bg: '#fefce8', border: '#fde047' },
     'EXCESSIVE_AGENCY': { label: '과도한 권한', color: '#6d28d9', bg: '#f5f3ff', border: '#c4b5fd' },
-    'TOOL_ABUSE': { label: '도구 오남용', color: '#be185d', bg: '#fdf2f8', border: '#f9a8d4' }
+    'TOOL_ABUSE': { label: '도구 오남용', color: '#be185d', bg: '#fdf2f8', border: '#f9a8d4' },
+    'BASELINE': { label: '정상 동작 검증', color: '#047857', bg: '#ecfdf5', border: '#a7f3d0' }
   };
   return map[category] || { label: category, color: '#475569', bg: '#f8fafc', border: '#cbd5e1' };
 };
@@ -115,10 +119,10 @@ export default function App() {
 
   // Scope (점검 범위) state
   const SCOPE_DEFINITIONS = [
-    { key: 'PROMPT_INJECTION', label: '프롬프트 주입 & 탈옥', count: 4, isCore: true, desc: '직접/간접 프롬프트 주입, 크레센도 및 난독화 탈옥, 정상 질의 베이스라인 점검' },
-    { key: 'SENSITIVE_DATA_LEAKAGE', label: '민감정보 & 비밀키 유출', count: 3, isCore: true, desc: '고객·임직원 개인식별정보(PII), LLM 공급사 API Key, RAG 벡터 지식베이스 탈취 점검' },
-    { key: 'EXCESSIVE_AGENCY', label: '과도한 권한 & 시스템 침투', count: 4, isCore: true, desc: '비인가 DB 은폐 쿼리, 도구 매개 SQL 인젝션, BOLA 권한 상승, 내부 사설망/클라우드 SSRF 점검' },
-    { key: 'TOOL_ABUSE', label: '도구 오남용 & DoS/XSS', count: 2, isCore: true, desc: '기관 사칭 페르소나 피싱 알림, 무한 재귀 호출 DoS 및 다운스트림 XSS 점검' }
+    { key: 'PROMPT_INJECTION', label: '프롬프트 주입 & 탈옥', count: 5, isCore: true, desc: '직접/간접 주입, 크레센도 탈옥, 정상 질의 베이스라인 점검' },
+    { key: 'SENSITIVE_DATA_LEAKAGE', label: '민감정보 & 비밀키 유출', count: 4, isCore: true, desc: '개인식별정보(PII), API Key, RAG 벡터 지식베이스, 상세 오류 정보 노출' },
+    { key: 'EXCESSIVE_AGENCY', label: '과도한 권한 & 시스템 침투', count: 6, isCore: true, desc: '비인가 DB 조회, SQLi, 타인 정보 조회(BOLA), SSRF, 과도한 Tool 권한' },
+    { key: 'TOOL_ABUSE', label: '도구 오남용 & DoS', count: 2, isCore: true, desc: '기관 사칭 페르소나 피싱 알림, 반복 Tool 호출에 따른 자원 고갈' }
   ];
 
   const [selectedScopes, setSelectedScopes] = useState(['PROMPT_INJECTION', 'SENSITIVE_DATA_LEAKAGE', 'EXCESSIVE_AGENCY', 'TOOL_ABUSE']);
@@ -2451,23 +2455,41 @@ export default function App() {
             a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' })
           );
 
-          const allCount = domainCases.length;
-          const highCount = domainCases.filter(t => t.importance === 'HIGH').length;
-          const medCount = domainCases.filter(t => t.importance === 'MEDIUM').length;
-          const lowCount = domainCases.filter(t => t.importance === 'LOW').length;
+          const isSafeCase = (t) => t.id && t.id.startsWith('TEST-AI-SAFE');
 
-          const piCount = domainCases.filter(t => t.category === 'PROMPT_INJECTION').length;
-          const eaCount = domainCases.filter(t => t.category === 'EXCESSIVE_AGENCY').length;
+          const allCount = domainCases.length;
+          const highCount = domainCases.filter(t => !isSafeCase(t) && t.importance === 'HIGH').length;
+          const medCount = domainCases.filter(t => !isSafeCase(t) && t.importance === 'MEDIUM').length;
+          const lowCount = domainCases.filter(t => !isSafeCase(t) && t.importance === 'LOW').length;
+          const baselineImpCount = domainCases.filter(t => isSafeCase(t)).length;
+
+          const piCount = domainCases.filter(t => t.category === 'PROMPT_INJECTION' && !isSafeCase(t)).length;
           const sdlCount = domainCases.filter(t => t.category === 'SENSITIVE_DATA_LEAKAGE').length;
+          const eaCount = domainCases.filter(t => t.category === 'EXCESSIVE_AGENCY' && !isSafeCase(t)).length;
           const taCount = domainCases.filter(t => t.category === 'TOOL_ABUSE').length;
+          const baselineCount = domainCases.filter(t => isSafeCase(t)).length;
 
           const searchLower = catalogSearch.toLowerCase().trim();
           const filteredTestCases = sortedDomainCases.filter(tc => {
-            if (catalogImportanceFilter !== 'ALL' && tc.importance !== catalogImportanceFilter) {
-              return false;
+            if (catalogImportanceFilter !== 'ALL') {
+              if (catalogImportanceFilter === 'BASELINE') {
+                if (!isSafeCase(tc)) return false;
+              } else if (isSafeCase(tc)) {
+                return false;
+              } else if (tc.importance !== catalogImportanceFilter) {
+                return false;
+              }
             }
-            if (catalogCategoryFilter !== 'ALL' && tc.category !== catalogCategoryFilter) {
-              return false;
+            if (catalogCategoryFilter !== 'ALL') {
+              if (catalogCategoryFilter === 'BASELINE') {
+                if (!isSafeCase(tc)) return false;
+              } else if (catalogCategoryFilter === 'PROMPT_INJECTION') {
+                if (tc.category !== 'PROMPT_INJECTION' || isSafeCase(tc)) return false;
+              } else if (catalogCategoryFilter === 'EXCESSIVE_AGENCY') {
+                if (tc.category !== 'EXCESSIVE_AGENCY' || isSafeCase(tc)) return false;
+              } else if (tc.category !== catalogCategoryFilter) {
+                return false;
+              }
             }
             if (!searchLower) return true;
             return tc.id.toLowerCase().includes(searchLower) ||
@@ -2475,7 +2497,8 @@ export default function App() {
               (tc.description && tc.description.toLowerCase().includes(searchLower)) ||
               (KOREAN_TC_NAMES[tc.id] && KOREAN_TC_NAMES[tc.id].toLowerCase().includes(searchLower)) ||
               tc.attackPrompt.toLowerCase().includes(searchLower) ||
-              tc.category.toLowerCase().includes(searchLower);
+              tc.category.toLowerCase().includes(searchLower) ||
+              (isSafeCase(tc) && '정상 동작 검증 baseline'.includes(searchLower));
           });
 
           const totalPages = catalogPageSize > 0 ? Math.max(1, Math.ceil(filteredTestCases.length / catalogPageSize)) : 1;
@@ -2756,6 +2779,35 @@ export default function App() {
                       borderRadius: '9999px'
                     }}>{taCount}</span>
                   </button>
+
+                  {/* 정상 동작 검증 */}
+                  <button
+                    type="button"
+                    onClick={() => { setCatalogCategoryFilter('BASELINE'); setCatalogPage(1); }}
+                    style={{
+                      border: catalogCategoryFilter === 'BASELINE' ? '1px solid #a7f3d0' : '1px solid var(--border-color)',
+                      background: catalogCategoryFilter === 'BASELINE' ? '#ecfdf5' : 'var(--bg-card)',
+                      color: catalogCategoryFilter === 'BASELINE' ? '#047857' : 'var(--text-main)',
+                      padding: '0.22rem 0.65rem',
+                      borderRadius: '0.375rem',
+                      fontSize: '0.75rem',
+                      fontWeight: catalogCategoryFilter === 'BASELINE' ? 700 : 500,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem'
+                    }}
+                  >
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#059669' }}></span>
+                    <span>정상 동작 검증</span>
+                    <span style={{
+                      opacity: 0.85,
+                      fontSize: '0.68rem',
+                      background: catalogCategoryFilter === 'BASELINE' ? 'rgba(5,150,105,0.15)' : 'var(--bg-subtle)',
+                      padding: '0.05rem 0.35rem',
+                      borderRadius: '9999px'
+                    }}>{baselineCount}</span>
+                  </button>
                 </div>
 
                 {/* Divider */}
@@ -2854,6 +2906,35 @@ export default function App() {
                       }}>{medCount}</span>
                     </button>
 
+                    {/* 검증용 (Baseline) */}
+                    <button
+                      type="button"
+                      onClick={() => { setCatalogImportanceFilter('BASELINE'); setCatalogPage(1); }}
+                      style={{
+                        border: catalogImportanceFilter === 'BASELINE' ? '1px solid #a7f3d0' : '1px solid var(--border-color)',
+                        background: catalogImportanceFilter === 'BASELINE' ? '#ecfdf5' : 'var(--bg-card)',
+                        color: catalogImportanceFilter === 'BASELINE' ? '#047857' : 'var(--text-main)',
+                        padding: '0.22rem 0.65rem',
+                        borderRadius: '0.375rem',
+                        fontSize: '0.75rem',
+                        fontWeight: catalogImportanceFilter === 'BASELINE' ? 700 : 500,
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem'
+                      }}
+                    >
+                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#059669' }}></span>
+                      <span>검증용 (Baseline)</span>
+                      <span style={{
+                        opacity: 0.85,
+                        fontSize: '0.68rem',
+                        background: catalogImportanceFilter === 'BASELINE' ? 'rgba(5,150,105,0.15)' : 'var(--bg-subtle)',
+                        padding: '0.05rem 0.35rem',
+                        borderRadius: '9999px'
+                      }}>{baselineImpCount}</span>
+                    </button>
+
                     {/* LOW */}
                     <button
                       type="button"
@@ -2935,8 +3016,9 @@ export default function App() {
                         </tr>
                       ) : (
                         paginatedTestCases.map(tc => {
-                          const imp = tc.importance === 'HIGH' ? '상' : (tc.importance === 'MEDIUM' ? '중' : '하');
-                          const catBadge = getCategoryBadge(tc.category);
+                          const isSafe = tc.id && tc.id.startsWith('TEST-AI-SAFE');
+                          const imp = isSafe ? '검증용' : (tc.importance === 'HIGH' ? '상' : (tc.importance === 'MEDIUM' ? '중' : '하'));
+                          const catBadge = getCategoryBadge(tc.category, tc.id);
                           const domainBadge = getDomainBadge(tc.domain);
                           const koreanTitle = KOREAN_TC_NAMES[tc.id] || tc.name;
                           const isExpanded = expandedRowIds.has(tc.id);
@@ -2996,9 +3078,9 @@ export default function App() {
                                 <td style={{ padding: '0.9rem 1.25rem', verticalAlign: 'middle', textAlign: 'center', whiteSpace: 'nowrap' }}>
                                   <span style={{
                                     display: 'inline-block',
-                                    background: imp === '상' ? '#fef2f2' : (imp === '중' ? '#fffbeb' : '#f0fdf4'),
-                                    color: imp === '상' ? '#dc2626' : (imp === '중' ? '#d97706' : '#16a34a'),
-                                    border: imp === '상' ? '1px solid #fecaca' : (imp === '중' ? '1px solid #fde68a' : '1px solid #bbf7d0'),
+                                    background: isSafe ? '#ecfdf5' : (imp === '상' ? '#fef2f2' : (imp === '중' ? '#fffbeb' : '#f0fdf4')),
+                                    color: isSafe ? '#047857' : (imp === '상' ? '#dc2626' : (imp === '중' ? '#d97706' : '#16a34a')),
+                                    border: isSafe ? '1px solid #a7f3d0' : (imp === '상' ? '1px solid #fecaca' : (imp === '중' ? '1px solid #fde68a' : '1px solid #bbf7d0')),
                                     padding: '0.2rem 0.55rem',
                                     borderRadius: '0.375rem',
                                     fontSize: '0.75rem',
