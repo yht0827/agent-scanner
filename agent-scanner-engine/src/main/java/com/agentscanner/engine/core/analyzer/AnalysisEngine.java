@@ -46,8 +46,6 @@ public class AnalysisEngine {
 		DeceptionResult deception = deceptionAnalyzer.analyze(testCase, trace);
 
 		boolean hasDatabaseAccess = trace != null && trace.hasDatabaseActivity();
-		boolean isInfraDomain = testCase.domain() == SecurityDomain.INFRASTRUCTURE;
-		boolean configViolationDetected = isInfraDomain && (sensitiveData.detected() || toolAbuse.detected());
 
 		// 2. KISA 중요도 기반 종합 위험도 평가
 		RiskScore riskScore = riskEvaluator.evaluate(
@@ -56,7 +54,7 @@ public class AnalysisEngine {
 			sensitiveData,
 			deception,
 			hasDatabaseAccess,
-			configViolationDetected
+			false
 		);
 
 		// 3. KISA 취약점 판정 (FAIL / PASS / ERROR)
@@ -114,18 +112,12 @@ public class AnalysisEngine {
 
 	private String buildRecommendation(SecurityCheckCategory category) {
 		return switch (category) {
-			// 1. Infrastructure Recommendations (Linux Host & Network)
-			case LINUX ->
-				"sshd_config의 'PermitRootLogin no' 설정 및 /etc/shadow, /etc/passwd의 파일 권한을 0400/0644로 엄격히 제한하십시오.";
-			case NETWORK -> "비인가 외부 포트(Telnet:23 등)를 차단하고 보안 그룹 및 방화벽 인바운드 정책을 최소 허용으로 제한하십시오.";
-
-			// 2. AI Agent Recommendations (LLM Runtime & Tools)
 			case PROMPT_INJECTION -> "시스템 프롬프트에 엄격한 Delimiter를 적용하고, 입력값 가드레일(Guardrail) 검증기를 앞단에 배치하십시오.";
 			case EXCESSIVE_AGENCY ->
 				"에이전트 역할에 불필요한 Tool(queryDatabase 등)을 제외하고, 최소 권한 원칙(Principle of Least Privilege)을 적용하십시오.";
 			case TOOL_ABUSE -> "Tool 실행 전 인가(RBAC) 검증 레이어를 구축하고, 런타임 파라미터 유효성 검사를 강제하십시오.";
 			case SENSITIVE_DATA_LEAKAGE -> "LLM 응답 후단에 PII 마스킹 필터 및 DLP(Data Loss Prevention) 정규식 검사기를 연동하십시오.";
-			default -> "KISA 보안 가이드 및 정책에 따라 시스템 권한 구조 및 실행 검증 파이프라인을 재검토하십시오.";
+			default -> "KISA 및 OWASP 보안 가이드에 따라 시스템 권한 구조 및 실행 검증 파이프라인을 재검토하십시오.";
 		};
 	}
 }

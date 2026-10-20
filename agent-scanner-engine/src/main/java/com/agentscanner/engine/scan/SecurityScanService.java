@@ -60,12 +60,9 @@ public class SecurityScanService {
 	private final FindingRepository findingRepository;
 	private final TargetAgentRepository targetAgentRepository;
 	private final WebClient.Builder webClientBuilder;
+	private final com.agentscanner.engine.config.ScannerProperties scannerProperties;
 
-	@Value("${scanner.default-adapter:mock}")
-	private String defaultAdapterName;
-
-	@Value("${scanner.target-base-url:http://localhost:8081}")
-	private String defaultTargetBaseUrl;
+	public static final int MAX_DISPLAY_NAME_LENGTH = 250;
 
 	@Transactional
 	public List<TestExecution> runScan(String adapterName) {
@@ -94,20 +91,20 @@ public class SecurityScanService {
 				adapterDisplayName = "mock (" + target.getName() + ")";
 			} else {
 				checkTargetConnectivity(target.getName(), target.getBaseUrl());
-				adapter = new HttpTargetAgentAdapter(target.getBaseUrl(), webClientBuilder);
+				adapter = new HttpTargetAgentAdapter(target.getBaseUrl(), webClientBuilder, scannerProperties.http());
 				adapterDisplayName = "http (" + target.getName() + " - " + target.getBaseUrl() + ")";
 			}
 		} else {
-			String selectedAdapterName = (adapterName != null && !adapterName.isBlank()) ? adapterName : defaultAdapterName;
+			String selectedAdapterName = (adapterName != null && !adapterName.isBlank()) ? adapterName : scannerProperties.defaultAdapter();
 			adapter = resolveAdapter(selectedAdapterName);
 			adapterDisplayName = adapter.getAdapterName();
 			if (adapter instanceof HttpTargetAgentAdapter) {
-				checkTargetConnectivity("HTTP Target Agent", defaultTargetBaseUrl);
+				checkTargetConnectivity("HTTP Target Agent", scannerProperties.targetBaseUrl());
 			}
 		}
 
-		adapterDisplayName = truncate(adapterDisplayName, 250);
-		targetAgentName = truncate(targetAgentName, 250);
+		adapterDisplayName = truncate(adapterDisplayName, MAX_DISPLAY_NAME_LENGTH);
+		targetAgentName = truncate(targetAgentName, MAX_DISPLAY_NAME_LENGTH);
 
 		log.info("Starting security scan [{}] for target '{}' using adapter '{}' with categories '{}'",
 			scanId, targetAgentName, adapterDisplayName, categories);
@@ -275,7 +272,7 @@ public class SecurityScanService {
 		TestCase testCase = catalog.getTestCase(executionEntity.getTestCaseId())
 			.orElseThrow(() -> new IllegalArgumentException("TestCase not found: " + executionEntity.getTestCaseId()));
 
-		String selectedAdapter = (adapterName != null && !adapterName.isBlank()) ? adapterName : defaultAdapterName;
+		String selectedAdapter = (adapterName != null && !adapterName.isBlank()) ? adapterName : scannerProperties.defaultAdapter();
 		AgentAdapter adapter = adapters.stream()
 			.filter(a -> a.getAdapterName().equalsIgnoreCase(selectedAdapter))
 			.findFirst()

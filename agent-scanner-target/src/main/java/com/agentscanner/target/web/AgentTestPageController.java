@@ -1,6 +1,7 @@
 package com.agentscanner.target.web;
 
 import com.agentscanner.target.agent.CustomerSupportAgentService;
+import com.agentscanner.target.config.AgentProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -19,18 +20,16 @@ import java.util.Map;
 public class AgentTestPageController {
 
     private final CustomerSupportAgentService agentService;
+    private final AgentProperties agentProperties;
 
     @Value("${spring.ai.openai.chat.options.model:gpt-4o-mini}")
     private String modelName;
-
-    @Value("${agent.name:EnterpriseAssistantAgent}")
-    private String agentName;
 
     @GetMapping("/api/v1/agent/status")
     public ResponseEntity<Map<String, Object>> getAgentStatus() {
         Map<String, Object> status = new LinkedHashMap<>();
         status.put("status", "UP");
-        status.put("agentName", agentName);
+        status.put("agentName", agentProperties != null ? agentProperties.name() : "CustomerSupportAgent");
         boolean isReal = agentService.isRealOpenAiMode();
         status.put("isRealOpenAi", isReal);
         status.put("mode", isReal ? "REAL_OPENAI (OpenAI GPT 실시간 호출)" : "OFFLINE_MOCK (가상 샌드박스 시뮬레이터)");

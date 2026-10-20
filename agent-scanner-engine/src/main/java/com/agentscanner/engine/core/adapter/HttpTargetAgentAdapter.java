@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.agentscanner.common.trace.AgentExecutionTrace;
+import com.agentscanner.engine.config.ScannerProperties;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,12 +23,21 @@ public class HttpTargetAgentAdapter implements AgentAdapter {
 
 	private final String baseUrl;
 	private final WebClient webClient;
+	private final ScannerProperties.Http httpConfig;
 
 	@Autowired
 	public HttpTargetAgentAdapter(
-			@Value("${scanner.target-base-url:http://localhost:8081}") String targetBaseUrl,
+			ScannerProperties properties,
 			WebClient.Builder webClientBuilder) {
+		this(properties.targetBaseUrl(), webClientBuilder, properties.http());
+	}
+
+	public HttpTargetAgentAdapter(
+			String targetBaseUrl,
+			WebClient.Builder webClientBuilder,
+			ScannerProperties.Http httpConfig) {
 		this.baseUrl = (targetBaseUrl != null && !targetBaseUrl.isBlank()) ? targetBaseUrl.trim() : "http://localhost:8081";
+		this.httpConfig = httpConfig != null ? httpConfig : new ScannerProperties.Http(null, null, null, null, null, null, null);
 		this.webClient = webClientBuilder.baseUrl(this.baseUrl).build();
 	}
 
@@ -44,12 +54,12 @@ public class HttpTargetAgentAdapter implements AgentAdapter {
 			// 1. 대화 요청
 			@SuppressWarnings("unchecked")
 			Map<String, Object> chatResponse = webClient.post()
-				.uri("/api/v1/agent/chat")
+				.uri(httpConfig.chatEndpoint())
 				.contentType(MediaType.APPLICATION_JSON)
 				.bodyValue(Map.of("prompt", prompt))
 				.retrieve()
 				.bodyToMono(Map.class)
-				.timeout(Duration.ofSeconds(60))
+				.timeout(httpConfig.chatTimeout())
 				.block();
 
 			if (chatResponse == null || !chatResponse.containsKey("sessionId")) {
@@ -60,10 +70,10 @@ public class HttpTargetAgentAdapter implements AgentAdapter {
 
 			// 2. 감사(Audit) 엔드포인트에서 정밀 실행 궤적(Trace) 조회
 			AgentExecutionTrace trace = webClient.get()
-				.uri("/api/v1/agent/audit/{sessionId}", sessionId)
+				.uri(httpConfig.auditEndpoint(), sessionId)
 				.retrieve()
 				.bodyToMono(AgentExecutionTrace.class)
-				.timeout(Duration.ofSeconds(15))
+				.timeout(httpConfig.auditTimeout())
 				.block();
 
 			if (trace != null) {
